@@ -5,7 +5,7 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
+    --background: 0 0% 87.8%;
     --foreground: 240 10% 3.9%;
     --card: 0 0% 100%;
     --card-foreground: 240 10% 3.9%;
@@ -30,12 +30,18 @@
     --chart-3: 197 37% 24%;
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
+    /* --navShadow: 0px 0px 20px 5px rgba(0, 0, 0, 0.1); */
+    /* --navShadow: 0px 0px 20px 5px rgba(150, 150, 150, 0.2); */
+    /* --navShadow: 0px 0px 20px 5px rgba(255, 182, 193, 0.3); */
+    /* --navShadow: 0px 0px 20px 5px rgba(210, 180, 140, 0.3); */
+    /* --navShadow: 0px 0px 20px 5px rgba(192, 192, 192, 0.25); */
+    --navShadow: 0px 0px 20px 5px rgba(240, 128, 128, 0.3);
   }
 
   .dark {
     --background: 240 10% 3.9%;
     --foreground: 0 0% 98%;
-    --card: 240 10% 3.9%;
+    --card: 0 0% 10.2%;
     --card-foreground: 0 0% 98%;
     --popover: 240 10% 3.9%;
     --popover-foreground: 0 0% 98%;
@@ -57,5 +63,6 @@
     --chart-3: 30 80% 55%;
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
+    --navShadow: 0px 0px 20px 5px rgba(66, 220, 219, 0.5);
   }
 }
