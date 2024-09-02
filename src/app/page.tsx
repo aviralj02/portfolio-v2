@@ -1,9 +1,26 @@
+import AboutTile from "@/components/all/AboutTile";
+import GridWrapper from "@/components/all/GridWrapper";
+import RecentBlogTile from "@/components/all/RecentBlogTile";
+import RecentProjectTile from "@/components/all/RecentProjectTile";
+import ResumeTile from "@/components/all/ResumeTile";
+import SocialsTile from "@/components/all/SocialsTile";
+import Spotify from "@/components/all/Spotify";
 import PageWrapper from "@/components/PageWrapper";
 
 export default function Home() {
   return (
     <PageWrapper>
-      <main className="">Portfolio V2 - Aviral Jain</main>
+      <GridWrapper>
+        <RecentBlogTile />
+        <AboutTile />
+        <SocialsTile />
+        <ResumeTile />
+        <Spotify />
+        <div className="bg-card rounded-3xl col-span-2">hello</div>
+        <RecentProjectTile />
+        <div className="bg-card rounded-3xl col-span-2">hello</div>
+        <div className="bg-card rounded-3xl">hello</div>
+      </GridWrapper>
     </PageWrapper>
   );
 }

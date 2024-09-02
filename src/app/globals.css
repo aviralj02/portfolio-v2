@@ -15,6 +15,7 @@
     --primary-foreground: 0 0% 98%;
     --secondary: 240 4.8% 95.9%;
     --secondary-foreground: 240 5.9% 10%;
+    --secondary-text: 0 0% 40%;
     --muted: 240 4.8% 95.9%;
     --muted-foreground: 240 3.8% 46.1%;
     --accent: 240 4.8% 95.9%;
@@ -34,8 +35,8 @@
     /* --navShadow: 0px 0px 20px 5px rgba(150, 150, 150, 0.2); */
     /* --navShadow: 0px 0px 20px 5px rgba(255, 182, 193, 0.3); */
     /* --navShadow: 0px 0px 20px 5px rgba(210, 180, 140, 0.3); */
-    /* --navShadow: 0px 0px 20px 5px rgba(192, 192, 192, 0.25); */
-    --navShadow: 0px 0px 20px 5px rgba(240, 128, 128, 0.3);
+    --navShadow: 0px 0px 20px 5px rgba(192, 192, 192, 0.25);
+    /* --navShadow: 0px 0px 20px 5px rgba(240, 128, 128, 0.3); */
   }
 
   .dark {
@@ -49,6 +50,7 @@
     --primary-foreground: 240 5.9% 10%;
     --secondary: 240 3.7% 15.9%;
     --secondary-foreground: 0 0% 98%;
+    --secondary-text: 0 0% 63%;
     --muted: 240 3.7% 15.9%;
     --muted-foreground: 240 5% 64.9%;
     --accent: 240 3.7% 15.9%;
@@ -63,6 +65,7 @@
     --chart-3: 30 80% 55%;
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
-    --navShadow: 0px 0px 20px 5px rgba(66, 220, 219, 0.5);
+    --navShadow: 0px 0px 20px 5px rgba(192, 192, 192, 0.25);
+    /* --navShadow: 0px 0px 20px 5px rgba(66, 220, 219, 0.5); */
   }
 }
