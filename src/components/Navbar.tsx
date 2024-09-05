@@ -20,12 +20,12 @@ const Navbar = (props: Props) => {
       route: "/",
     },
     {
-      label: "About",
-      route: "/about",
-    },
-    {
       label: "Work",
       route: "/work",
+    },
+    {
+      label: "Projects",
+      route: "/projects",
     },
     {
       label: "Blogs",

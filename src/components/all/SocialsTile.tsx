@@ -39,7 +39,7 @@ const SocialsTile = (props: Props) => {
   ];
 
   return (
-    <div className="grid grid-cols-2 gap-4 items-stretch">
+    <div className="grid grid-cols-2 gap-4 items-stretch box-border">
       {socials.map((social: Social) => (
         <motion.a
           key={social.label}

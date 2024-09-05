@@ -6,9 +6,14 @@ import React, { FC, ReactElement } from "react";
 type Props = {
   width: number;
   height: number;
+  className?: string;
 };
 
-const MediumIcon: FC<Props> = ({ width, height }: Props): ReactElement => {
+const MediumIcon: FC<Props> = ({
+  width,
+  height,
+  className,
+}: Props): ReactElement => {
   const { theme } = useTheme();
 
   return (
@@ -18,6 +23,7 @@ const MediumIcon: FC<Props> = ({ width, height }: Props): ReactElement => {
       xmlns="http://www.w3.org/2000/svg"
       width={width}
       height={height}
+      className={className}
     >
       <title>Medium</title>
       <path

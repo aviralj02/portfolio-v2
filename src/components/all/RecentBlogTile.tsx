@@ -22,7 +22,7 @@ const RecentBlogTile = (props: Props) => {
 
         <div className="flex flex-col items-start mx-5">
           <h3 className="text-base">Setting up Express.js with Typescript</h3>
-          <span className="text-sm text-secondary-text">July 19, 2023</span>
+          <span className="text-sm text-dim">July 19, 2023</span>
         </div>
       </div>
 
