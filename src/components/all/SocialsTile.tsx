@@ -1,10 +1,14 @@
 "use client";
 
 import React, { ReactElement } from "react";
-import GithubIcon from "../icons/GithubIcon";
-import LinkedInIcon from "../icons/LinkedInIcon";
-import MediumIcon from "../icons/MediumIcon";
 import { motion } from "framer-motion";
+import dynamic from "next/dynamic";
+
+const GithubIcon = dynamic(() => import("../icons/GithubIcon"), { ssr: false });
+const LinkedInIcon = dynamic(() => import("../icons/LinkedInIcon"), {
+  ssr: false,
+});
+const MediumIcon = dynamic(() => import("../icons/MediumIcon"), { ssr: false });
 
 type Props = {};
 
@@ -32,7 +36,7 @@ const SocialsTile = (props: Props) => {
       to: "/",
     },
     {
-      label: "github",
+      label: "something",
       icon: <GithubIcon width={30} height={30} />,
       to: "/",
     },

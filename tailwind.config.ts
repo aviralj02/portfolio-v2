@@ -53,6 +53,9 @@ const config: Config = {
       boxShadow: {
         navShadow: "var(--navShadow)",
       },
+      backgroundImage: {
+        "card-gradient": "var(--card-gradient)",
+      },
     },
   },
   plugins: [],

@@ -1,8 +1,12 @@
 import React, { ReactElement } from "react";
-import GithubIcon from "./icons/GithubIcon";
-import LinkedInIcon from "./icons/LinkedInIcon";
-import MediumIcon from "./icons/MediumIcon";
 import Link from "next/link";
+import dynamic from "next/dynamic";
+
+const GithubIcon = dynamic(() => import("./icons/GithubIcon"), { ssr: false });
+const LinkedInIcon = dynamic(() => import("./icons/LinkedInIcon"), {
+  ssr: false,
+});
+const MediumIcon = dynamic(() => import("./icons/MediumIcon"), { ssr: false });
 
 type Props = {};
 
@@ -18,22 +22,22 @@ const Footer = (props: Props) => {
   const socials: Social[] = [
     {
       label: "github",
-      icon: <GithubIcon width={22} height={22} />,
+      icon: <GithubIcon width={20} height={20} />,
       to: "/",
     },
     {
       label: "linkedin",
-      icon: <LinkedInIcon width={22} height={22} />,
+      icon: <LinkedInIcon width={20} height={20} />,
       to: "/",
     },
     {
       label: "medium",
-      icon: <MediumIcon width={22} height={22} />,
+      icon: <MediumIcon width={20} height={20} />,
       to: "/",
     },
     {
-      label: "github",
-      icon: <GithubIcon width={22} height={22} />,
+      label: "something",
+      icon: <GithubIcon width={20} height={20} />,
       to: "/",
     },
   ];
