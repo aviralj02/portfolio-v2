@@ -73,7 +73,7 @@ const Footer = (props: Props) => {
     <div className="max-w-screen-xl mx-auto py-8 px-2.5 md:px-20">
       <hr className="w-full border-0 h-[1px] bg-dim" />
 
-      <div className="flex flex-col sm:flex-row justify-between mt-12 px-6 sm:h-44">
+      <div className="flex justify-between mt-12 px-6 h-44">
         <div className="flex flex-col gap-12">
           <div className="flex flex-col gap-6">
             <div className="flex flex-col text-left font-semibold text-lg text-secondary-text leading-6">
@@ -100,7 +100,7 @@ const Footer = (props: Props) => {
           </div>
         </div>
 
-        <div className="flex flex-col gap-4 sm:gap-6 flex-wrap text-dim font-semibold mt-6 sm:m-0">
+        <div className="hidden sm:flex flex-col gap-6 flex-wrap text-dim font-semibold">
           {footerLinks.map((link: FooterLink) => (
             <Link
               key={link.label}
