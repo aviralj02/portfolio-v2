@@ -1,6 +1,7 @@
 "use client";
 
 import PageWrapper from "@/components/PageWrapper";
+import Skills from "@/components/work/Skills";
 import Timeline from "@/components/work/Timeline";
 import React from "react";
 
@@ -32,7 +33,7 @@ const Work = (props: Props) => {
   ];
 
   return (
-    <PageWrapper className="flex flex-col my-14">
+    <PageWrapper className="flex flex-col my-14 gap-20">
       <div className="flex flex-col gap-12">
         <div className="flex flex-col items-start text-primary gap-1">
           <h1 className="sm:text-2xl text-xl font-medium">Work Experience</h1>
@@ -43,6 +44,11 @@ const Work = (props: Props) => {
         </div>
 
         <Timeline data={timelineData} />
+      </div>
+
+      <div className="flex flex-col gap-8">
+        <h2 className="sm:text-2xl text-xl font-medium">Skills</h2>
+        <Skills />
       </div>
     </PageWrapper>
   );
