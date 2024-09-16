@@ -50,7 +50,7 @@ const SocialsTile = (props: Props) => {
           target="_blank"
           rel="noreferrer"
           href={social.to}
-          className="bg-card rounded-3xl grid place-content-center hover:bg-accent"
+          className="bg-card rounded-3xl grid place-content-center hover:bg-accent transition-all duration-300"
           whileHover="hover"
         >
           <motion.div

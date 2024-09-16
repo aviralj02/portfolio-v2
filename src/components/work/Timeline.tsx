@@ -12,7 +12,7 @@ type Experience = {
 
 const Timeline = ({ data }: Props) => {
   return (
-    <div className="flex flex-col space-y-8 max-w-2xl w-full">
+    <div className="flex flex-col space-y-8 w-full">
       {data.map((item, index) => (
         <div key={index} className="flex items-start group cursor-pointer">
           <div className="relative flex flex-col items-center">

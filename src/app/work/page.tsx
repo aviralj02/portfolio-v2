@@ -35,10 +35,12 @@ const Work = (props: Props) => {
   return (
     <PageWrapper className="flex flex-col my-14 gap-20">
       <div className="flex flex-col gap-12">
-        <div className="flex flex-col items-start text-primary gap-1">
-          <h1 className="sm:text-2xl text-xl font-medium">Work Experience</h1>
-          <p className="sm:text-base text-sm">
-            Growing through hands-on experience, here's a glimpse into my
+        <div className="flex flex-col items-start gap-1">
+          <h1 className="sm:text-2xl text-xl font-medium text-primary">
+            Work Experience
+          </h1>
+          <p className="sm:text-base text-sm text-muted-foreground">
+            Growing through hands-on experience, here&apos;s a glimpse into my
             professional journey so far.
           </p>
         </div>
@@ -47,7 +49,16 @@ const Work = (props: Props) => {
       </div>
 
       <div className="flex flex-col gap-8">
-        <h2 className="sm:text-2xl text-xl font-medium">Skills</h2>
+        <div className="flex flex-col items-start gap-1">
+          <h2 className="sm:text-2xl text-xl font-medium text-primary">
+            Skills
+          </h2>
+          <p className="sm:text-base text-sm text-muted-foreground">
+            Technologies I&apos;m currently experienced with, yet always eager
+            to learn and adapt to new advancements and tools.
+          </p>
+        </div>
+
         <Skills />
       </div>
     </PageWrapper>
