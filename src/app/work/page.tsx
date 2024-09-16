@@ -33,7 +33,7 @@ const Work = (props: Props) => {
   ];
 
   return (
-    <PageWrapper className="flex flex-col my-14 gap-20">
+    <PageWrapper className="flex flex-col gap-20 sm:my-12 my-6">
       <div className="flex flex-col gap-12">
         <div className="flex flex-col items-start gap-1">
           <h1 className="sm:text-2xl text-xl font-medium text-primary">

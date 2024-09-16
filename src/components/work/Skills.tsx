@@ -1,5 +1,6 @@
 import React from "react";
 import dynamic from "next/dynamic";
+import { TagSize } from "@/types/enums";
 
 const Tag = dynamic(() => import("../Tag"), { ssr: false });
 
@@ -23,7 +24,7 @@ const SkillType = (props: Props) => {
       </h3>
       <div className="flex gap-4 flex-wrap">
         {[1, 2, 3, 4, 5, 6].map((item) => (
-          <Tag key={item} />
+          <Tag key={item} name="JavaScript" size={TagSize.Large} />
         ))}
       </div>
     </div>
