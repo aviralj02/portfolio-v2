@@ -28,10 +28,8 @@
     --ring: 240 5.9% 10%;
     --radius: 0.5rem;
     --dim: 0 0% 55%;
-    /* --navShadow: 0px 0px 20px 5px rgba(0, 0, 0, 0.1); */
     --navShadow: 0px 0px 20px 5px rgba(150, 150, 150, 0.2);
-    /* --navShadow: 0px 0px 20px 5px rgba(192, 192, 192, 0.25); */
-    /* --navShadow: 0px 0px 20px 5px rgba(240, 128, 128, 0.3); */
+    /* --navShadow: 0px 0px 20px 5px rgba(0, 0, 0, 0.1); */
   }
 
   .dark {
@@ -40,7 +38,6 @@
     --card: 0 0% 10.2%;
     --card-foreground: 0 0% 98%;
     --card-gradient: linear-gradient(to bottom, #000000, #3c3c3c);
-    /* --card-gradient: linear-gradient(to bottom, black, #333, bl ack); */
     --popover: 240 10% 3.9%;
     --popover-foreground: 0 0% 98%;
     --primary: 0 0% 98%;

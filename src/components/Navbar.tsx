@@ -36,7 +36,7 @@ const Navbar = (props: Props) => {
 
   return (
     <nav className="shadow-navShadow rounded-full">
-      <ul className="flex gap-2 sm:gap-4 list-none">
+      <ul className="flex gap-1 sm:gap-4 list-none">
         {navLinks.map((link: NavLink) => (
           <li key={link.label} className="relative py-[6px] px-5">
             <Link

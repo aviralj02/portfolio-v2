@@ -16,17 +16,15 @@ type ProjectType = {
   description: string;
   live?: string;
   github: string;
-  banner: string;
   icon: string;
   stack: string[];
+  bgColor: string;
 };
 
 const ProjectCard = ({ project }: Props) => {
   return (
     <div
-      style={{
-        backgroundImage: `url(${project.banner})`,
-      }}
+      style={{ backgroundColor: project.bgColor }}
       className="relative flex flex-col w-full rounded-3xl"
     >
       <div className="bg-transparent h-14 w-full" />

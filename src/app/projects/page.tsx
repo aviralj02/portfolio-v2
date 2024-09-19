@@ -9,9 +9,9 @@ type ProjectType = {
   description: string;
   live?: string;
   github: string;
-  banner: string;
   icon: string;
   stack: string[];
+  bgColor: string;
 };
 
 const Projects = (props: Props) => {
@@ -22,7 +22,7 @@ const Projects = (props: Props) => {
         "Platform allowing users to engage in conversational interactions with PDF documents using LLM by Open AI.",
       live: "https://docu-inquire.vercel.app/",
       github: "https://github.com/aviralj02/docu-inquire",
-      banner: process.env.DUMMY_BANNER_LINK!,
+      bgColor: "#6C7AFF",
       icon: process.env.DUMMY_ICON_LINK!,
       stack: [
         "Typescript",
@@ -39,7 +39,7 @@ const Projects = (props: Props) => {
         "Platform allowing users to engage in conversational interactions with PDF documents using LLM by Open AI.",
       live: "https://docu-inquire.vercel.app/",
       github: "https://github.com/aviralj02/docu-inquire",
-      banner: process.env.DUMMY_BANNER_LINK!,
+      bgColor: "#6C7AFF",
       icon: process.env.DUMMY_ICON_LINK!,
       stack: [
         "Typescript",
@@ -56,7 +56,7 @@ const Projects = (props: Props) => {
         "Platform allowing users to engage in conversational interactions with PDF documents using LLM by Open AI.",
       live: "https://docu-inquire.vercel.app/",
       github: "https://github.com/aviralj02/docu-inquire",
-      banner: process.env.DUMMY_BANNER_LINK!,
+      bgColor: "#6C7AFF",
       icon: process.env.DUMMY_ICON_LINK!,
       stack: [
         "Typescript",
@@ -70,11 +70,11 @@ const Projects = (props: Props) => {
   ];
 
   return (
-    <PageWrapper className="flex flex-col sm:my-12 my-6 gap-8">
+    <PageWrapper className="flex flex-col gap-8 sm:my-12 my-6">
       <div className="flex flex-col items-start text-primary gap-1">
         <h1 className="sm:text-2xl text-xl font-medium">Projects</h1>
         <p className="sm:text-base text-sm text-muted-foreground">
-          Here are some of the projects I've worked on
+          Here are some of the projects I&apos;ve worked on
         </p>
       </div>
 

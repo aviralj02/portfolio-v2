@@ -41,7 +41,7 @@ const Work = (props: Props) => {
           </h1>
           <p className="sm:text-base text-sm text-muted-foreground">
             Growing through hands-on experience, here&apos;s a glimpse into my
-            professional journey so far.
+            professional journey so far
           </p>
         </div>
 
