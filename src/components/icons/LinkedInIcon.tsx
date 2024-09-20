@@ -4,16 +4,10 @@ import { useTheme } from "next-themes";
 import React, { FC, ReactElement } from "react";
 
 type Props = {
-  width: number;
-  height: number;
   className?: string;
 };
 
-const LinkedInIcon: FC<Props> = ({
-  width,
-  height,
-  className,
-}: Props): ReactElement => {
+const LinkedInIcon: FC<Props> = ({ className }: Props): ReactElement => {
   const { theme } = useTheme();
 
   return (
@@ -21,8 +15,6 @@ const LinkedInIcon: FC<Props> = ({
       role="img"
       viewBox="0 0 24 24"
       xmlns="http://www.w3.org/2000/svg"
-      width={width}
-      height={height}
       className={className}
     >
       <title>LinkedIn</title>

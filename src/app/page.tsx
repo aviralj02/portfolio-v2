@@ -16,10 +16,14 @@ export default function Home() {
         <SocialsTile />
         <ResumeTile />
         <Spotify />
-        <div className="bg-card rounded-3xl col-span-2">hello</div>
+        <div className="bg-card rounded-2xl col-span-2 order-5">hello</div>
         <RecentProjectTile />
-        <div className="bg-card rounded-3xl col-span-2">hello</div>
-        <div className="bg-card rounded-3xl">hello</div>
+        <div className="bg-card rounded-2xl col-span-2 lg:order-8 order-9">
+          hello
+        </div>
+        <div className="bg-card rounded-2xl aspect-square lg:order-9 order-8">
+          hello
+        </div>
       </GridWrapper>
     </PageWrapper>
   );

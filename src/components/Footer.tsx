@@ -22,22 +22,22 @@ const Footer = (props: Props) => {
   const socials: Social[] = [
     {
       label: "github",
-      icon: <GithubIcon width={20} height={20} />,
+      icon: <GithubIcon className="h-5 w-5" />,
       to: "/",
     },
     {
       label: "linkedin",
-      icon: <LinkedInIcon width={20} height={20} />,
+      icon: <LinkedInIcon className="h-5 w-5" />,
       to: "/",
     },
     {
       label: "medium",
-      icon: <MediumIcon width={20} height={20} />,
+      icon: <MediumIcon className="h-5 w-5" />,
       to: "/",
     },
     {
       label: "something",
-      icon: <GithubIcon width={20} height={20} />,
+      icon: <GithubIcon className="h-5 w-5" />,
       to: "/",
     },
   ];

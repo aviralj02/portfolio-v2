@@ -1,19 +1,14 @@
 "use client";
 
+import { cn } from "@/lib/utils";
 import { useTheme } from "next-themes";
 import React, { FC, ReactElement } from "react";
 
 type Props = {
-  width: number;
-  height: number;
   className?: string;
 };
 
-const GithubIcon: FC<Props> = ({
-  width,
-  height,
-  className,
-}: Props): ReactElement => {
+const GithubIcon: FC<Props> = ({ className }: Props): ReactElement => {
   const { theme } = useTheme();
 
   return (
@@ -21,9 +16,7 @@ const GithubIcon: FC<Props> = ({
       role="img"
       viewBox="0 0 24 24"
       xmlns="http://www.w3.org/2000/svg"
-      width={width}
-      height={height}
-      className={className}
+      className={cn(className)}
     >
       <title>GitHub</title>
       <path
