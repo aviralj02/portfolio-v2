@@ -26,7 +26,9 @@ const Timeline = ({ data }: Props) => {
               {item.title}
             </h3>
             <div className="flex flex-col sm:flex-row sm:items-center items-start justify-between sm:text-base text-sm">
-              <p className="text-primary leading-relaxed">{item.position}</p>
+              <p className="text-muted-foreground leading-relaxed">
+                {item.position}
+              </p>
               <p className="text-dim">{item.dates}</p>
             </div>
           </div>

@@ -18,7 +18,7 @@ const PageWrapper: FC<Props> = ({
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.15 }}
-      className={cn("mx-auto w-full max-w-screen-xl px-5 md:px-20", className)}
+      className={cn("mx-auto w-full max-w-screen-xl px-6 md:px-20", className)}
     >
       {children}
     </motion.div>
