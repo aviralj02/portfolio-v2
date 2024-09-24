@@ -27,10 +27,11 @@ const Header = (props: Props) => {
 
       <Link
         href={"/contact"}
-        className="md:flex hidden gap-1 items-center font-medium text-sm"
+        className="md:flex hidden gap-1 items-center font-medium text-sm group"
         aria-label="contact-button"
       >
-        <span>Contact</span> <ArrowUpRight className="w-4" />
+        <span>Contact</span>{" "}
+        <ArrowUpRight className="w-4 transform group-hover:rotate-45 transition ease-in" />
       </Link>
     </div>
   );

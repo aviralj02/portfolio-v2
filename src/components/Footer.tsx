@@ -1,3 +1,5 @@
+"use client";
+
 import React, { ReactElement } from "react";
 import Link from "next/link";
 import dynamic from "next/dynamic";
@@ -105,7 +107,7 @@ const Footer = (props: Props) => {
             <Link
               key={link.label}
               href="/"
-              className="hover:text-primary transition-all duration-300 md:ml-14"
+              className="hover:text-primary transition-all md:ml-14"
             >
               {link.label}
             </Link>
