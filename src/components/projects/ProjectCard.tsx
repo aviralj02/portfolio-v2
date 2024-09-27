@@ -3,50 +3,46 @@ import dynamic from "next/dynamic";
 import React from "react";
 import Link from "next/link";
 import { ExternalLink } from "lucide-react";
+import Image from "next/image";
 
 const Tag = dynamic(() => import("../Tag"), { ssr: false });
 const GithubIcon = dynamic(() => import("../icons/GithubIcon"), { ssr: false });
 
 type Props = {
-  project: ProjectType;
-};
-
-type ProjectType = {
-  title: string;
-  description: string;
-  live?: string;
-  github: string;
-  icon: string;
-  stack: string[];
-  bgColor: string;
+  project: Project;
 };
 
 const ProjectCard = ({ project }: Props) => {
   return (
     <div
-      style={{ backgroundColor: project.bgColor }}
-      className="relative flex flex-col w-full rounded-3xl"
+      style={{ backgroundColor: project.backgroundColor }}
+      className="relative flex flex-col w-full rounded-3xl h-fit"
     >
       <div className="bg-transparent h-14 w-full" />
 
       {/* ICON */}
-      <div className="absolute top-5 left-5 w-20 h-20 rounded-full z-20 border-4 border-card">
-        <img
-          src={project.icon}
-          alt="project-icon"
+      <div className="absolute top-5 left-5 w-20 h-20 rounded-full z-20 border-[6px] border-card">
+        <Image
+          src={project.icon?.url}
+          alt={project.icon?.fileName}
           className="rounded-full object-cover"
+          fill
         />
       </div>
 
       {/* PROJECT DETAILS */}
       <div className="bg-card flex flex-col gap-6 w-full p-5 rounded-3xl z-10">
         <div className="flex items-center gap-3 rounded-full w-fit self-end">
-          <Link href={"/"}>
-            <GithubIcon width={20} height={20} />
-          </Link>
-          <Link href={"/"}>
-            <ExternalLink width={20} height={20} />
-          </Link>
+          {project.codebase && (
+            <Link href={project.codebase} target="_blank" rel="noreferrer">
+              <GithubIcon className="h-5 w-5" />
+            </Link>
+          )}
+          {project.live && (
+            <Link href={project.live} target="_blank" rel="noreferrer">
+              <ExternalLink className="h-5 w-5" />
+            </Link>
+          )}
         </div>
 
         <div className="flex flex-col gap-4">

@@ -3,34 +3,30 @@
 import PageWrapper from "@/components/PageWrapper";
 import Skills from "@/components/work/Skills";
 import Timeline from "@/components/work/Timeline";
-import React from "react";
+import getExperiences from "@/lib/utils/get-experience";
+import getSkills from "@/lib/utils/get-skills";
+import React, { ReactElement, useEffect, useState } from "react";
 
 type Props = {};
 
-type Experience = {
-  title: string;
-  position: string;
-  dates: string;
-};
+const Work = (props: Props): ReactElement => {
+  const [timelineData, setTimelineData] = useState<Experience[]>();
+  const [skills, setSkills] = useState<Skill[]>();
 
-const Work = (props: Props) => {
-  const timelineData: Experience[] = [
-    {
-      title: "TrillionSale",
-      position: "Frontend Developer Intern",
-      dates: "June 2024 - August 2024",
-    },
-    {
-      title: "Flabs",
-      position: "Software Developer Intern",
-      dates: "October 2023 - March 2024",
-    },
-    {
-      title: "Cyberpeace Foundation",
-      position: "Full Stack Developer Intern",
-      dates: "June 2023 - August 2023",
-    },
-  ];
+  const fetchExperiences = async () => {
+    const experiences = await getExperiences();
+    setTimelineData(experiences);
+  };
+
+  const fetchSkills = async () => {
+    const skillsData = await getSkills();
+    setSkills(skillsData);
+  };
+
+  useEffect(() => {
+    fetchExperiences();
+    fetchSkills();
+  }, []);
 
   return (
     <PageWrapper className="flex flex-col gap-20 sm:my-12 my-6">
@@ -59,7 +55,7 @@ const Work = (props: Props) => {
           </p>
         </div>
 
-        <Skills />
+        <Skills data={skills} />
       </div>
     </PageWrapper>
   );

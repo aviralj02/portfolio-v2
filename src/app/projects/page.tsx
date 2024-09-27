@@ -1,73 +1,23 @@
+"use client";
+
 import PageWrapper from "@/components/PageWrapper";
 import ProjectCard from "@/components/projects/ProjectCard";
-import React from "react";
+import getProjects from "@/lib/utils/get-projects";
+import React, { ReactElement, useEffect, useState } from "react";
 
 type Props = {};
 
-type ProjectType = {
-  title: string;
-  description: string;
-  live?: string;
-  github: string;
-  icon: string;
-  stack: string[];
-  bgColor: string;
-};
+const Projects = (props: Props): ReactElement => {
+  const [projects, setProjects] = useState<Project[]>();
 
-const Projects = (props: Props) => {
-  const projects: ProjectType[] = [
-    {
-      title: "docu-inquire",
-      description:
-        "Platform allowing users to engage in conversational interactions with PDF documents using LLM by Open AI.",
-      live: "https://docu-inquire.vercel.app/",
-      github: "https://github.com/aviralj02/docu-inquire",
-      bgColor: "#6C7AFF",
-      icon: process.env.DUMMY_ICON_LINK!,
-      stack: [
-        "Typescript",
-        "Next.js",
-        "tRPC",
-        "Prisma",
-        "Tailwind CSS",
-        "MySQL",
-      ],
-    },
-    {
-      title: "docu-inquire",
-      description:
-        "Platform allowing users to engage in conversational interactions with PDF documents using LLM by Open AI.",
-      live: "https://docu-inquire.vercel.app/",
-      github: "https://github.com/aviralj02/docu-inquire",
-      bgColor: "#6C7AFF",
-      icon: process.env.DUMMY_ICON_LINK!,
-      stack: [
-        "Typescript",
-        "Next.js",
-        "tRPC",
-        "Prisma",
-        "Tailwind CSS",
-        "MySQL",
-      ],
-    },
-    {
-      title: "docu-inquire",
-      description:
-        "Platform allowing users to engage in conversational interactions with PDF documents using LLM by Open AI.",
-      live: "https://docu-inquire.vercel.app/",
-      github: "https://github.com/aviralj02/docu-inquire",
-      bgColor: "#6C7AFF",
-      icon: process.env.DUMMY_ICON_LINK!,
-      stack: [
-        "Typescript",
-        "Next.js",
-        "tRPC",
-        "Prisma",
-        "Tailwind CSS",
-        "MySQL",
-      ],
-    },
-  ];
+  const fetchProjects = async () => {
+    const projectsData = await getProjects();
+    setProjects(projectsData);
+  };
+
+  useEffect(() => {
+    fetchProjects();
+  }, []);
 
   return (
     <PageWrapper className="flex flex-col gap-8 sm:my-12 my-6">
@@ -79,8 +29,8 @@ const Projects = (props: Props) => {
       </div>
 
       <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-16">
-        {projects.map((project: ProjectType, index: number) => (
-          <ProjectCard key={index} project={project} />
+        {projects?.map((project: Project) => (
+          <ProjectCard key={project.title} project={project} />
         ))}
       </div>
     </PageWrapper>

@@ -24,7 +24,7 @@ const Tag = ({ name, size }: Props) => {
     >
       <span className="z-10">{name}</span>
       {theme === "dark" ? (
-        <div className="absolute bg-primary h-6 w-1/2 rounded-full left-1/2 -bottom-6 transform -translate-x-1/2 blur-md" />
+        <div className="absolute bg-primary h-6 w-1/2 rounded-full left-1/2 -bottom-7 transform -translate-x-1/2 blur-md" />
       ) : null}
     </div>
   );
