@@ -17,11 +17,10 @@ const getBlogs = async (): Promise<Blog[] | undefined> => {
   try {
     const { blogs } = await client.request<{ blogs: Blog[] }>(query);
 
-    return blogs;
+    return blogs || [];
   } catch (error) {
     console.log(error);
   }
-  return undefined;
 };
 
 export default getBlogs;

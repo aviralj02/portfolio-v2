@@ -20,11 +20,10 @@ const getExperiences = async (): Promise<Experience[] | undefined> => {
       query
     );
 
-    return experiences;
+    return experiences || [];
   } catch (error) {
     console.log(error);
   }
-  return undefined;
 };
 
 export default getExperiences;

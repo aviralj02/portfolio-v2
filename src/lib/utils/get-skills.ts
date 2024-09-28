@@ -15,11 +15,10 @@ const getSkills = async (): Promise<Skill[] | undefined> => {
   try {
     const { skills } = await client.request<{ skills: Skill[] }>(query);
 
-    return skills;
+    return skills || [];
   } catch (error) {
     console.log(error);
   }
-  return undefined;
 };
 
 export default getSkills;

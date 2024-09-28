@@ -23,11 +23,10 @@ const getProjects = async (): Promise<Project[] | undefined> => {
   try {
     const { projects } = await client.request<{ projects: Project[] }>(query);
 
-    return projects;
+    return projects || [];
   } catch (error) {
     console.log(error);
   }
-  return undefined;
 };
 
 export default getProjects;

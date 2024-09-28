@@ -3,6 +3,7 @@
 import PageWrapper from "@/components/PageWrapper";
 import Skills from "@/components/work/Skills";
 import Timeline from "@/components/work/Timeline";
+import TimelineSkeleton from "@/components/work/TimelineSkeleton";
 import getExperiences from "@/lib/utils/get-experience";
 import getSkills from "@/lib/utils/get-skills";
 import React, { ReactElement, useEffect, useState } from "react";
@@ -41,7 +42,7 @@ const Work = (props: Props): ReactElement => {
           </p>
         </div>
 
-        <Timeline data={timelineData} />
+        {timelineData ? <Timeline data={timelineData} /> : <TimelineSkeleton />}
       </div>
 
       <div className="flex flex-col gap-8">

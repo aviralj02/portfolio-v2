@@ -2,6 +2,7 @@
 
 import PageWrapper from "@/components/PageWrapper";
 import ProjectCard from "@/components/projects/ProjectCard";
+import ProjectSkeleton from "@/components/projects/ProjectSkeleton";
 import getProjects from "@/lib/utils/get-projects";
 import React, { ReactElement, useEffect, useState } from "react";
 
@@ -29,9 +30,13 @@ const Projects = (props: Props): ReactElement => {
       </div>
 
       <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-16">
-        {projects?.map((project: Project) => (
-          <ProjectCard key={project.title} project={project} />
-        ))}
+        {projects
+          ? projects.map((project: Project) => (
+              <ProjectCard key={project.title} project={project} />
+            ))
+          : Array.from({ length: 4 }).map((_, index: number) => (
+              <ProjectSkeleton key={index} />
+            ))}
       </div>
     </PageWrapper>
   );
