@@ -1,55 +1,46 @@
 "use client";
 
-import React, { ReactElement } from "react";
+import React, { ReactElement, useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import dynamic from "next/dynamic";
+import getSocials from "@/lib/utils/get-socials";
 
 const GithubIcon = dynamic(() => import("../icons/GithubIcon"), { ssr: false });
 const LinkedInIcon = dynamic(() => import("../icons/LinkedInIcon"), {
   ssr: false,
 });
 const MediumIcon = dynamic(() => import("../icons/MediumIcon"), { ssr: false });
+const ResumeIcon = dynamic(() => import("../icons/ResumeIcon"), { ssr: false });
 
 type Props = {};
 
-type Social = {
-  label: string;
-  icon: ReactElement;
-  to: string;
-};
-
 const SocialsTile = (props: Props) => {
-  const socials: Social[] = [
-    {
-      label: "github",
-      icon: <GithubIcon className="sm:h-8 sm:w-8 h-6 w-6" />,
-      to: "/",
-    },
-    {
-      label: "linkedin",
-      icon: <LinkedInIcon className="sm:h-8 sm:w-8 h-6 w-6" />,
-      to: "/",
-    },
-    {
-      label: "medium",
-      icon: <MediumIcon className="sm:h-8 sm:w-8 h-6 w-6" />,
-      to: "/",
-    },
-    {
-      label: "something",
-      icon: <GithubIcon className="sm:h-8 sm:w-8 h-6 w-6" />,
-      to: "/",
-    },
-  ];
+  const [socials, setSocials] = useState<Social[]>();
+
+  const fetchSocials = async () => {
+    const socialsData = await getSocials();
+    setSocials(socialsData);
+  };
+
+  useEffect(() => {
+    fetchSocials();
+  }, []);
+
+  const iconMap: { [key: string]: ReactElement } = {
+    github: <GithubIcon className="sm:h-8 sm:w-8 h-6 w-6" />,
+    linkedin: <LinkedInIcon className="sm:h-8 sm:w-8 h-6 w-6" />,
+    medium: <MediumIcon className="sm:h-8 sm:w-8 h-6 w-6" />,
+    resume: <ResumeIcon className="sm:h-8 sm:w-8 h-6 w-6" />,
+  };
 
   return (
     <div className="grid grid-cols-2 gap-4 items-stretch box-border aspect-square order-3">
-      {socials.map((social: Social) => (
+      {socials?.map((social: Social) => (
         <motion.a
-          key={social.label}
+          key={social.name}
           target="_blank"
           rel="noreferrer"
-          href={social.to}
+          href={social.url}
           className="bg-card rounded-2xl grid place-content-center hover:bg-accent transition-all duration-300"
           whileHover="hover"
         >
@@ -59,7 +50,7 @@ const SocialsTile = (props: Props) => {
             }}
             className="opacity-80"
           >
-            {social.icon}
+            {iconMap[social.name]}
           </motion.div>
         </motion.a>
       ))}

@@ -1,75 +1,38 @@
 "use client";
 
-import React, { ReactElement } from "react";
+import React, { ReactElement, useEffect, useState } from "react";
 import Link from "next/link";
 import dynamic from "next/dynamic";
+import { footerLinks } from "@/lib/constants";
+import getSocials from "@/lib/utils/get-socials";
 
 const GithubIcon = dynamic(() => import("./icons/GithubIcon"), { ssr: false });
 const LinkedInIcon = dynamic(() => import("./icons/LinkedInIcon"), {
   ssr: false,
 });
 const MediumIcon = dynamic(() => import("./icons/MediumIcon"), { ssr: false });
+const ResumeIcon = dynamic(() => import("./icons/ResumeIcon"), { ssr: false });
 
 type Props = {};
 
-type Social = {
-  label: string;
-  icon: ReactElement;
-  to: string;
-};
-
-type FooterLink = Omit<Social, "icon">;
-
 const Footer = (props: Props) => {
-  const socials: Social[] = [
-    {
-      label: "github",
-      icon: <GithubIcon className="h-5 w-5" />,
-      to: "/",
-    },
-    {
-      label: "linkedin",
-      icon: <LinkedInIcon className="h-5 w-5" />,
-      to: "/",
-    },
-    {
-      label: "medium",
-      icon: <MediumIcon className="h-5 w-5" />,
-      to: "/",
-    },
-    {
-      label: "something",
-      icon: <GithubIcon className="h-5 w-5" />,
-      to: "/",
-    },
-  ];
+  const [socials, setSocials] = useState<Social[]>();
 
-  const footerLinks: FooterLink[] = [
-    {
-      label: "About",
-      to: "/",
-    },
-    {
-      label: "Work",
-      to: "/",
-    },
-    {
-      label: "Projects",
-      to: "/",
-    },
-    {
-      label: "Blogs",
-      to: "/",
-    },
-    {
-      label: "Version",
-      to: "/",
-    },
-    {
-      label: "Contact",
-      to: "/",
-    },
-  ];
+  const fetchSocials = async () => {
+    const socialsData = await getSocials();
+    setSocials(socialsData);
+  };
+
+  useEffect(() => {
+    fetchSocials();
+  }, []);
+
+  const iconMap: { [key: string]: ReactElement } = {
+    github: <GithubIcon className="h-5 w-5" />,
+    linkedin: <LinkedInIcon className="h-5 w-5" />,
+    medium: <MediumIcon className="h-5 w-5" />,
+    resume: <ResumeIcon className="h-5 w-5" />,
+  };
 
   return (
     <div className="max-w-screen-xl mx-auto py-8 px-2.5 md:px-20">
@@ -84,14 +47,14 @@ const Footer = (props: Props) => {
             </div>
 
             <div className="flex gap-5 items-center">
-              {socials.map((social: Social) => (
+              {socials?.map((social: Social) => (
                 <a
-                  key={social.label}
-                  href={social.to}
+                  key={social.name}
+                  href={social.url}
                   target="_blank"
                   rel="noreferrer"
                 >
-                  {social.icon}
+                  {iconMap[social.name]}
                 </a>
               ))}
             </div>

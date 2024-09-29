@@ -21,12 +21,11 @@ const ProjectCard = ({ project }: Props) => {
       <div className="bg-transparent h-14 w-full" />
 
       {/* ICON */}
-      <div className="absolute top-5 left-5 w-20 h-20 rounded-full z-20 border-[6px] border-card">
-        <Image
+      <div className="absolute top-5 left-5 w-[20vw] h-[20vw] max-w-20 max-h-20 rounded-full z-20 border-[6px] border-card">
+        <img
           src={project.icon?.url}
           alt={project.icon?.fileName}
-          className="rounded-full object-cover"
-          fill
+          className="rounded-full object-cover w-full h-full"
         />
       </div>
 

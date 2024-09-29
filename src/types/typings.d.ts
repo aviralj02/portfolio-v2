@@ -32,7 +32,18 @@ interface Blog {
   title: string;
 }
 
+interface Social {
+  name: string;
+  priority: number;
+  url: string;
+}
+
 interface Icon {
   fileName: string;
   url: string;
 }
+
+type FooterLink = {
+  label: string;
+  to: string;
+};
