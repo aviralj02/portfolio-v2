@@ -1,9 +1,9 @@
 import React from "react";
 import { cn } from "@/lib/utils";
-import Globe from "./Globe";
+import Globe from "../Globe";
 import dynamic from "next/dynamic";
 
-const LiveClock = dynamic(() => import("./LiveClock"), { ssr: false });
+const LiveClock = dynamic(() => import("../LiveClock"), { ssr: false });
 
 type Props = {};
 

@@ -5,12 +5,18 @@ import { motion } from "framer-motion";
 import dynamic from "next/dynamic";
 import getSocials from "@/lib/utils/get-socials";
 
-const GithubIcon = dynamic(() => import("../icons/GithubIcon"), { ssr: false });
-const LinkedInIcon = dynamic(() => import("../icons/LinkedInIcon"), {
+const GithubIcon = dynamic(() => import("@/components/icons/GithubIcon"), {
   ssr: false,
 });
-const MediumIcon = dynamic(() => import("../icons/MediumIcon"), { ssr: false });
-const ResumeIcon = dynamic(() => import("../icons/ResumeIcon"), { ssr: false });
+const LinkedInIcon = dynamic(() => import("@/components/icons/LinkedInIcon"), {
+  ssr: false,
+});
+const MediumIcon = dynamic(() => import("@/components/icons/MediumIcon"), {
+  ssr: false,
+});
+const ResumeIcon = dynamic(() => import("@/components/icons/ResumeIcon"), {
+  ssr: false,
+});
 
 type Props = {};
 
