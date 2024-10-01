@@ -1,3 +1,4 @@
+import { MonthFormat } from "@/types/enums";
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 
@@ -10,4 +11,12 @@ export function formatDateToMonthYear(date: Date): string {
     year: "numeric",
     month: "long",
   }).format(date);
+}
+
+export function formatDate(date: Date, monthFormat: MonthFormat): string {
+  return date.toLocaleDateString("en-US", {
+    month: monthFormat,
+    day: "numeric",
+    year: "numeric",
+  });
 }

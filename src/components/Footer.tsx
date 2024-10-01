@@ -69,7 +69,7 @@ const Footer = (props: Props) => {
           {footerLinks.map((link: FooterLink) => (
             <Link
               key={link.label}
-              href="/"
+              href={link.to}
               className="hover:text-primary transition-all md:ml-14"
             >
               {link.label}

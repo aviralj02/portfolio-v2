@@ -1,3 +1,5 @@
+import { formatDate } from "@/lib/utils";
+import { MonthFormat } from "@/types/enums";
 import { Calendar, Timer } from "lucide-react";
 import React from "react";
 
@@ -6,14 +8,6 @@ type Props = {
 };
 
 const BlogCard = ({ blog }: Props) => {
-  const formatBlogDate = (date: Date): string => {
-    return date.toLocaleDateString("en-US", {
-      month: "short",
-      day: "numeric",
-      year: "numeric",
-    });
-  };
-
   return (
     <a
       href={blog.link}
@@ -32,7 +26,7 @@ const BlogCard = ({ blog }: Props) => {
         <div className="flex items-center gap-2">
           <Calendar width={15} height={15} />
           <span className="text-muted-foreground text-xs sm:text-sm">
-            {formatBlogDate(new Date(blog.publishDate))}
+            {formatDate(new Date(blog.publishDate), MonthFormat.Short)}
           </span>
         </div>
         <div className="flex items-center gap-2">

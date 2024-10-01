@@ -26,6 +26,7 @@ const ProjectCard = ({ project }: Props) => {
           src={project.icon?.url}
           alt={project.icon?.fileName}
           className="rounded-full object-cover w-full h-full"
+          draggable={false}
         />
       </div>
 

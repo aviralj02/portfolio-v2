@@ -56,6 +56,29 @@ const config: Config = {
       backgroundImage: {
         "card-gradient": "var(--card-gradient)",
       },
+
+      keyframes: {
+        quiet: {
+          "25%": { transform: "scaleY(0.6)" },
+          "50%": { transform: "scaleY(0.4)" },
+          "75%": { transform: "scaleY(0.8)" },
+        },
+        decent: {
+          "25%": { transform: "scaleY(1)" },
+          "50%": { transform: "scaleY(0.4)" },
+          "75%": { transform: "scaleY(0.6)" },
+        },
+        loud: {
+          "25%": { transform: "scaleY(1)" },
+          "50%": { transform: "scaleY(0.4)" },
+          "75%": { transform: "scaleY(1.2)" },
+        },
+      },
+      animation: {
+        quiet: "quiet 1s infinite",
+        decent: "decent 1s infinite",
+        loud: "loud 1s infinite",
+      },
     },
   },
   plugins: [],

@@ -1,6 +1,5 @@
 "use client";
 
-import { cn } from "@/lib/utils";
 import { useTheme } from "next-themes";
 import React, { FC, ReactElement } from "react";
 
@@ -16,7 +15,7 @@ const ResumeIcon: FC<Props> = ({ className }: Props): ReactElement => {
       role="img"
       viewBox="0 0 24 24"
       xmlns="http://www.w3.org/2000/svg"
-      className={cn(className)}
+      className={className}
     >
       <title>Resume</title>
       <path

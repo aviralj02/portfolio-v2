@@ -1,11 +1,25 @@
-import { cn } from "@/lib/utils";
-import { ArrowRight, RssIcon } from "lucide-react";
-import Link from "next/link";
-import React from "react";
+"use client";
+
+import { cn, formatDate } from "@/lib/utils";
+import getBlogs from "@/lib/utils/get-blogs";
+import { MonthFormat } from "@/types/enums";
+import { ArrowRight } from "lucide-react";
+import React, { useEffect, useState } from "react";
 
 type Props = {};
 
 const RecentBlogTile = (props: Props) => {
+  const [recentBlog, setRecentBlog] = useState<Blog>();
+
+  const fetchRecentBlog = async () => {
+    const blogsData = await getBlogs();
+    setRecentBlog(blogsData?.[0]);
+  };
+
+  useEffect(() => {
+    fetchRecentBlog();
+  }, []);
+
   return (
     <div
       className={cn(
@@ -14,11 +28,11 @@ const RecentBlogTile = (props: Props) => {
       )}
     >
       <div className="flex flex-col gap-4">
-        <span className="text-xs sm:text-sm">LATEST BLOG</span>
-        <h2 className="text-base sm:text-2xl font-bold">
-          Setting up Express.js with Typescript
-        </h2>
-        <span className="text-xs sm:text-sm">September 20, 2024</span>
+        <span className="text-xs sm:text-sm">RECENT BLOG</span>
+        <h2 className="text-sm sm:text-xl font-bold">{recentBlog?.title}</h2>
+        <span className="text-xs sm:text-sm">
+          {formatDate(new Date(recentBlog?.publishDate!), MonthFormat.Long)}
+        </span>
       </div>
 
       <ArrowRight className="w-5 h-5 sm:w-7 sm:h-7 self-end" />

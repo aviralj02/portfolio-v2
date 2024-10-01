@@ -17,7 +17,7 @@ interface Project {
   backgroundColor: string;
   codebase: string;
   description: string;
-  live: string;
+  live?: string;
   priority: number;
   stack: string[];
   title: string;
