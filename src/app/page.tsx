@@ -1,13 +1,18 @@
 import AboutTile from "@/components/all/grid-tiles/AboutTile";
 import RecentBlogTile from "@/components/all/grid-tiles/RecentBlogTile";
 import RecentProjectTile from "@/components/all/grid-tiles/RecentProjectTile";
-import ResumeTile from "@/components/all/grid-tiles/ResumeTile";
 import SocialsTile from "@/components/all/grid-tiles/SocialsTile";
 import Spotify from "@/components/all/grid-tiles/SpotifyTile";
 import TodoTile from "@/components/all/grid-tiles/TodoTile";
 import UtilityTile from "@/components/all/grid-tiles/UtilityTile";
 import GridWrapper from "@/components/all/GridWrapper";
 import PageWrapper from "@/components/PageWrapper";
+import dynamic from "next/dynamic";
+
+const ImageTile = dynamic(
+  () => import("@/components/all/grid-tiles/ImageTile"),
+  { ssr: false }
+);
 
 export default function Home() {
   return (
@@ -16,7 +21,7 @@ export default function Home() {
         <RecentBlogTile />
         <AboutTile />
         <SocialsTile />
-        <ResumeTile />
+        <ImageTile />
 
         <Spotify />
         <TodoTile />

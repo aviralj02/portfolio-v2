@@ -1,12 +1,9 @@
 import { TagSize } from "@/types/enums";
-import dynamic from "next/dynamic";
 import React from "react";
 import Link from "next/link";
 import { ExternalLink } from "lucide-react";
-import Image from "next/image";
-
-const Tag = dynamic(() => import("../Tag"), { ssr: false });
-const GithubIcon = dynamic(() => import("../icons/GithubIcon"), { ssr: false });
+import Tag from "../Tag";
+import GithubIcon from "../icons/GithubIcon";
 
 type Props = {
   project: Project;

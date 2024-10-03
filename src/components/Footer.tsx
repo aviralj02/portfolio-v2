@@ -2,16 +2,12 @@
 
 import React, { ReactElement, useEffect, useState } from "react";
 import Link from "next/link";
-import dynamic from "next/dynamic";
 import { footerLinks } from "@/lib/constants";
 import getSocials from "@/lib/utils/get-socials";
-
-const GithubIcon = dynamic(() => import("./icons/GithubIcon"), { ssr: false });
-const LinkedInIcon = dynamic(() => import("./icons/LinkedInIcon"), {
-  ssr: false,
-});
-const MediumIcon = dynamic(() => import("./icons/MediumIcon"), { ssr: false });
-const ResumeIcon = dynamic(() => import("./icons/ResumeIcon"), { ssr: false });
+import LinkedInIcon from "./icons/LinkedInIcon";
+import MediumIcon from "./icons/MediumIcon";
+import ResumeIcon from "./icons/ResumeIcon";
+import GithubIcon from "./icons/GithubIcon";
 
 type Props = {};
 

@@ -1,8 +1,6 @@
 import React from "react";
-import dynamic from "next/dynamic";
 import { TagSize } from "@/types/enums";
-
-const Tag = dynamic(() => import("../Tag"), { ssr: false });
+import Tag from "../Tag";
 
 type Props = {
   data: Skill[] | undefined;

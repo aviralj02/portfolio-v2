@@ -21,7 +21,10 @@ const RecentBlogTile = (props: Props) => {
   }, []);
 
   return (
-    <div
+    <a
+      href={recentBlog?.link || "/blogs"}
+      target="_blank"
+      rel="noreferrer"
       className={cn(
         "row-span-2 lg:order-1 order-2",
         "flex flex-col w-full items-start justify-end gap-12 sm:gap-20 box-border bg-card p-3 sm:p-5 rounded-2xl hover:bg-accent transition ease-in-out duration-200"
@@ -36,7 +39,7 @@ const RecentBlogTile = (props: Props) => {
       </div>
 
       <ArrowRight className="w-5 h-5 sm:w-7 sm:h-7 self-end" />
-    </div>
+    </a>
   );
 };
 

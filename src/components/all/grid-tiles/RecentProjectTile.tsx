@@ -3,7 +3,6 @@
 import { cn } from "@/lib/utils";
 import getProjects from "@/lib/utils/get-projects";
 import { ArrowRight } from "lucide-react";
-import Link from "next/link";
 import React, { useEffect, useState } from "react";
 
 const RecentProjectTile = () => {
@@ -19,7 +18,7 @@ const RecentProjectTile = () => {
   }, []);
 
   return (
-    <Link
+    <a
       href={recentProject?.live || recentProject?.codebase || "/projects"}
       target="_blank"
       rel="noreferrer"
@@ -46,7 +45,7 @@ const RecentProjectTile = () => {
       </div>
 
       <ArrowRight className="w-5 h-5 sm:w-7 sm:h-7 self-end" />
-    </Link>
+    </a>
   );
 };
 

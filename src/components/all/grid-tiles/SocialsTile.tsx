@@ -2,21 +2,11 @@
 
 import React, { ReactElement, useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import dynamic from "next/dynamic";
 import getSocials from "@/lib/utils/get-socials";
-
-const GithubIcon = dynamic(() => import("@/components/icons/GithubIcon"), {
-  ssr: false,
-});
-const LinkedInIcon = dynamic(() => import("@/components/icons/LinkedInIcon"), {
-  ssr: false,
-});
-const MediumIcon = dynamic(() => import("@/components/icons/MediumIcon"), {
-  ssr: false,
-});
-const ResumeIcon = dynamic(() => import("@/components/icons/ResumeIcon"), {
-  ssr: false,
-});
+import GithubIcon from "@/components/icons/GithubIcon";
+import LinkedInIcon from "@/components/icons/LinkedInIcon";
+import MediumIcon from "@/components/icons/MediumIcon";
+import ResumeIcon from "@/components/icons/ResumeIcon";
 
 type Props = {};
 

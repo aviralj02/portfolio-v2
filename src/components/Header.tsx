@@ -11,7 +11,7 @@ const Header = (props: Props) => {
     <div className="max-w-screen-xl flex items-center justify-center md:justify-between mx-auto py-8 px-2.5 md:px-20">
       <Link href="/">
         <Image
-          src="/profile-image.png"
+          src="/assets/profile-image.png"
           alt="header-photo"
           width={45}
           height={45}

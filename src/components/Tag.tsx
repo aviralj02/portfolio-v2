@@ -1,5 +1,3 @@
-"use client";
-
 import { cn } from "@/lib/utils";
 import { TagSize } from "@/types/enums";
 import { useTheme } from "next-themes";
