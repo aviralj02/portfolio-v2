@@ -12,7 +12,7 @@ const UtilityTile = (props: Props) => {
     <div
       className={cn(
         "aspect-square lg:order-9 order-8",
-        "grid grid-cols-1 gap-4 lg:gap-8 auto-rows-fr"
+        "grid grid-cols-1 gap-4 lg:gap-8 auto-rows-fr w-full"
       )}
     >
       <div className="flex justify-center items-center bg-card rounded-2xl w-full">

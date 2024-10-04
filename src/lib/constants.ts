@@ -21,6 +21,6 @@ export const footerLinks: FooterLink[] = [
   },
   {
     label: "Contact",
-    to: "/contact",
+    to: "/#contact",
   },
 ];

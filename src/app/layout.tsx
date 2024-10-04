@@ -20,7 +20,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={cn(inter.className, "bg-background text-primary")}>
+      <body
+        className={cn(inter.className, "bg-background text-primary scrollbar")}
+      >
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"

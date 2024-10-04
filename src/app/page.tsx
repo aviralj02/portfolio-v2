@@ -1,4 +1,5 @@
 import AboutTile from "@/components/all/grid-tiles/AboutTile";
+import ContactTile from "@/components/all/grid-tiles/ContactTile";
 import RecentBlogTile from "@/components/all/grid-tiles/RecentBlogTile";
 import RecentProjectTile from "@/components/all/grid-tiles/RecentProjectTile";
 import SocialsTile from "@/components/all/grid-tiles/SocialsTile";
@@ -27,9 +28,7 @@ export default function Home() {
         <TodoTile />
         <RecentProjectTile />
 
-        <div className="bg-card rounded-2xl col-span-2 lg:order-8 order-9">
-          hello
-        </div>
+        <ContactTile />
         <UtilityTile />
       </GridWrapper>
     </PageWrapper>

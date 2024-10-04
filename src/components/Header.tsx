@@ -23,7 +23,7 @@ const Header = (props: Props) => {
       <Navbar />
 
       <Link
-        href={"/contact"}
+        href={"/#contact"}
         className="md:flex hidden gap-1 items-center font-medium text-sm group"
         aria-label="contact-button"
       >

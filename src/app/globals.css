@@ -59,3 +59,19 @@
     /* --navShadow: 0px 0px 20px 5px rgba(66, 220, 219, 0.5); */
   }
 }
+
+@layer utilities {
+  .scrollbar::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .scrollbar::-webkit-scrollbar-track {
+    border-radius: 100vh;
+    background: hsl(var(--secondary));
+  }
+
+  .scrollbar::-webkit-scrollbar-thumb {
+    background: hsl(var(--dim));
+    border-radius: 100vh;
+  }
+}
