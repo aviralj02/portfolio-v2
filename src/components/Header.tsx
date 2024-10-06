@@ -16,6 +16,7 @@ const Header = (props: Props) => {
           width={45}
           height={45}
           priority
+          draggable={false}
           className="rounded-full hidden md:block"
         />
       </Link>
