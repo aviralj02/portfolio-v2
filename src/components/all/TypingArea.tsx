@@ -26,7 +26,7 @@ const TypingArea = ({ textAreaRef, effectKeys, currentIndex }: Props) => {
   return (
     <>
       <textarea
-        className="w-0 h-0 opacity-0"
+        className="w-[1px] h-[1px] opacity-0"
         ref={textAreaRef}
         onChange={(e: ChangeEvent<HTMLTextAreaElement>) =>
           setText(e.target.value)
