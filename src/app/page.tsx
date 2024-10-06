@@ -3,8 +3,8 @@ import ContactTile from "@/components/all/grid-tiles/ContactTile";
 import RecentBlogTile from "@/components/all/grid-tiles/RecentBlogTile";
 import RecentProjectTile from "@/components/all/grid-tiles/RecentProjectTile";
 import SocialsTile from "@/components/all/grid-tiles/SocialsTile";
-import Spotify from "@/components/all/grid-tiles/SpotifyTile";
-import TodoTile from "@/components/all/grid-tiles/TodoTile";
+import SpotifyTile from "@/components/all/grid-tiles/SpotifyTile";
+import TypingTile from "@/components/all/grid-tiles/TypingTile";
 import UtilityTile from "@/components/all/grid-tiles/UtilityTile";
 import GridWrapper from "@/components/all/GridWrapper";
 import PageWrapper from "@/components/PageWrapper";
@@ -24,8 +24,8 @@ export default function Home() {
         <SocialsTile />
         <ImageTile />
 
-        <Spotify />
-        <TodoTile />
+        <SpotifyTile />
+        <TypingTile />
         <RecentProjectTile />
 
         <ContactTile />

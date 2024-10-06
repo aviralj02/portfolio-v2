@@ -27,7 +27,7 @@ const RecentProjectTile = () => {
         "flex flex-col w-full justify-between bg-card rounded-2xl box-border p-3 sm:p-5 hover:bg-accent transition ease-in-out duration-200"
       )}
     >
-      <div className="w-[10vw] h-[10vw] max-w-16 max-h-16 rounded-full grayscale-[50%]">
+      <div className="w-[10vw] h-[10vw] max-w-16 max-h-16 rounded-full grayscale-[50%] select-none">
         <img
           src={recentProject?.icon.url}
           alt={recentProject?.icon.fileName}
@@ -36,7 +36,7 @@ const RecentProjectTile = () => {
         />
       </div>
 
-      <div className="flex flex-col gap-2 sm:gap-4">
+      <div className="flex flex-col gap-2 sm:gap-4 select-none">
         <span className="text-xs sm:text-sm">RECENT PROJECT</span>
         <h2 className="text-base sm:text-2xl font-bold">
           {recentProject?.title}

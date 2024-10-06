@@ -30,7 +30,7 @@ const SocialsTile = (props: Props) => {
   };
 
   return (
-    <div className="grid grid-cols-2 gap-4 items-stretch box-border aspect-square order-3">
+    <div className="grid grid-cols-2 gap-4 items-stretch box-border aspect-square order-3 w-full">
       {socials?.map((social: Social) => (
         <motion.a
           key={social.name}

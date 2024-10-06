@@ -6,8 +6,6 @@ import { HeadphoneOffIcon } from "lucide-react";
 
 type Props = {};
 
-export const revalidate = 30;
-
 const SpotifyTile = async (props: Props) => {
   const currentlyPlaying = await fetchSpotifyData();
 
@@ -15,7 +13,7 @@ const SpotifyTile = async (props: Props) => {
     <div
       className={cn(
         "aspect-square lg:order-5 order-7",
-        "flex flex-col bg-card rounded-2xl box-border"
+        "flex flex-col bg-card rounded-2xl box-border w-full"
       )}
     >
       <div className="relative rounded-t-2xl h-1/3 w-full">
