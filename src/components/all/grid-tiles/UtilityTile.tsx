@@ -15,7 +15,10 @@ const UtilityTile = (props: Props) => {
         "grid grid-cols-1 gap-4 lg:gap-8 auto-rows-fr w-full"
       )}
     >
-      <div className="flex justify-center items-center bg-card rounded-2xl w-full">
+      <div
+        id="theme"
+        className="flex justify-center items-center bg-card rounded-2xl w-full"
+      >
         <ThemeToggle />
       </div>
       <VisitorLocation />

@@ -22,8 +22,8 @@ export const footerLinks: FooterLink[] = [
     to: "/blogs",
   },
   {
-    label: "Version",
-    to: "/versions",
+    label: "Theme",
+    to: "/#theme",
   },
   {
     label: "Contact",
