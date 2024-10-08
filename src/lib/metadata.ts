@@ -19,6 +19,14 @@ export const portfolioMetadata: Metadata = {
     siteName: "Aviral Jain",
     type: "website",
     locale: "en_US",
+    images: [
+      {
+        url: "https://www.aviral.xyz/opengraph-image.jpg",
+      },
+      {
+        url: "https://www.aviral.xyz/twitter-image.jpg",
+      },
+    ],
   },
   robots: {
     index: true,
