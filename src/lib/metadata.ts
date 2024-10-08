@@ -15,6 +15,8 @@ export const portfolioMetadata: Metadata = {
     "Engineer",
   ],
   openGraph: {
+    title: "Aviral | Portfolio",
+    description: PORTFOLIO_DESC,
     url: PORTFOLIO_URL,
     siteName: "Aviral Jain",
     type: "website",
