@@ -8,7 +8,23 @@ const token = Buffer.from(`${client_id}:${client_secret}`).toString("base64");
 const NOW_PLAYING_ENDPOINT = `https://api.spotify.com/v1/me/player/currently-playing`;
 const TOKEN_ENDPOINT = `https://accounts.spotify.com/api/token`;
 
+const authToken: {
+  accessToken: string | null;
+  tokenExpiry: number | null;
+} = {
+  accessToken: null,
+  tokenExpiry: null,
+};
+
 const getAccessToken = async () => {
+  if (
+    authToken.accessToken &&
+    authToken.tokenExpiry &&
+    Date.now() < authToken.tokenExpiry
+  ) {
+    return { access_token: authToken.accessToken };
+  }
+
   const res = await fetch(TOKEN_ENDPOINT, {
     method: "POST",
     headers: {
@@ -19,9 +35,15 @@ const getAccessToken = async () => {
       grant_type: "refresh_token",
       refresh_token: refresh_token,
     }),
+    cache: "no-store",
   });
 
-  return res.json();
+  const data = await res.json();
+
+  authToken.accessToken = data.access_token;
+  authToken.tokenExpiry = Date.now() + data.expires_in * 1000;
+
+  return { access_token: authToken.accessToken };
 };
 
 export const getNowPlaying = async () => {
