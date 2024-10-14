@@ -85,11 +85,6 @@ const ContactTile: FC<Props> = (props: Props) => {
             Sending <Loader className="animate-spin h-4 w-4" />
           </span>
         )}
-        {errors?.message && (
-          <p className="text-red-600 font-medium text-xs sm:text-sm block">
-            {errors.message._errors[0]}
-          </p>
-        )}
       </div>
 
       <form
@@ -97,7 +92,7 @@ const ContactTile: FC<Props> = (props: Props) => {
         className="grid lg:grid-cols-2 grid-cols-1 gap-3 w-full"
         onSubmit={handleSubmit}
       >
-        <div className="order-1">
+        <div className="order-1 flex flex-col gap-1">
           <input
             type="text"
             name="name"
@@ -112,7 +107,7 @@ const ContactTile: FC<Props> = (props: Props) => {
           )}
         </div>
 
-        <div className="order-2 lg:order-3">
+        <div className={cn("order-2 lg:order-3", "flex flex-col gap-1")}>
           <input
             type="email"
             name="email"
@@ -127,7 +122,9 @@ const ContactTile: FC<Props> = (props: Props) => {
           )}
         </div>
 
-        <div className="row-span-3 lg:order-2 order-3">
+        <div
+          className={cn("row-span-3 lg:order-2 order-3", "flex flex-col gap-1")}
+        >
           <textarea
             name="message"
             placeholder="message"
@@ -135,6 +132,11 @@ const ContactTile: FC<Props> = (props: Props) => {
             className="w-full h-full resize-none text-primary text-xs sm:text-sm outline-none rounded-xl px-4 py-2 placeholder:text-dim bg-secondary scrollbar"
             disabled={success}
           />
+          {errors?.message && (
+            <p className="text-red-600 font-medium text-xs sm:text-sm block">
+              {errors.message._errors[0]}
+            </p>
+          )}
         </div>
 
         <button
