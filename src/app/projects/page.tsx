@@ -1,24 +1,13 @@
-"use client";
-
 import PageWrapper from "@/components/PageWrapper";
 import ProjectCard from "@/components/projects/ProjectCard";
 import ProjectSkeleton from "@/components/projects/ProjectSkeleton";
 import getProjects from "@/lib/utils/get-projects";
-import React, { ReactElement, useEffect, useState } from "react";
+import React, { ReactElement } from "react";
 
 type Props = {};
 
-const Projects = (props: Props): ReactElement => {
-  const [projects, setProjects] = useState<Project[]>();
-
-  const fetchProjects = async () => {
-    const projectsData = await getProjects();
-    setProjects(projectsData);
-  };
-
-  useEffect(() => {
-    fetchProjects();
-  }, []);
+const Projects = async (props: Props): Promise<ReactElement> => {
+  const projects: Project[] | undefined = await getProjects();
 
   return (
     <PageWrapper className="flex flex-col gap-8 sm:my-12 my-6">

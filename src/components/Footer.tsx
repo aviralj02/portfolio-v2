@@ -8,11 +8,14 @@ import LinkedInIcon from "./icons/LinkedInIcon";
 import MediumIcon from "./icons/MediumIcon";
 import ResumeIcon from "./icons/ResumeIcon";
 import GithubIcon from "./icons/GithubIcon";
+import { ArrowUpDown } from "lucide-react";
+import { useTheme } from "next-themes";
 
 type Props = {};
 
 const Footer = (props: Props) => {
   const [socials, setSocials] = useState<Social[]>();
+  const { theme, setTheme } = useTheme();
 
   const fetchSocials = async () => {
     const socialsData = await getSocials();
@@ -62,15 +65,29 @@ const Footer = (props: Props) => {
         </div>
 
         <div className="hidden sm:flex flex-col gap-6 flex-wrap text-dim font-semibold">
-          {footerLinks.map((link: FooterLink) => (
-            <Link
-              key={link.label}
-              href={link.to}
-              className="hover:text-primary transition-all md:ml-14"
-            >
-              {link.label}
-            </Link>
-          ))}
+          {footerLinks.map((link: FooterLink) => {
+            if (link.label === "Theme") {
+              return (
+                <button
+                  key={link.label}
+                  onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+                  className="flex gap-1 items-center hover:text-primary transition-all md:ml-14"
+                >
+                  Theme <ArrowUpDown className="w-4 h-auto" />
+                </button>
+              );
+            } else {
+              return (
+                <Link
+                  key={link.label}
+                  href={link.to}
+                  className="hover:text-primary transition-all md:ml-14"
+                >
+                  {link.label}
+                </Link>
+              );
+            }
+          })}
         </div>
       </div>
     </div>

@@ -1,6 +1,10 @@
+"use client";
+
 import React from "react";
 import { TagSize } from "@/types/enums";
-import Tag from "../Tag";
+import dynamic from "next/dynamic";
+
+const Tag = dynamic(() => import("../Tag"), { ssr: false });
 
 type Props = {
   data: Skill[] | undefined;

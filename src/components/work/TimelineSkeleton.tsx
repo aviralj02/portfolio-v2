@@ -4,7 +4,7 @@ type Props = {};
 
 const TimelineSkeleton = (props: Props) => {
   return (
-    <div className="flex flex-col space-y-8 w-full">
+    <div className="flex flex-col space-y-8 w-full animate-pulse">
       {Array.from({ length: 4 }).map((_, index) => (
         <div key={index} className="flex items-start group">
           <div className="relative flex flex-col items-center">

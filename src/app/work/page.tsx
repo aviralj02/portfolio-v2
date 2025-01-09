@@ -1,33 +1,16 @@
-"use client";
-
 import PageWrapper from "@/components/PageWrapper";
 import Skills from "@/components/work/Skills";
 import Timeline from "@/components/work/Timeline";
 import TimelineSkeleton from "@/components/work/TimelineSkeleton";
 import getExperiences from "@/lib/utils/get-experience";
 import getSkills from "@/lib/utils/get-skills";
-import React, { ReactElement, useEffect, useState } from "react";
+import React, { ReactElement } from "react";
 
 type Props = {};
 
-const Work = (props: Props): ReactElement => {
-  const [timelineData, setTimelineData] = useState<Experience[]>();
-  const [skills, setSkills] = useState<Skill[]>();
-
-  const fetchExperiences = async () => {
-    const experiences = await getExperiences();
-    setTimelineData(experiences);
-  };
-
-  const fetchSkills = async () => {
-    const skillsData = await getSkills();
-    setSkills(skillsData);
-  };
-
-  useEffect(() => {
-    fetchExperiences();
-    fetchSkills();
-  }, []);
+const Work = async (props: Props): Promise<ReactElement> => {
+  const experience: Experience[] | undefined = await getExperiences();
+  const skills: Skill[] | undefined = await getSkills();
 
   return (
     <PageWrapper className="flex flex-col gap-20 sm:my-12 my-6">
@@ -42,7 +25,7 @@ const Work = (props: Props): ReactElement => {
           </p>
         </div>
 
-        {timelineData ? <Timeline data={timelineData} /> : <TimelineSkeleton />}
+        {experience ? <Timeline data={experience} /> : <TimelineSkeleton />}
       </div>
 
       <div className="flex flex-col gap-8">

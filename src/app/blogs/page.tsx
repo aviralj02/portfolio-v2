@@ -1,24 +1,13 @@
-"use client";
-
 import BlogCard from "@/components/blogs/BlogCard";
 import BlogSkeleton from "@/components/blogs/BlogSkeleton";
 import PageWrapper from "@/components/PageWrapper";
 import getBlogs from "@/lib/utils/get-blogs";
-import React, { ReactElement, useEffect, useState } from "react";
+import React, { ReactElement } from "react";
 
 type Props = {};
 
-const Blogs = (props: Props): ReactElement => {
-  const [blogs, setBlogs] = useState<Blog[]>();
-
-  const fetchBlogs = async () => {
-    const blogsData = await getBlogs();
-    setBlogs(blogsData);
-  };
-
-  useEffect(() => {
-    fetchBlogs();
-  }, []);
+const Blogs = async (props: Props): Promise<ReactElement> => {
+  const blogs: Blog[] | undefined = await getBlogs();
 
   return (
     <PageWrapper className="flex flex-col gap-8 sm:my-12 my-6">

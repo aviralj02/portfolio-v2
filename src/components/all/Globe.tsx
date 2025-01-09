@@ -56,7 +56,7 @@ const Globe = (props: Props) => {
         markers: [{ location: [28.459497, 77.026634], size: 0.08 }],
         onRender: (state) => {
           if (!pointerInteracting.current) {
-            phi += 0.005;
+            phi += 0.003;
           }
           state.phi = phi + r.get();
           state.width = width * 2;

@@ -2,7 +2,7 @@
 
 ### ✨ portfolio
 
-- **Framework**: [Next.js](https://nextjs.org/)
+- **Framework**: [Next.js](https://nextjs.org/) (TypeScript)
 - **Styling**: [Tailwind CSS](https://tailwindcss.com)
 - **Animations**: [Framer Motion](https://www.framer.com/motion/)
 - **CMS**: [Hygraph](https://hygraph.com/) + [GraphQL](https://graphql.org/)
