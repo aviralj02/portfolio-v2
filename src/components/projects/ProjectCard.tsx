@@ -5,9 +5,7 @@ import React from "react";
 import Link from "next/link";
 import { ExternalLink } from "lucide-react";
 import GithubIcon from "../icons/GithubIcon";
-import dynamic from "next/dynamic";
-
-const Tag = dynamic(() => import("../Tag"), { ssr: false });
+import Tag from "../Tag";
 
 type Props = {
   project: Project;
