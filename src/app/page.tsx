@@ -1,4 +1,5 @@
 import AboutTile from "@/components/all/grid-tiles/AboutTile";
+import ClientImageTile from "@/components/all/grid-tiles/ClientImageTile";
 import ContactTile from "@/components/all/grid-tiles/ContactTile";
 import RecentBlogTile from "@/components/all/grid-tiles/RecentBlogTile";
 import RecentProjectTile from "@/components/all/grid-tiles/RecentProjectTile";
@@ -10,11 +11,6 @@ import GridWrapper from "@/components/all/GridWrapper";
 import PageWrapper from "@/components/PageWrapper";
 import dynamic from "next/dynamic";
 
-const ImageTile = dynamic(
-  () => import("@/components/all/grid-tiles/ImageTile"),
-  { ssr: false }
-);
-
 export default function Home() {
   return (
     <PageWrapper>
@@ -22,7 +18,7 @@ export default function Home() {
         <RecentBlogTile />
         <AboutTile />
         <SocialsTile />
-        <ImageTile />
+        <ClientImageTile />
 
         <SpotifyTile />
         <TypingTile />
