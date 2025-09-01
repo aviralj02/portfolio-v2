@@ -6,10 +6,11 @@ import { footerLinks } from "@/lib/constants";
 import getSocials from "@/lib/utils/get-socials";
 import LinkedInIcon from "./icons/LinkedInIcon";
 import MediumIcon from "./icons/MediumIcon";
-import ResumeIcon from "./icons/ResumeIcon";
 import GithubIcon from "./icons/GithubIcon";
 import { ArrowUpDown } from "lucide-react";
 import { useTheme } from "next-themes";
+import XIcon from "./icons/XIcon";
+import PageoIcon from "./icons/PageoIcon";
 
 type Props = {};
 
@@ -30,7 +31,8 @@ const Footer = (props: Props) => {
     github: <GithubIcon className="h-5 w-5" />,
     linkedin: <LinkedInIcon className="h-5 w-5" />,
     medium: <MediumIcon className="h-5 w-5" />,
-    resume: <ResumeIcon className="h-5 w-5" />,
+    x: <XIcon className="h-5 w-5" />,
+    pageo: <PageoIcon className="h-5 w-5" />,
   };
 
   return (
@@ -45,17 +47,23 @@ const Footer = (props: Props) => {
               <span>Let&apos;s bring it to life together!</span>
             </div>
 
-            <div className="flex gap-5 items-center">
-              {socials?.map((social: Social) => (
-                <a
-                  key={social.name}
-                  href={social.url}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  {iconMap[social.name]}
-                </a>
-              ))}
+            <div className="flex gap-8 items-center">
+              {Object.keys(iconMap).map((icon: string) => {
+                const socialData = socials?.find(
+                  (social) => social.name === icon
+                );
+
+                return (
+                  <a
+                    key={socialData?.name}
+                    href={socialData?.url}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    {iconMap[icon]}
+                  </a>
+                );
+              })}
             </div>
           </div>
 

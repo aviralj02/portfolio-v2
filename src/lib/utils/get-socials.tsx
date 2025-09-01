@@ -4,9 +4,8 @@ import client from "../hygraph";
 const getSocials = async (): Promise<Social[] | undefined> => {
   const query = gql`
     query getSocials {
-      socials(orderBy: priority_ASC) {
+      socials {
         name
-        priority
         url
       }
     }

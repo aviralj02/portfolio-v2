@@ -1,26 +1,22 @@
 "use client";
 
-import React, { ReactElement } from "react";
+import PageoIcon from "@/components/icons/PageoIcon";
+import ResumeIcon from "@/components/icons/ResumeIcon";
 import { motion } from "framer-motion";
-import GithubIcon from "@/components/icons/GithubIcon";
-import LinkedInIcon from "@/components/icons/LinkedInIcon";
-import MediumIcon from "@/components/icons/MediumIcon";
-import XIcon from "@/components/icons/XIcon";
+import { ReactElement } from "react";
 
 type Props = {
   socials: Array<Social> | undefined;
 };
 
-const SocialsTile = ({ socials }: Props) => {
+const ExtraLinks = ({ socials }: Props) => {
   const iconMap: { [key: string]: ReactElement } = {
-    github: <GithubIcon className="sm:h-8 sm:w-8 h-6 w-6" />,
-    linkedin: <LinkedInIcon className="sm:h-8 sm:w-8 h-6 w-6" />,
-    medium: <MediumIcon className="sm:h-8 sm:w-8 h-6 w-6" />,
-    x: <XIcon className="sm:h-8 sm:w-8 h-6 w-6" />,
+    pageo: <PageoIcon className="sm:h-8 sm:w-8 h-6 w-6" />,
+    resume: <ResumeIcon className="sm:h-8 sm:w-8 h-6 w-6" />,
   };
 
   return (
-    <div className="grid grid-cols-2 gap-4 items-stretch box-border aspect-square order-3 w-full">
+    <div className="grid grid-cols-2 aspect-1/2 h-1/5 gap-4 lg:gap-7">
       {Object.keys(iconMap).map((icon: string) => {
         const socialData = socials?.find((social) => social.name === icon);
 
@@ -48,4 +44,4 @@ const SocialsTile = ({ socials }: Props) => {
   );
 };
 
-export default SocialsTile;
+export default ExtraLinks;

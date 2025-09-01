@@ -21,7 +21,7 @@ export default async function Home() {
   return (
     <PageWrapper>
       <GridWrapper>
-        <RecentBlogTile recentBlog={blogsData?.[0]} />
+        <RecentBlogTile recentBlog={blogsData?.[0]} socials={socialsData} />
         <AboutTile />
         <SocialsTile socials={socialsData} />
         <ClientImageTile />

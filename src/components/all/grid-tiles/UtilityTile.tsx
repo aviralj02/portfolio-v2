@@ -14,7 +14,7 @@ const UtilityTile = (props: Props) => {
     <div
       className={cn(
         "aspect-square lg:order-9 order-8",
-        "grid grid-cols-1 gap-4 lg:gap-8 auto-rows-fr w-full"
+        "grid grid-cols-1 gap-4 lg:gap-7 auto-rows-fr w-full"
       )}
     >
       <div
