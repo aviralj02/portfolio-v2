@@ -22,7 +22,7 @@ const ExtraLinks = ({ socials }: Props) => {
 
         return (
           <motion.a
-            key={socialData?.name}
+            key={icon}
             target="_blank"
             rel="noreferrer"
             href={socialData?.url}

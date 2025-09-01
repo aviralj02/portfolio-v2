@@ -55,7 +55,7 @@ const Footer = (props: Props) => {
 
                 return (
                   <a
-                    key={socialData?.name}
+                    key={icon}
                     href={socialData?.url}
                     target="_blank"
                     rel="noreferrer"
