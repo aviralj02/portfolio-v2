@@ -6,20 +6,11 @@ import { MonthFormat } from "@/types/enums";
 import { ArrowRight } from "lucide-react";
 import React, { useEffect, useState } from "react";
 
-type Props = {};
+type Props = {
+  recentBlog: Blog | undefined;
+};
 
-const RecentBlogTile = (props: Props) => {
-  const [recentBlog, setRecentBlog] = useState<Blog>();
-
-  const fetchRecentBlog = async () => {
-    const blogsData = await getBlogs();
-    setRecentBlog(blogsData?.[0]);
-  };
-
-  useEffect(() => {
-    fetchRecentBlog();
-  }, []);
-
+const RecentBlogTile = ({ recentBlog }: Props) => {
   return (
     <a
       href={recentBlog?.link || "/blogs"}

@@ -9,20 +9,26 @@ import TypingTile from "@/components/all/grid-tiles/TypingTile";
 import UtilityTile from "@/components/all/grid-tiles/UtilityTile";
 import GridWrapper from "@/components/all/GridWrapper";
 import PageWrapper from "@/components/PageWrapper";
-import dynamic from "next/dynamic";
+import getBlogs from "@/lib/utils/get-blogs";
+import getProjects from "@/lib/utils/get-projects";
+import getSocials from "@/lib/utils/get-socials";
 
-export default function Home() {
+export default async function Home() {
+  const projects = await getProjects();
+  const socialsData = await getSocials();
+  const blogsData = await getBlogs();
+
   return (
     <PageWrapper>
       <GridWrapper>
-        <RecentBlogTile />
+        <RecentBlogTile recentBlog={blogsData?.[0]} />
         <AboutTile />
-        <SocialsTile />
+        <SocialsTile socials={socialsData} />
         <ClientImageTile />
 
         <SpotifyTile />
         <TypingTile />
-        <RecentProjectTile />
+        <RecentProjectTile recentProject={projects?.[0]} />
 
         <ContactTile />
         <UtilityTile />

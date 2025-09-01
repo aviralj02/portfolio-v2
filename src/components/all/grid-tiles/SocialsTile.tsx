@@ -1,27 +1,17 @@
 "use client";
 
-import React, { ReactElement, useEffect, useState } from "react";
+import React, { ReactElement } from "react";
 import { motion } from "framer-motion";
-import getSocials from "@/lib/utils/get-socials";
 import GithubIcon from "@/components/icons/GithubIcon";
 import LinkedInIcon from "@/components/icons/LinkedInIcon";
 import MediumIcon from "@/components/icons/MediumIcon";
 import ResumeIcon from "@/components/icons/ResumeIcon";
 
-type Props = {};
+type Props = {
+  socials: Array<Social> | undefined;
+};
 
-const SocialsTile = (props: Props) => {
-  const [socials, setSocials] = useState<Social[]>();
-
-  const fetchSocials = async () => {
-    const socialsData = await getSocials();
-    setSocials(socialsData);
-  };
-
-  useEffect(() => {
-    fetchSocials();
-  }, []);
-
+const SocialsTile = ({ socials }: Props) => {
   const iconMap: { [key: string]: ReactElement } = {
     github: <GithubIcon className="sm:h-8 sm:w-8 h-6 w-6" />,
     linkedin: <LinkedInIcon className="sm:h-8 sm:w-8 h-6 w-6" />,

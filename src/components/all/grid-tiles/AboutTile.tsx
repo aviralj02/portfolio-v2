@@ -23,7 +23,7 @@ const AboutTile: React.FC<Props> = () => {
         </h1>
         <p className="text-sm sm:text-base leading-tight">
           I&apos;m a full-stack engineer from India who enjoys building user
-          friendly applications with solid design.
+          friendly applications with solid backend design.
         </p>
         <p className="hidden lg:block text-sm sm:text-base leading-tight">
           Turning ideas into easy-to-use software solutions.

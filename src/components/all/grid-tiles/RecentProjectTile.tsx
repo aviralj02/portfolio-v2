@@ -1,22 +1,12 @@
-"use client";
-
 import { cn } from "@/lib/utils";
-import getProjects from "@/lib/utils/get-projects";
 import { ArrowRight } from "lucide-react";
-import React, { useEffect, useState } from "react";
+import React from "react";
 
-const RecentProjectTile = () => {
-  const [recentProject, setRecentProject] = useState<Project>();
+type Props = {
+  recentProject: Project | undefined;
+};
 
-  const fetchRecentProject = async () => {
-    const projects = await getProjects();
-    setRecentProject(projects?.[0]);
-  };
-
-  useEffect(() => {
-    fetchRecentProject();
-  }, []);
-
+const RecentProjectTile = ({ recentProject }: Props) => {
   return (
     <a
       href={recentProject?.live || recentProject?.codebase || "/projects"}
