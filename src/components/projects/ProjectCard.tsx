@@ -15,7 +15,7 @@ const ProjectCard = ({ project }: Props) => {
   return (
     <div
       style={{ backgroundColor: project.backgroundColor }}
-      className="relative flex flex-col w-full rounded-3xl h-fit"
+      className="relative flex flex-col w-full rounded-3xl h-fit card-shadow"
     >
       <div className="bg-transparent h-14 w-full" />
 

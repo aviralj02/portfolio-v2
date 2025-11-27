@@ -14,7 +14,7 @@ const AboutTile: React.FC<Props> = () => {
     <div
       className={cn(
         "col-span-2 row-span-2 aspect-square lg:order-2 order-1",
-        "relative flex flex-col p-6 justify-between sm:p-8 bg-card rounded-2xl w-full h-auto box-border overflow-hidden group"
+        "relative flex flex-col p-6 justify-between sm:p-8 bg-card rounded-2xl w-full h-auto box-border overflow-hidden group card-shadow"
       )}
     >
       <div className="flex flex-col gap-2">

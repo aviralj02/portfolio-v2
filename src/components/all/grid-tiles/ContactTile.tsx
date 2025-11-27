@@ -70,7 +70,7 @@ const ContactTile: FC<Props> = (props: Props) => {
     <div
       className={cn(
         "col-span-2 lg:order-8 order-9",
-        "flex flex-col gap-6 bg-card rounded-2xl p-6 w-full"
+        "flex flex-col gap-6 bg-card rounded-2xl p-6 w-full card-shadow"
       )}
     >
       <div className="flex lg:flex-row flex-col items-center lg:justify-between gap-3 lg:gap-0">

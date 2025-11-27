@@ -5,6 +5,7 @@ import { MonthFormat } from "@/types/enums";
 import { ArrowRight } from "lucide-react";
 import React from "react";
 import ExtraLinks from "./ExtraLinks";
+import { motion } from "framer-motion";
 
 type Props = {
   recentBlog: Blog | undefined;
@@ -19,12 +20,17 @@ const RecentBlogTile = ({ recentBlog, socials }: Props) => {
         "flex flex-col gap-4 lg:gap-7"
       )}
     >
-      <a
+      <motion.a
+        whileHover={{
+          scale: 1.02,
+          y: -2,
+        }}
+        transition={{ duration: 0.1, ease: "easeOut" }}
         href={recentBlog?.link || "/blogs"}
         target="_blank"
         rel="noreferrer"
         className={
-          "flex flex-col flex-1 w-full items-start justify-end gap-12 sm:gap-20 box-border bg-card p-3 sm:p-5 rounded-2xl hover:bg-accent transition ease-in-out duration-200"
+          "flex flex-col flex-1 w-full items-start justify-end gap-12 sm:gap-20 box-border p-3 sm:p-5 rounded-2xl transition ease-in-out duration-200 card-template"
         }
       >
         <div className="flex flex-col gap-4">
@@ -36,7 +42,7 @@ const RecentBlogTile = ({ recentBlog, socials }: Props) => {
         </div>
 
         <ArrowRight className="w-5 h-5 sm:w-7 sm:h-7 self-end" />
-      </a>
+      </motion.a>
 
       <ExtraLinks socials={socials} />
     </div>

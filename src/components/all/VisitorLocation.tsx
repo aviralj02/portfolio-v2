@@ -47,7 +47,7 @@ const VisitorLocation = (props: Props) => {
   }, [lastLocation]);
 
   return (
-    <div className="bg-card rounded-2xl flex items-center justify-center gap-4 px-4">
+    <div className="bg-card rounded-2xl flex items-center justify-center gap-4 px-4 card-shadow">
       <MapPinned className="hidden lg:block w-7 h-7" />
 
       <div className="flex flex-col lg:text-sm text-xs font-mono sm:tracking-wide select-none">

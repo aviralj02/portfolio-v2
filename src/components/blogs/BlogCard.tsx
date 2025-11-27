@@ -13,7 +13,7 @@ const BlogCard = ({ blog }: Props) => {
       href={blog.link}
       rel="noreferrer"
       target="_blank"
-      className="w-full flex flex-col items-start gap-4 p-6 bg-card rounded-2xl hover:bg-muted transition-all"
+      className="w-full flex flex-col items-start gap-4 p-6 rounded-2xl transition-all card-template"
     >
       <h2 className="text-base sm:text-xl text-primary font-semibold">
         {blog.title}

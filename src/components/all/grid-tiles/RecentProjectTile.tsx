@@ -1,4 +1,7 @@
+"use client";
+
 import { cn } from "@/lib/utils";
+import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import React from "react";
 
@@ -8,13 +11,18 @@ type Props = {
 
 const RecentProjectTile = ({ recentProject }: Props) => {
   return (
-    <a
+    <motion.a
+      whileHover={{
+        scale: 1.02,
+        y: -2,
+      }}
+      transition={{ duration: 0.1, ease: "easeOut" }}
       href={recentProject?.live || recentProject?.codebase || "/projects"}
       target="_blank"
       rel="noreferrer"
       className={cn(
         "row-span-2 lg:order-7 order-6",
-        "flex flex-col w-full justify-between bg-card rounded-2xl box-border p-3 sm:p-5 hover:bg-accent transition ease-in-out duration-200"
+        "flex flex-col w-full justify-between rounded-2xl box-border p-3 sm:p-5 transition ease-in-out duration-200 card-template"
       )}
     >
       <div className="w-[10vw] h-[10vw] max-w-16 max-h-16 rounded-full grayscale-[50%] select-none">
@@ -35,7 +43,7 @@ const RecentProjectTile = ({ recentProject }: Props) => {
       </div>
 
       <ArrowRight className="w-5 h-5 sm:w-7 sm:h-7 self-end" />
-    </a>
+    </motion.a>
   );
 };
 

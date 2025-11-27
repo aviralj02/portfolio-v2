@@ -10,7 +10,7 @@ const ImageTile = () => {
     <div
       className={cn(
         "aspect-square order-4",
-        "bg-card rounded-2xl overflow-hidden w-full"
+        "bg-card rounded-2xl overflow-hidden w-full card-shadow"
       )}
     >
       <img

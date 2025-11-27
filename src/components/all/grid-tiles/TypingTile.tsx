@@ -30,7 +30,7 @@ const TypingTile = () => {
     <div
       className={cn(
         "col-span-2 order-5",
-        "flex flex-col p-4 w-full items-center sm:justify-between gap-4 sm:gap-0 bg-card rounded-2xl"
+        "flex flex-col p-4 w-full items-center sm:justify-between gap-4 sm:gap-0 bg-card rounded-2xl card-shadow"
       )}
     >
       <TypingArea

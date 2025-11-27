@@ -81,6 +81,7 @@ const config: Config = {
       },
     },
   },
+  safelist: ["card-shadow"],
   plugins: [],
 };
 export default config;

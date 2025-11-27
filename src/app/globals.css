@@ -5,7 +5,7 @@
 
 @layer base {
   :root {
-    --background: 0 0% 87.8%;
+    --background: 30 10% 96%;
     --foreground: 240 10% 3.9%;
     --card: 0 0% 100%;
     --card-foreground: 240 10% 3.9%;
@@ -19,7 +19,7 @@
     --secondary-text: 220 50% 30%;
     --muted: 240 4.8% 95.9%;
     --muted-foreground: 240 3.8% 46.1%;
-    --accent: 240 4.8% 95.9%;
+    --accent: 0 0 93%;
     --accent-foreground: 240 5.9% 10%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
@@ -60,6 +60,14 @@
   }
 }
 
+.card-shadow {
+  box-shadow:
+    0px 4px 18px #0000000a,
+    0px 2.025px 7.84688px rgba(0, 0, 0, .027),
+    0px 0.8px 2.925px #00000005,
+    0px 0.175px 1.04062px rgba(0, 0, 0, .013);
+}
+
 @layer utilities {
   .scrollbar::-webkit-scrollbar {
     width: 5px;
@@ -74,4 +82,9 @@
     background: hsl(var(--dim));
     border-radius: 100vh;
   }
+}
+
+
+.card-template {
+  @apply bg-card hover:bg-accent card-shadow
 }
