@@ -11,6 +11,7 @@ import { ArrowUpDown } from "lucide-react";
 import { useTheme } from "next-themes";
 import XIcon from "./icons/XIcon";
 import PageoIcon from "./icons/PageoIcon";
+import { toggleThemeWithTransition } from "@/lib/utils";
 
 type Props = {};
 
@@ -78,7 +79,9 @@ const Footer = (props: Props) => {
               return (
                 <button
                   key={link.label}
-                  onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+                  onClick={toggleThemeWithTransition(() =>
+                    setTheme(theme === "light" ? "dark" : "light")
+                  )}
                   className="flex gap-1 items-center hover:text-primary transition-all md:ml-14"
                 >
                   Theme <ArrowUpDown className="w-4 h-auto" />

@@ -88,3 +88,24 @@
 .card-template {
   @apply bg-card hover:bg-accent card-shadow
 }
+
+
+/* VIEW TRANSITIONS */
+::view-transition-old(root) {
+  animation-delay: 700ms;
+}
+
+::view-transition-new(root) {
+  animation: circle-in 700ms;
+}
+
+
+@keyframes circle-in {
+  from {
+    clip-path: circle(0 at 50% 50%);
+  }
+
+  to {
+    clip-path: circle(140% at 50% 50%);
+  }
+}

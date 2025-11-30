@@ -20,3 +20,14 @@ export function formatDate(date: Date, monthFormat: MonthFormat): string {
     year: "numeric",
   });
 }
+
+export const toggleThemeWithTransition = (callback: () => void) => () => {
+  if (!document.startViewTransition) {
+    callback();
+    return;
+  }
+
+  document.startViewTransition(() => {
+    callback();
+  });
+};

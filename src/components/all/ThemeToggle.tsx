@@ -1,6 +1,6 @@
 "use client";
 
-import { cn } from "@/lib/utils";
+import { cn, toggleThemeWithTransition } from "@/lib/utils";
 import { motion } from "framer-motion";
 import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
@@ -13,7 +13,9 @@ const ThemeToggle = (props: Props) => {
 
   return (
     <div
-      onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+      onClick={toggleThemeWithTransition(() =>
+        setTheme(theme === "light" ? "dark" : "light")
+      )}
       className={cn(
         "flex items-center sm:h-12 sm:w-24 h-10 w-20 rounded-full bg-secondary p-[5px] shadow-inner hover:cursor-pointer",
         theme === "dark" && "justify-end"
@@ -28,7 +30,7 @@ const ThemeToggle = (props: Props) => {
           damping: 30,
         }}
       >
-        <motion.div whileTap={{ rotate: 360 }}>
+        <motion.div>
           {theme === "dark" ? (
             <Moon className="sm:h-6 sm:w-6 h-4 w-4 text-primary" />
           ) : (
