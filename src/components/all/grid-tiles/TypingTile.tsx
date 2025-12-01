@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { typingProps } from "@/lib/constants";
 import TypingArea from "../TypingArea";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { Fira_Code } from "next/font/google";
 
 const fira = Fira_Code({ subsets: ["latin"] });

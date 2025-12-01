@@ -4,7 +4,7 @@
 
 - **Framework**: [Next.js](https://nextjs.org/) (TypeScript)
 - **Styling**: [Tailwind CSS](https://tailwindcss.com)
-- **Animations**: [Framer Motion](https://www.framer.com/motion/)
+- **Animations**: [Motion](https://motion.dev/)
 - **CMS**: [Hygraph](https://hygraph.com/) + [GraphQL](https://graphql.org/)
 
 ### Local Set-Up

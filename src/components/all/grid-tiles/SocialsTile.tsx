@@ -1,7 +1,7 @@
 "use client";
 
 import React, { ReactElement } from "react";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import GithubIcon from "@/components/icons/GithubIcon";
 import LinkedInIcon from "@/components/icons/LinkedInIcon";
 import MediumIcon from "@/components/icons/MediumIcon";

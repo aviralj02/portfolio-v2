@@ -1,4 +1,4 @@
-import { MotionProps } from "framer-motion";
+import { MotionProps } from "motion/react";
 
 export const PORTFOLIO_URL: string = "https://aviral.xyz";
 export const PORTFOLIO_DESC: string =

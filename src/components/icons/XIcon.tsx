@@ -1,5 +1,7 @@
+"use client";
+
 import { useTheme } from "next-themes";
-import React, { FC, ReactElement } from "react";
+import { FC, ReactElement } from "react";
 
 type Props = {
   className?: string;

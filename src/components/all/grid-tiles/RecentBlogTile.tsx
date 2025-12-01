@@ -3,9 +3,8 @@
 import { cn, formatDate } from "@/lib/utils";
 import { MonthFormat } from "@/types/enums";
 import { ArrowRight } from "lucide-react";
-import React from "react";
 import ExtraLinks from "./ExtraLinks";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 
 type Props = {
   recentBlog: Blog | undefined;

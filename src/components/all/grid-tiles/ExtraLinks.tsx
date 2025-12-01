@@ -2,7 +2,7 @@
 
 import PageoIcon from "@/components/icons/PageoIcon";
 import ResumeIcon from "@/components/icons/ResumeIcon";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { ReactElement } from "react";
 
 type Props = {

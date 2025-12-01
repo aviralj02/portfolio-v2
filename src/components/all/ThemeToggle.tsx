@@ -1,10 +1,9 @@
 "use client";
 
 import { cn, toggleThemeWithTransition } from "@/lib/utils";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
-import React from "react";
 
 type Props = {};
 

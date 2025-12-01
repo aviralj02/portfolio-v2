@@ -1,7 +1,7 @@
 "use client";
 
-import { AnimatePresence, motion } from "framer-motion";
-import React, { ChangeEvent, RefObject, useEffect, useState } from "react";
+import { AnimatePresence, motion } from "motion/react";
+import { ChangeEvent, RefObject, useEffect, useState } from "react";
 import { Fira_Code } from "next/font/google";
 import { typingProps } from "@/lib/constants";
 import { cn } from "@/lib/utils";
@@ -9,7 +9,7 @@ import { cn } from "@/lib/utils";
 const fira = Fira_Code({ subsets: ["latin"] });
 
 type Props = {
-  textAreaRef: RefObject<HTMLTextAreaElement>;
+  textAreaRef: RefObject<HTMLTextAreaElement | null>;
   effectKeys: string[];
   currentIndex: number;
 };
