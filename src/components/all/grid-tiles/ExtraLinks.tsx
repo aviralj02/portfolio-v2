@@ -1,13 +1,19 @@
 "use client";
 
-import PageoIcon from "@/components/icons/PageoIcon";
-import ResumeIcon from "@/components/icons/ResumeIcon";
 import { motion } from "motion/react";
+import dynamic from "next/dynamic";
 import { ReactElement } from "react";
 
 type Props = {
   socials: Array<Social> | undefined;
 };
+
+const PageoIcon = dynamic(() => import("@/components/icons/PageoIcon"), {
+  ssr: false,
+});
+const ResumeIcon = dynamic(() => import("@/components/icons/ResumeIcon"), {
+  ssr: false,
+});
 
 const ExtraLinks = ({ socials }: Props) => {
   const iconMap: { [key: string]: ReactElement } = {

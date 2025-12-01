@@ -1,17 +1,29 @@
 "use client";
 
-import React, { ReactElement, useEffect, useState } from "react";
+import { ReactElement, useEffect, useState } from "react";
 import Link from "next/link";
 import { footerLinks } from "@/lib/constants";
 import getSocials from "@/lib/utils/get-socials";
-import LinkedInIcon from "./icons/LinkedInIcon";
-import MediumIcon from "./icons/MediumIcon";
-import GithubIcon from "./icons/GithubIcon";
 import { ArrowUpDown } from "lucide-react";
 import { useTheme } from "next-themes";
-import XIcon from "./icons/XIcon";
-import PageoIcon from "./icons/PageoIcon";
 import { toggleThemeWithTransition } from "@/lib/utils";
+import dynamic from "next/dynamic";
+
+const GithubIcon = dynamic(() => import("@/components/icons/GithubIcon"), {
+  ssr: false,
+});
+const LinkedInIcon = dynamic(() => import("@/components/icons/LinkedInIcon"), {
+  ssr: false,
+});
+const MediumIcon = dynamic(() => import("@/components/icons/MediumIcon"), {
+  ssr: false,
+});
+const XIcon = dynamic(() => import("@/components/icons/XIcon"), {
+  ssr: false,
+});
+const PageoIcon = dynamic(() => import("@/components/icons/PageoIcon"), {
+  ssr: false,
+});
 
 type Props = {};
 

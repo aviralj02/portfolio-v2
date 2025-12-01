@@ -1,11 +1,21 @@
 "use client";
 
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 import { motion } from "motion/react";
-import GithubIcon from "@/components/icons/GithubIcon";
-import LinkedInIcon from "@/components/icons/LinkedInIcon";
-import MediumIcon from "@/components/icons/MediumIcon";
-import XIcon from "@/components/icons/XIcon";
+import dynamic from "next/dynamic";
+
+const GithubIcon = dynamic(() => import("@/components/icons/GithubIcon"), {
+  ssr: false,
+});
+const LinkedInIcon = dynamic(() => import("@/components/icons/LinkedInIcon"), {
+  ssr: false,
+});
+const MediumIcon = dynamic(() => import("@/components/icons/MediumIcon"), {
+  ssr: false,
+});
+const XIcon = dynamic(() => import("@/components/icons/XIcon"), {
+  ssr: false,
+});
 
 type Props = {
   socials: Array<Social> | undefined;

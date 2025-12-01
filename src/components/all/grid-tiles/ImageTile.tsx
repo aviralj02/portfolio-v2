@@ -2,10 +2,10 @@
 
 import { cn } from "@/lib/utils";
 import { useTheme } from "next-themes";
-import React from "react";
 
 const ImageTile = () => {
   const { theme } = useTheme();
+
   return (
     <div
       className={cn(
