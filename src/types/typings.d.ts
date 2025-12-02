@@ -5,6 +5,7 @@ interface Experience {
   role: string;
   startDate: Date;
   url: string;
+  logo: Asset;
 }
 
 interface Skill {
@@ -21,7 +22,7 @@ interface Project {
   priority: number;
   stack: string[];
   title: string;
-  icon: Icon;
+  icon: Asset;
 }
 
 interface Blog {
@@ -38,7 +39,7 @@ interface Social {
   url: string;
 }
 
-interface Icon {
+interface Asset {
   fileName: string;
   url: string;
 }

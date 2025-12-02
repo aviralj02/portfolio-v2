@@ -11,6 +11,10 @@ const getExperiences = async (): Promise<Experience[] | undefined> => {
         role
         startDate
         url
+        logo {
+          fileName
+          url
+        }
       }
     }
   `;
