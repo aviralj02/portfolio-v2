@@ -22,8 +22,13 @@ const VisitorLocation = (props: Props) => {
         method: "GET",
       }
     );
+
     const data = await res.json();
     const { city, country } = data;
+
+    if (city === lastLocation?.city && country === lastLocation?.country) {
+      return;
+    }
 
     const isSuccessUpdate = await updateLastVisitor(
       lastLocation?.id!,
@@ -47,19 +52,22 @@ const VisitorLocation = (props: Props) => {
   }, [lastLocation]);
 
   return (
-    <div className="bg-card rounded-2xl flex items-center justify-center gap-4 px-4 card-shadow">
-      <MapPinned className="hidden lg:block w-7 h-7" />
+    <div className="bg-card rounded-2xl flex items-center justify-center gap-4 px-5 py-3 card-shadow transition-all hover:scale-[1.02]">
+      <MapPinned className="hidden lg:block w-7 h-7 text-muted-foreground" />
 
-      <div className="flex flex-col lg:text-sm text-xs font-mono sm:tracking-wide select-none">
-        <span>
-          Last Visited<span className="hidden sm:inline-block">&nbsp;from</span>
-          <span className="inline-block sm:hidden">:</span>
+      <div className="flex flex-col text-xs lg:text-sm font-mono tracking-wide select-none">
+        <span className="text-muted-foreground">
+          Last Visited
+          <span className="hidden sm:inline">&nbsp;from</span>
+          <span className="inline sm:hidden">:</span>
         </span>
 
         {lastLocation ? (
-          <span>{lastLocation?.city + ", " + lastLocation?.country}</span>
+          <span className="font-semibold">
+            {lastLocation.city}, {lastLocation.country}
+          </span>
         ) : (
-          <span className="animate-bounce mt-2">Detecting ...</span>
+          <span className="animate-pulse mt-1 text-primary">Detecting...</span>
         )}
       </div>
     </div>
