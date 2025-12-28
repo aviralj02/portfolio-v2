@@ -1,0 +1,85 @@
+## Site Information
+- **Name**: Aviral Jain Portfolio
+- **URL**: https://aviral.xyz
+- **Description**: A comprehensive portfolio showcasing skills as a full stack developer, including work experience, projects, and technical blogs.
+- **Owner**: Aviral Jain
+- **Location**: Gurugram, Haryana, India
+
+## About
+Aviral Jain is a full-stack engineer from India who enjoys building user-friendly applications with solid backend design. The portfolio demonstrates capabilities in web development, showcasing impactful contributions from internships and professional roles.
+
+## Technology Stack
+- **Framework**: Next.js 16.0.7 (TypeScript)
+- **Styling**: Tailwind CSS
+- **Animations**: Motion (v12.23.24)
+- **CMS**: Hygraph + GraphQL
+- **Analytics**: Vercel Analytics
+- **Deployment**: Vercel (presumed)
+
+## Site Structure
+
+### Main Pages
+1. **Home** (`/`)
+   - Grid-based layout with interactive tiles
+   - About section with introduction
+   - Recent blog post preview
+   - Recent project preview
+   - Social media links
+   - Spotify integration (currently playing track)
+   - Contact information
+   - Theme toggle functionality
+   - Live clock and visitor location
+
+2. **Work** (`/work`)
+   - Work experience and professional history
+   - Skills showcase
+   - Internships and roles
+   - Technical competencies
+
+3. **Projects** (`/projects`)
+   - Portfolio of key projects
+   - Project descriptions and details
+   - Technologies used in each project
+   - Links to live demos and repositories
+
+4. **Blogs** (`/blogs`)
+   - Technical blog posts
+   - Thoughts on technology and web development trends
+   - Insights and tutorials
+
+## Key Features
+- Dark/light theme support
+- Responsive grid layout
+- Real-time Spotify integration
+- Visitor location tracking
+- Live clock display
+- Interactive typing animations
+- Smooth page transitions
+- SEO optimized with Open Graph and Twitter cards
+
+## Content Sources
+- Projects, blogs, and work experience are managed through Hygraph CMS
+- Content is fetched via GraphQL queries
+- Dynamic content updates without code changes
+
+## Social Links
+The portfolio includes links to various social platforms (GitHub, LinkedIn, X/Twitter, Medium, etc.) and professional resources.
+
+## Contact
+Contact information and methods are available on the homepage.
+
+## Sitemap
+- https://aviral.xyz (priority: 1.0, weekly updates)
+- https://aviral.xyz/work (priority: 0.8, monthly updates)
+- https://aviral.xyz/projects (priority: 0.8, monthly updates)
+- https://aviral.xyz/blogs (priority: 0.8, monthly updates)
+
+## Metadata
+- **Keywords**: Aviral Jain, Frontend, Next.js, React.js, Developer, Engineer
+- **Language**: English
+- **Robots**: Index, Follow
+- **Open Graph Images**: Available at /opengraph-image.jpg and /twitter-image.jpg
+
+## Repository
+- **GitHub**: https://github.com/aviralj02/portfolio-v2
+
