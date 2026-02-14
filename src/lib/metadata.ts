@@ -15,7 +15,7 @@ export const portfolioMetadata: Metadata = {
     "Engineer",
   ],
   openGraph: {
-    title: "Aviral | Portfolio",
+    title: "Aviral Jain",
     description: PORTFOLIO_DESC,
     url: PORTFOLIO_URL,
     siteName: "Aviral Jain",
@@ -28,6 +28,13 @@ export const portfolioMetadata: Metadata = {
       {
         url: "https://www.aviral.xyz/twitter-image.jpg",
       },
+    ],
+  },
+  twitter: {
+    title: "Aviral | Portfolio",
+    description: PORTFOLIO_DESC,
+    images: [
+      "https://www.aviral.xyz/twitter-image.jpg",
     ],
   },
   robots: {
