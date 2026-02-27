@@ -1,4 +1,4 @@
-import React, { FC, ReactElement, ReactNode } from "react";
+import { FC, ReactElement, ReactNode } from "react";
 
 type Props = {
   children: ReactNode;
@@ -6,7 +6,7 @@ type Props = {
 
 const GridWrapper: FC<Props> = ({ children }: Props): ReactElement => {
   return (
-    <div className="grid lg:grid-cols-4 grid-cols-2 w-full max-w-md lg:max-w-full mx-auto items-stretch gap-4 lg:gap-7 my-6">
+    <div className="grid lg:grid-cols-4 grid-cols-2 w-full max-w-md lg:max-w-full mx-auto items-stretch gap-4 lg:gap-7 sm:my-8 my-12">
       {children}
     </div>
   );

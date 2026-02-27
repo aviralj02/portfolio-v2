@@ -8,9 +8,7 @@ import PageWrapper from "../PageWrapper";
 import ExperienceList from "./ExperienceList";
 import ExperienceSkeleton from "./ExperienceSkeleton";
 
-type Props = {};
-
-const WorkPage = (props: Props) => {
+const WorkPage = () => {
   const [timelineData, setTimelineData] = useState<Array<Experience>>();
   const [skills, setSkills] = useState<Array<Skill>>();
 
@@ -30,7 +28,7 @@ const WorkPage = (props: Props) => {
   }, []);
 
   return (
-    <PageWrapper className="flex flex-col gap-14 sm:my-12 my-6">
+    <PageWrapper className="flex flex-col gap-14 sm:my-8 my-12">
       <div className="flex flex-col gap-8">
         <div className="flex flex-col items-start gap-1">
           <h1 className="sm:text-2xl text-xl font-semibold text-primary">

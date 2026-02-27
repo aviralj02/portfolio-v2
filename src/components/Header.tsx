@@ -1,20 +1,17 @@
 import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
-import React from "react";
 import Navbar from "./Navbar";
 import Image from "next/image";
 
-type Props = {};
-
-const Header = (props: Props) => {
+const Header = () => {
   return (
-    <div className="max-w-screen-xl flex items-center justify-center md:justify-between mx-auto py-8 px-2.5 md:px-20">
+    <div className="max-w-screen-xl flex items-center justify-between mx-auto py-6 px-2.5 md:px-20">
       <Link href="/">
         <Image
           src="/assets/profile-image.png"
-          alt="header-photo"
-          width={45}
-          height={45}
+          alt="profile-image"
+          width={40}
+          height={40}
           priority
           draggable={false}
           className="rounded-full hidden md:block"

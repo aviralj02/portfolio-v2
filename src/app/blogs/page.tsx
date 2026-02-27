@@ -1,9 +1,7 @@
 import BlogPage from "@/components/blogs/BlogPage";
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 
-type Props = {};
-
-const Blogs = (props: Props): ReactElement => {
+const Blogs = (): ReactElement => {
   return <BlogPage />;
 };
 

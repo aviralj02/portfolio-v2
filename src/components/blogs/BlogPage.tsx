@@ -1,14 +1,12 @@
 "use client";
 
 import getBlogs from "@/lib/utils/get-blogs";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import PageWrapper from "../PageWrapper";
 import BlogSkeleton from "./BlogSkeleton";
 import BlogCard from "./BlogCard";
 
-type Props = {};
-
-const BlogPage = (props: Props) => {
+const BlogPage = () => {
   const [blogs, setBlogs] = useState<Blog[]>();
 
   const fetchBlogs = async () => {
@@ -21,7 +19,7 @@ const BlogPage = (props: Props) => {
   }, []);
 
   return (
-    <PageWrapper className="flex flex-col gap-8 sm:my-12 my-6">
+    <PageWrapper className="flex flex-col gap-8 sm:my-8 my-12">
       <div className="flex flex-col items-start text-primary gap-1">
         <h1 className="sm:text-2xl text-xl font-semibold">Blogs</h1>
         <p className="sm:text-base text-sm text-muted-foreground">
