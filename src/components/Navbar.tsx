@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { motion } from "motion/react";
+import { AnimatePresence, motion } from "motion/react";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 
@@ -21,11 +21,8 @@ const Navbar = () => {
   const pathname = usePathname();
 
   return (
-    <motion.div
-      layout
-      className="fixed top-6 left-0 right-0 z-50 flex justify-center"
-    >
-      <div className="rounded-full p-0.5 nav-glass-ring">
+    <div className="fixed top-6 left-0 right-0 z-50 flex justify-center pointer-events-none">
+      <div className="rounded-full p-0.5 nav-glass-ring pointer-events-auto">
         <nav className="rounded-full px-1 py-1 nav-glass-body">
           <ul className="flex gap-0.5 list-none">
             {navLinks.map((link: NavLink) => (
@@ -33,10 +30,10 @@ const Navbar = () => {
                 <Link
                   href={link.route}
                   className={cn(
-                    "text-sm font-medium transition-opacity duration-200 relative z-10 block",
+                    "text-sm font-medium transition-colors duration-200 relative z-10 block",
                     pathname !== link.route
-                      ? "opacity-60 hover:opacity-90"
-                      : "opacity-100"
+                      ? "text-primary/60 hover:text-primary"
+                      : "text-primary"
                   )}
                 >
                   {link.label}
@@ -44,12 +41,18 @@ const Navbar = () => {
 
                 {pathname === link.route && (
                   <motion.div
-                    className="absolute inset-0 -z-0 rounded-full nav-glass-pill"
+                    className="absolute inset-0 z-0 rounded-full nav-glass-pill"
                     layoutId="active-pill"
                     layoutScroll
-                    initial={{ scaleY: 2.5 }}
-                    animate={{ scaleY: 1 }}
-                    exit={{ scaleY: 2.5 }}
+                    whileHover={{
+                      scaleX: 1.2,
+                      scaleY: 1.4,
+                    }}
+                    initial={{
+                      scaleY: 2,
+                      scaleX: 1.5,
+                    }}
+                    animate={{ scaleY: 1, scaleX: 1 }}
                     transition={{
                       type: "spring",
                       stiffness: 400,
@@ -62,7 +65,7 @@ const Navbar = () => {
           </ul>
         </nav>
       </div>
-    </motion.div>
+    </div>
   );
 };
 
