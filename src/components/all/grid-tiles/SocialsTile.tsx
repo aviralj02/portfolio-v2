@@ -30,7 +30,7 @@ const SocialsTile = ({ socials }: Props) => {
   };
 
   return (
-    <div className="grid grid-cols-2 gap-4 items-stretch box-border aspect-square order-3 w-full">
+    <div className="grid grid-cols-2 gap-4 box-border items-stretch aspect-square order-3 w-full">
       {Object.keys(iconMap).map((icon: string) => {
         const socialData = socials?.find((social) => social.name === icon);
 

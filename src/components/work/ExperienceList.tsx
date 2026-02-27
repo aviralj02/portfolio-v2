@@ -11,7 +11,7 @@ const ExperienceList = ({ data }: Props) => {
       {data?.map((item, index) => (
         <div
           key={index}
-          className="flex items-center gap-4 py-4 transition-all duration-200 hover:bg-accent/20 rounded-sm pr-4 pl-2"
+          className="flex items-center gap-4 py-4 transition-all duration-200 hover:bg-accent/20 rounded-lg pr-4 pl-2"
         >
           <div className="min-w-[36px] min-h-[36px] relative">
             <Image

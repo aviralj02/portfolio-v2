@@ -1,6 +1,81 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@theme inline {
+  /* Colors - reference :root CSS variables */
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-dim: hsl(var(--dim));
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  --color-secondary-text: hsl(var(--secondary-text));
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+
+  /* Border radius */
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
+
+  /* Box shadow */
+  --shadow-nav-shadow: var(--navShadow);
+
+  /* Background image */
+  --background-image-card-gradient: var(--card-gradient);
+
+  /* Animations */
+  --animate-quiet: quiet 1s infinite;
+  --animate-decent: decent 1s infinite;
+  --animate-loud: loud 1s infinite;
+
+  @keyframes quiet {
+    25% {
+      transform: scaleY(0.6);
+    }
+    50% {
+      transform: scaleY(0.4);
+    }
+    75% {
+      transform: scaleY(0.8);
+    }
+  }
+
+  @keyframes decent {
+    25% {
+      transform: scaleY(1);
+    }
+    50% {
+      transform: scaleY(0.4);
+    }
+    75% {
+      transform: scaleY(0.6);
+    }
+  }
+
+  @keyframes loud {
+    25% {
+      transform: scaleY(1);
+    }
+    50% {
+      transform: scaleY(0.4);
+    }
+    75% {
+      transform: scaleY(1.2);
+    }
+  }
+}
 
 @layer base {
   :root {
@@ -108,7 +183,7 @@
   }
 }
 
-.card-shadow {
+@utility card-shadow {
   box-shadow: 0px 4px 18px #0000000a, 0px 2.025px 7.84688px rgba(0, 0, 0, 0.027),
     0px 0.8px 2.925px #00000005, 0px 0.175px 1.04062px rgba(0, 0, 0, 0.013);
 }
