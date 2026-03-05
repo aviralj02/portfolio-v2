@@ -1,11 +1,7 @@
-import BlogCard from "@/components/blogs/BlogCard";
 import BlogSkeleton from "@/components/blogs/BlogSkeleton";
 import PageWrapper from "@/components/PageWrapper";
-import getBlogs from "@/lib/utils/get-blogs";
 
-const Blogs = async (): Promise<React.JSX.Element> => {
-  const blogs = await getBlogs();
-
+export default function Loading() {
   return (
     <PageWrapper className="flex flex-col gap-8 sm:my-6 my-12">
       <div className="flex flex-col items-start text-primary gap-1">
@@ -16,12 +12,10 @@ const Blogs = async (): Promise<React.JSX.Element> => {
       </div>
 
       <div className="w-full flex flex-col gap-6">
-        {blogs?.map((blog: Blog) => (
-          <BlogCard key={blog.title} blog={blog} />
+        {Array.from({ length: 4 }).map((_, index: number) => (
+          <BlogSkeleton key={index} />
         ))}
       </div>
     </PageWrapper>
   );
-};
-
-export default Blogs;
+}

@@ -1,10 +1,7 @@
 import PageWrapper from "@/components/PageWrapper";
-import ProjectCard from "@/components/projects/ProjectCard";
-import getProjects from "@/lib/utils/get-projects";
+import ProjectSkeleton from "@/components/projects/ProjectSkeleton";
 
-const Projects = async (): Promise<React.JSX.Element> => {
-  const projects = await getProjects();
-
+export default function Loading() {
   return (
     <PageWrapper className="flex flex-col gap-8 sm:my-6 my-12">
       <div className="flex flex-col items-start text-primary gap-1">
@@ -14,13 +11,11 @@ const Projects = async (): Promise<React.JSX.Element> => {
         </p>
       </div>
 
-      <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-12">
-        {projects?.map((project: Project) => (
-          <ProjectCard key={project.title} project={project} />
+      <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-16">
+        {Array.from({ length: 4 }).map((_, index: number) => (
+          <ProjectSkeleton key={index} />
         ))}
       </div>
     </PageWrapper>
   );
-};
-
-export default Projects;
+}

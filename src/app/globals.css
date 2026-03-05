@@ -39,6 +39,7 @@
   --animate-quiet: quiet 1s infinite;
   --animate-decent: decent 1s infinite;
   --animate-loud: loud 1s infinite;
+  --animate-skeleton-shimmer: skeleton-shimmer 1.5s ease-in-out infinite;
 
   @keyframes quiet {
     25% {
@@ -224,13 +225,23 @@
   @apply bg-card hover:bg-accent card-shadow;
 }
 
+@keyframes skeleton-shimmer {
+  0%,
+  100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
 /* VIEW TRANSITIONS */
 ::view-transition-old(root) {
-  animation-delay: 700ms;
+  animation-delay: 500ms;
 }
 
 ::view-transition-new(root) {
-  animation: circle-in 700ms;
+  animation: circle-in 500ms;
 }
 
 @keyframes circle-in {

@@ -5,7 +5,7 @@ import Image from "next/image";
 
 const Header = () => {
   return (
-    <div className="max-w-screen-xl flex items-center justify-between mx-auto py-6 px-2.5 md:px-20">
+    <div className="max-w-7xl flex items-center justify-between mx-auto py-7 px-2.5 md:px-20">
       <Link href="/">
         <Image
           src="/assets/profile-image.png"
