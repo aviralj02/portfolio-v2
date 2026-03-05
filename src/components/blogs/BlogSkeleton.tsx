@@ -1,23 +1,24 @@
-import React from "react";
-
-type Props = {};
-
-const BlogSkeleton = (props: Props) => {
+const BlogSkeleton = (): React.JSX.Element => {
   return (
-    <div className="w-full flex flex-col items-start gap-4 p-6 bg-gray-400 rounded-2xl animate-pulse">
-      <div className="h-6 w-3/4 bg-gray-500 rounded" />
+    <div className="w-full flex flex-col items-start gap-4 p-6 rounded-2xl border border-border overflow-hidden bg-card">
+      {/* Title */}
+      <div className="h-5 sm:h-6 w-3/4 rounded-sm bg-muted animate-skeleton-shimmer" />
 
-      <div className="h-4 w-full bg-gray-500 rounded" />
-      <div className="h-4 w-full bg-gray-500 rounded" />
+      {/* Description lines */}
+      <div className="flex flex-col gap-2 w-full">
+        <div className="h-3 sm:h-4 w-full rounded-sm animate-skeleton-shimmer bg-muted delay-100" />
+        <div className="h-3 sm:h-4 w-[80%] rounded-sm animate-skeleton-shimmer bg-muted delay-200" />
+      </div>
 
-      <div className="flex flex-col sm:flex-row gap-3 sm:gap-6 mt-4 w-full">
+      {/* date & read time */}
+      <div className="flex flex-col sm:flex-row gap-3 sm:gap-6 mt-2 w-full">
         <div className="flex items-center gap-2">
-          <div className="h-4 w-4 bg-gray-600 rounded-full" />
-          <div className="h-3 w-16 bg-gray-500 rounded" />
+          <div className="h-3.5 w-3.5 rounded-full shrink-0 animate-skeleton-shimmer bg-muted-foreground/40 delay-150" />
+          <div className="h-3 w-14 rounded-sm animate-skeleton-shimmer bg-muted delay-250" />
         </div>
         <div className="flex items-center gap-2">
-          <div className="h-4 w-4 bg-gray-600 rounded-full" />
-          <div className="h-3 w-12 bg-gray-500 rounded" />
+          <div className="h-3.5 w-3.5 rounded-full shrink-0 animate-skeleton-shimmer bg-muted-foreground/40 delay-150" />
+          <div className="h-3 w-12 rounded-sm animate-skeleton-shimmer bg-muted delay-300" />
         </div>
       </div>
     </div>

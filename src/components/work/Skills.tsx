@@ -1,11 +1,10 @@
 "use client";
 
-import React from "react";
 import { TagSize } from "@/types/enums";
 import Tag from "../Tag";
 
 type Props = {
-  data: Skill[] | undefined;
+  data: Array<Skill> | undefined;
 };
 
 const Skills = ({ data }: Props) => {
@@ -24,6 +23,7 @@ const SkillType = ({ skill }: { skill: Skill }) => {
       <h3 className="sm:text-lg text-base font-medium text-muted-foreground">
         {skill.skillType}
       </h3>
+
       <div className="flex gap-4 flex-wrap">
         {skill.competencies.map((competency) => (
           <Tag key={competency} name={competency} size={TagSize.Large} />

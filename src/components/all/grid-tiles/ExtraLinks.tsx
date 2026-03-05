@@ -22,7 +22,7 @@ const ExtraLinks = ({ socials }: Props) => {
   };
 
   return (
-    <div className="grid grid-cols-2 aspect-1/2 h-1/5 gap-4 lg:gap-7">
+    <div className="grid grid-cols-2 gap-4 lg:gap-7">
       {Object.keys(iconMap).map((icon: string) => {
         const socialData = socials?.find((social) => social.name === icon);
 
@@ -32,7 +32,7 @@ const ExtraLinks = ({ socials }: Props) => {
             target="_blank"
             rel="noreferrer"
             href={socialData?.url}
-            className="rounded-2xl grid place-content-center transition-all duration-300 card-template"
+            className="rounded-2xl grid place-content-center aspect-square transition-all duration-300 card-template"
             whileHover="hover"
           >
             <motion.div

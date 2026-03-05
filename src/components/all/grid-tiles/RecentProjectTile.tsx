@@ -25,7 +25,7 @@ const RecentProjectTile = ({ recentProject }: Props) => {
         "flex flex-col w-full justify-between rounded-2xl box-border p-3 sm:p-5 transition ease-in-out duration-200 card-template"
       )}
     >
-      <div className="w-[10vw] h-[10vw] max-w-16 max-h-16 rounded-full grayscale-[50%] select-none">
+      <div className="w-[10vw] h-[10vw] max-w-16 max-h-16 rounded-full grayscale-50 select-none">
         <img
           src={recentProject?.icon.url}
           alt={recentProject?.icon.fileName}

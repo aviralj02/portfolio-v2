@@ -39,7 +39,7 @@ const Tag = ({ name, size }: Props) => {
         />
       )}
 
-      <div className="absolute inset-x-0 -top-[1px] h-[1px] bg-white/10 pointer-events-none" />
+      <div className="absolute inset-x-0 -top-px h-px bg-white/10 pointer-events-none" />
     </div>
   );
 };

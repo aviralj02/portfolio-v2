@@ -1,13 +1,8 @@
 import PageWrapper from "@/components/PageWrapper";
-import ExperienceList from "@/components/work/ExperienceList";
-import Skills from "@/components/work/Skills";
-import getExperiences from "@/lib/utils/get-experience";
-import getSkills from "@/lib/utils/get-skills";
+import ExperienceSkeleton from "@/components/work/ExperienceSkeleton";
+import SkillsSkeleton from "@/components/work/SkillsSkeleton";
 
-const Work = async (): Promise<React.JSX.Element> => {
-  const timelineData = await getExperiences();
-  const skills = await getSkills();
-
+export default function Loading() {
   return (
     <PageWrapper className="flex flex-col gap-14 sm:my-6 my-12">
       <div className="flex flex-col gap-8">
@@ -21,7 +16,7 @@ const Work = async (): Promise<React.JSX.Element> => {
           </p>
         </div>
 
-        <ExperienceList data={timelineData} />
+        <ExperienceSkeleton />
       </div>
 
       <div className="flex flex-col gap-8">
@@ -35,10 +30,8 @@ const Work = async (): Promise<React.JSX.Element> => {
           </p>
         </div>
 
-        <Skills data={skills} />
+        <SkillsSkeleton />
       </div>
     </PageWrapper>
   );
-};
-
-export default Work;
+}
