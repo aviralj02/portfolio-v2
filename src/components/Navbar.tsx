@@ -1,9 +1,10 @@
 "use client";
 
-import Link from "next/link";
-import { AnimatePresence, motion } from "motion/react";
-import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
+import { motion } from "motion/react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useState } from "react";
 
 type NavLink = {
   label: string;
@@ -19,21 +20,42 @@ const navLinks: Array<NavLink> = [
 
 const Navbar = () => {
   const pathname = usePathname();
+  const [activeTabHovered, setActiveTabHovered] = useState(false);
 
   return (
-    <div className="fixed top-6 left-0 right-0 z-50 flex justify-center pointer-events-none">
+    <motion.div
+      layoutScroll
+      className="fixed top-6 left-0 right-0 z-50 flex justify-center pointer-events-none"
+    >
       <div className="rounded-full p-0.5 nav-glass-ring pointer-events-auto">
-        <nav className="rounded-full px-1 py-1 nav-glass-body">
+        <motion.nav
+          layout
+          layoutRoot
+          className="rounded-full px-1 py-1 nav-glass-body"
+        >
           <ul className="flex gap-0.5 list-none">
             {navLinks.map((link: NavLink) => (
-              <li key={link.label} className="relative py-[6px] px-5">
+              <motion.li
+                key={link.label}
+                className="relative py-[6px] px-5"
+                onHoverStart={
+                  pathname === link.route
+                    ? () => setActiveTabHovered(true)
+                    : undefined
+                }
+                onHoverEnd={
+                  pathname === link.route
+                    ? () => setActiveTabHovered(false)
+                    : undefined
+                }
+              >
                 <Link
                   href={link.route}
                   className={cn(
                     "text-sm font-medium transition-colors duration-200 relative z-10 block",
                     pathname !== link.route
                       ? "text-primary/60 hover:text-primary"
-                      : "text-primary"
+                      : "text-primary",
                   )}
                 >
                   {link.label}
@@ -43,29 +65,27 @@ const Navbar = () => {
                   <motion.div
                     className="absolute inset-0 z-0 rounded-full nav-glass-pill"
                     layoutId="active-pill"
-                    layoutScroll
-                    whileHover={{
-                      scaleX: 1.2,
-                      scaleY: 1.4,
+                    animate={{
+                      scaleX: activeTabHovered ? 1.06 : 1,
+                      scaleY: activeTabHovered ? 1.08 : 1,
                     }}
-                    initial={{
-                      scaleY: 2,
-                      scaleX: 1.5,
-                    }}
-                    animate={{ scaleY: 1, scaleX: 1 }}
                     transition={{
-                      type: "spring",
-                      stiffness: 400,
-                      damping: 50,
+                      layout: {
+                        type: "spring",
+                        stiffness: 400,
+                        damping: 32,
+                      },
+                      duration: 0.3,
+                      ease: "easeInOut",
                     }}
                   />
                 )}
-              </li>
+              </motion.li>
             ))}
           </ul>
-        </nav>
+        </motion.nav>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
