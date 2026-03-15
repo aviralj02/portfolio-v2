@@ -11,7 +11,7 @@ type NavLink = {
   route: string;
 };
 
-const navLinks: Array<NavLink> = [
+const baseNavLinks: Array<NavLink> = [
   { label: "All", route: "/" },
   { label: "Work", route: "/work" },
   { label: "Projects", route: "/projects" },
@@ -21,6 +21,10 @@ const navLinks: Array<NavLink> = [
 const Navbar = () => {
   const pathname = usePathname();
   const [activeTabHovered, setActiveTabHovered] = useState(false);
+
+  const navLinks = pathname.startsWith("/craft")
+    ? [...baseNavLinks, { label: "Craft", route: "/craft" }]
+    : baseNavLinks;
 
   return (
     <motion.div
@@ -55,7 +59,7 @@ const Navbar = () => {
                     "text-sm font-medium transition-colors duration-200 relative z-10 block",
                     pathname !== link.route
                       ? "text-primary/60 hover:text-primary"
-                      : "text-primary",
+                      : "text-primary"
                   )}
                 >
                   {link.label}
