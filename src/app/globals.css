@@ -237,11 +237,11 @@
 
 /* VIEW TRANSITIONS */
 ::view-transition-old(root) {
-  animation-delay: 500ms;
+  animation-delay: 800ms;
 }
 
 ::view-transition-new(root) {
-  animation: circle-in 500ms;
+  animation: circle-in 800ms;
 }
 
 @keyframes circle-in {

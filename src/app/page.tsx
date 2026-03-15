@@ -5,7 +5,7 @@ import RecentBlogTile from "@/components/all/grid-tiles/RecentBlogTile";
 import RecentProjectTile from "@/components/all/grid-tiles/RecentProjectTile";
 import SocialsTile from "@/components/all/grid-tiles/SocialsTile";
 import SpotifyTile from "@/components/all/grid-tiles/SpotifyTile";
-import TypingTile from "@/components/all/grid-tiles/TypingTile";
+import CraftTile from "@/components/all/grid-tiles/CraftTile";
 import UtilityTile from "@/components/all/grid-tiles/UtilityTile";
 import GridWrapper from "@/components/all/GridWrapper";
 import PageWrapper from "@/components/PageWrapper";
@@ -27,7 +27,7 @@ export default async function Home() {
         <ClientImageTile />
 
         <SpotifyTile />
-        <TypingTile />
+        <CraftTile />
         <RecentProjectTile recentProject={projects?.[0]} />
 
         <ContactTile />
