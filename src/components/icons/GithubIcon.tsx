@@ -1,5 +1,5 @@
-import { useTheme } from "next-themes";
 import React, { FC, ReactElement } from "react";
+import { useTheme } from "next-themes";
 
 type Props = {
   className?: string;

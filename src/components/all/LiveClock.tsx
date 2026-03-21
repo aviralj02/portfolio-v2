@@ -1,10 +1,8 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
-type Props = {};
-
-const LiveClock = (props: Props) => {
+const LiveClock = () => {
   const [currentTime, setCurrentTime] = useState<Date>(new Date());
 
   useEffect(() => {

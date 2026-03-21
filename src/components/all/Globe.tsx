@@ -1,13 +1,12 @@
 "use client";
 
+import React, { useEffect, useRef } from "react";
+import { useTheme } from "next-themes";
+
 import { useSpring } from "@react-spring/web";
 import createGlobe, { COBEOptions } from "cobe";
-import { useTheme } from "next-themes";
-import React, { useEffect, useRef } from "react";
 
-type Props = {};
-
-const Globe = (props: Props) => {
+const Globe = () => {
   const { theme } = useTheme();
 
   const canvasRef = useRef<HTMLCanvasElement | null>(null);

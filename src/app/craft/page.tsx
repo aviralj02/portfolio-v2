@@ -1,5 +1,6 @@
-import PageWrapper from "@/components/PageWrapper";
 import { Sparkles } from "lucide-react";
+
+import PageWrapper from "@/components/PageWrapper";
 
 const Crafts = (): React.JSX.Element => {
   return (

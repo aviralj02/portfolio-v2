@@ -1,6 +1,7 @@
-import "server-only";
-
 import { getNowPlaying } from "./spotify";
+import { Artist, SpotifyData } from "./spotify-types";
+
+import "server-only";
 
 export const fetchSpotifyData = async (): Promise<SpotifyData> => {
   try {

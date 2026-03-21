@@ -1,13 +1,15 @@
 "use client";
 
 import { ReactElement, useEffect, useState } from "react";
-import Link from "next/link";
-import { footerLinks } from "@/lib/constants";
-import getSocials from "@/lib/utils/get-socials";
-import { ArrowUpDown } from "lucide-react";
-import { useTheme } from "next-themes";
-import { toggleThemeWithTransition } from "@/lib/utils";
 import dynamic from "next/dynamic";
+import Link from "next/link";
+import { useTheme } from "next-themes";
+
+import { ArrowUpDown } from "lucide-react";
+
+import { footerLinks } from "@/lib/constants";
+import { toggleThemeWithTransition } from "@/lib/utils";
+import getSocials from "@/lib/utils/get-socials";
 
 const GithubIcon = dynamic(() => import("@/components/icons/GithubIcon"), {
   ssr: false,
@@ -25,9 +27,7 @@ const PageoIcon = dynamic(() => import("@/components/icons/PageoIcon"), {
   ssr: false,
 });
 
-type Props = {};
-
-const Footer = (props: Props) => {
+const Footer = () => {
   const [socials, setSocials] = useState<Social[]>();
   const { theme, setTheme } = useTheme();
 

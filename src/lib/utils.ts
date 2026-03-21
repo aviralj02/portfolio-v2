@@ -1,6 +1,7 @@
-import { MonthFormat } from "@/types/enums";
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
+
+import { MonthFormat } from "@/types/enums";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));

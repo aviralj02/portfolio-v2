@@ -1,5 +1,4 @@
 import BlogCard from "@/components/blogs/BlogCard";
-import BlogSkeleton from "@/components/blogs/BlogSkeleton";
 import PageWrapper from "@/components/PageWrapper";
 import getBlogs from "@/lib/utils/get-blogs";
 

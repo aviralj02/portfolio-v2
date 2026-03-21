@@ -1,4 +1,4 @@
-interface SpotifyData {
+export interface SpotifyData {
   isPlaying: boolean;
   title?: string;
   album?: string;
@@ -7,7 +7,7 @@ interface SpotifyData {
   songUrl?: string;
 }
 
-type Artist = Partial<{
+export type Artist = Partial<{
   name: string;
-  [key: string]: any;
+  [key: string]: string;
 }>;

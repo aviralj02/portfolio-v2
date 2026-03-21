@@ -1,10 +1,13 @@
 "use client";
 
-import { TagSize } from "@/types/enums";
-import { cn } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
+
 import { ExternalLink } from "lucide-react";
+
+import { cn } from "@/lib/utils";
+import { TagSize } from "@/types/enums";
+
 import GithubIcon from "../icons/GithubIcon";
 import Tag from "../Tag";
 

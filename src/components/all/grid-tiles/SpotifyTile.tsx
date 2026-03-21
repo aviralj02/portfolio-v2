@@ -1,12 +1,10 @@
-import React from "react";
+import { HeadphoneOffIcon } from "lucide-react";
+
 import SpotifyIcon from "@/components/icons/SpotifyIcon";
 import { fetchSpotifyData } from "@/lib/spotify/api";
 import { cn } from "@/lib/utils";
-import { HeadphoneOffIcon } from "lucide-react";
 
-type Props = {};
-
-const SpotifyTile = async (props: Props) => {
+const SpotifyTile = async () => {
   const currentlyPlaying = await fetchSpotifyData();
 
   return (

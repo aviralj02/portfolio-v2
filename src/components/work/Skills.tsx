@@ -1,6 +1,7 @@
 "use client";
 
 import { TagSize } from "@/types/enums";
+
 import Tag from "../Tag";
 
 type Props = {

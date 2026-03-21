@@ -1,7 +1,8 @@
 "use client";
 
-import { cn } from "@/lib/utils";
 import dynamic from "next/dynamic";
+
+import { cn } from "@/lib/utils";
 
 const ImageTile = dynamic(
   () => import("@/components/all/grid-tiles/ImageTile"),

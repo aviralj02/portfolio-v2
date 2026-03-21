@@ -1,12 +1,12 @@
 "use client";
 
-import { cn } from "@/lib/utils";
-import { Loader, SendHorizonal } from "lucide-react";
-import React, { FC, FormEvent, useRef, useState } from "react";
-import { z } from "zod";
-import emailjs from "@emailjs/browser";
+import { FormEvent, useRef, useState } from "react";
 
-type Props = {};
+import emailjs from "@emailjs/browser";
+import { Loader, SendHorizonal } from "lucide-react";
+import { z } from "zod";
+
+import { cn } from "@/lib/utils";
 
 const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID as string;
 const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID as string;
@@ -23,7 +23,7 @@ const ContactSchema = z.object({
 
 type ContactFormData = z.infer<typeof ContactSchema>;
 
-const ContactTile: FC<Props> = (props: Props) => {
+const ContactTile = () => {
   const [errors, setErrors] = useState<z.ZodFormattedError<ContactFormData>>();
   const [success, setSuccess] = useState<boolean>(false);
   const [sending, setSending] = useState<boolean>(false);
