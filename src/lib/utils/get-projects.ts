@@ -1,4 +1,5 @@
 import { gql } from "graphql-request";
+
 import client from "../hygraph";
 
 const getProjects = async (): Promise<Project[] | undefined> => {

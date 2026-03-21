@@ -1,4 +1,5 @@
 import { gql } from "graphql-request";
+
 import client from "../hygraph";
 
 const getSocials = async (): Promise<Social[] | undefined> => {

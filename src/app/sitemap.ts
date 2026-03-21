@@ -1,5 +1,6 @@
-import { PORTFOLIO_URL } from "@/lib/constants";
 import { MetadataRoute } from "next";
+
+import { PORTFOLIO_URL } from "@/lib/constants";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   return [

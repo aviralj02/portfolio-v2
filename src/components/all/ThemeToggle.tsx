@@ -1,13 +1,13 @@
 "use client";
 
-import { cn, toggleThemeWithTransition } from "@/lib/utils";
-import { motion } from "motion/react";
-import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 
-type Props = {};
+import { Moon, Sun } from "lucide-react";
+import { motion } from "motion/react";
 
-const ThemeToggle = (props: Props) => {
+import { cn, toggleThemeWithTransition } from "@/lib/utils";
+
+const ThemeToggle = () => {
   const { setTheme, theme } = useTheme();
 
   return (

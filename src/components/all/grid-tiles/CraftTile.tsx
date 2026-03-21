@@ -1,9 +1,11 @@
 "use client";
 
-import { cn } from "@/lib/utils";
+import Link from "next/link";
+
 import { ArrowUpRight, Sparkles } from "lucide-react";
 import { motion } from "motion/react";
-import Link from "next/link";
+
+import { cn } from "@/lib/utils";
 
 const CraftsTile = () => {
   return (

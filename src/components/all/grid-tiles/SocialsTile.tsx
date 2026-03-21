@@ -1,8 +1,9 @@
 "use client";
 
 import { ReactElement } from "react";
-import { motion } from "motion/react";
 import dynamic from "next/dynamic";
+
+import { motion } from "motion/react";
 
 const GithubIcon = dynamic(() => import("@/components/icons/GithubIcon"), {
   ssr: false,

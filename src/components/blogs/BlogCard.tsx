@@ -1,7 +1,9 @@
+import React from "react";
+
+import { Calendar, Timer } from "lucide-react";
+
 import { formatDate } from "@/lib/utils";
 import { MonthFormat } from "@/types/enums";
-import { Calendar, Timer } from "lucide-react";
-import React from "react";
 
 type Props = {
   blog: Blog;
