@@ -10,6 +10,10 @@ export const footerLinks: FooterLink[] = [
     to: "/",
   },
   {
+    label: "Theme",
+    to: "/#theme",
+  },
+  {
     label: "Work",
     to: "/work",
   },
@@ -20,10 +24,6 @@ export const footerLinks: FooterLink[] = [
   {
     label: "Blogs",
     to: "/blogs",
-  },
-  {
-    label: "Theme",
-    to: "/#theme",
   },
   {
     label: "Contact",
