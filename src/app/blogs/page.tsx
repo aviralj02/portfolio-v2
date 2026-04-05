@@ -7,10 +7,14 @@ const Blogs = async (): Promise<React.JSX.Element> => {
 
   return (
     <PageWrapper className="flex flex-col gap-8 sm:my-6 my-12">
-      <div className="flex flex-col items-start text-primary gap-1">
+      <div className="flex flex-col items-start text-primary gap-2">
+        <span className="text-xs font-medium tracking-widest uppercase text-secondary-text">
+          Writing
+        </span>
         <h1 className="sm:text-2xl text-xl font-semibold">Blogs</h1>
         <p className="sm:text-base text-sm text-muted-foreground">
-          I share my experiences as a developer, writing blogs on various topics
+          Thoughts I couldn&apos;t stop thinking about, written down so you
+          don&apos;t have to.
         </p>
       </div>
 

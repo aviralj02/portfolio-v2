@@ -13,6 +13,11 @@ const getProjects = async (): Promise<Project[] | undefined> => {
         priority
         stack
         title
+        intro
+        with {
+          name
+          href
+        }
         icon {
           fileName
           url

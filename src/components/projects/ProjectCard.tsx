@@ -1,14 +1,17 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-import { ExternalLink } from "lucide-react";
+import { ChevronRight, ExternalLink, UserRound } from "lucide-react";
+import { motion, useReducedMotion } from "motion/react";
 
 import { cn } from "@/lib/utils";
 import { TagSize } from "@/types/enums";
 
 import GithubIcon from "../icons/GithubIcon";
+import Modal from "../Modal";
 import Tag from "../Tag";
 
 type Props = {
@@ -16,98 +19,199 @@ type Props = {
 };
 
 const ProjectCard = ({ project }: Props) => {
-  const { icon, backgroundColor, codebase, live, title, description, stack } =
-    project;
+  const {
+    icon,
+    backgroundColor,
+    codebase,
+    live,
+    title,
+    description,
+    stack,
+    with: team,
+    intro,
+  } = project;
+
+  const [isOpen, setIsOpen] = useState(false);
+  const prefersReduced = useReducedMotion();
+
+  const iconId = `project-icon-${title}`;
 
   return (
-    <article
-      className={cn(
-        "relative flex flex-col w-full rounded-3xl h-full overflow-hidden card-shadow",
-        "transition-all duration-300 ease-out"
-      )}
-      style={{ backgroundColor }}
-    >
-      <div className="min-h-14 w-full shrink-0" aria-hidden />
-
-      {/* Project icon */}
-      <div className="absolute top-5 left-5 z-20 w-[20vw] h-[20vw] max-w-20 max-h-20 rounded-full overflow-hidden border-[6px] border-card bg-card shadow-sm">
-        {icon?.url && (
-          <Image
-            src={icon.url}
-            alt={icon.fileName ?? title}
-            width={80}
-            height={80}
-            className="object-cover w-full h-full"
-            sizes="80px"
-            draggable={false}
-          />
+    <>
+      <motion.button
+        onClick={() => setIsOpen(true)}
+        className={cn(
+          "w-full flex items-center gap-3 p-3 rounded-2xl text-left",
+          "bg-card border border-border",
+          "cursor-pointer group"
         )}
-      </div>
-
-      {/* Content */}
-      <div className="relative z-10 flex flex-col gap-6 w-full h-full p-5 rounded-3xl -mt-3 bg-card">
-        {/* Actions */}
+        whileHover={prefersReduced ? {} : { x: 4 }}
+        whileTap={prefersReduced ? {} : { scale: 0.985 }}
+        transition={{ duration: 0.15, ease: "easeOut" }}
+      >
         <div
-          className="flex items-center gap-2 w-fit self-end"
-          role="group"
-          aria-label="Project links"
-        >
-          {codebase && (
-            <Link
-              href={codebase}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="View source code on GitHub"
-              className={cn(
-                "p-1.5 rounded-lg text-muted-foreground",
-                "transition-colors duration-200",
-                "hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-              )}
-            >
-              <GithubIcon className="h-5 w-5" />
-            </Link>
-          )}
+          className="w-1 self-stretch rounded-full shrink-0"
+          style={{ backgroundColor }}
+        />
 
-          {live && (
-            <Link
-              href={live}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Open live project"
-              className={cn(
-                "p-1.5 rounded-lg text-muted-foreground",
-                "transition-colors duration-200",
-                "hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-              )}
-            >
-              <ExternalLink className="h-5 w-5" />
-            </Link>
-          )}
+        {!isOpen ? (
+          <motion.div
+            layoutId={iconId}
+            className="w-10 h-10 rounded-full overflow-hidden border-2 border-border shrink-0"
+            transition={{ type: "spring", stiffness: 300, damping: 40 }}
+          >
+            {icon?.url && (
+              <Image
+                src={icon.url}
+                alt={icon.fileName ?? title}
+                width={40}
+                height={40}
+                className="object-cover w-full h-full"
+                sizes="40px"
+                draggable={false}
+              />
+            )}
+          </motion.div>
+        ) : (
+          <div className="w-10 h-10 shrink-0" aria-hidden />
+        )}
+
+        <div className="flex-1 min-w-0 flex flex-col gap-0.5">
+          <h2 className="text-sm font-semibold text-primary">{title}</h2>
+          <p className="text-xs text-muted-foreground truncate">{intro}</p>
         </div>
 
-        <div className="flex flex-col gap-4 justify-evenly min-w-0 flex-1">
-          <div className="flex flex-col gap-2">
-            <h2 className="text-xl sm:text-2xl font-semibold text-primary leading-tight">
-              {title}
-            </h2>
+        <ChevronRight className="w-4 h-4 text-muted-foreground shrink-0 transition-transform duration-200 group-hover:translate-x-0.5" />
+      </motion.button>
 
-            <p className="text-sm sm:text-base font-normal text-muted-foreground leading-relaxed">
-              {description}
-            </p>
+      <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
+        <div
+          className="h-20 shrink-0 rounded-t-3xl sm:rounded-t-3xl overflow-hidden"
+          style={{ backgroundColor }}
+        />
+
+        {icon?.url && (
+          <div className="px-6 -mt-8 shrink-0">
+            <motion.div
+              layoutId={iconId}
+              className="w-16 h-16 rounded-full overflow-hidden border-4 border-card shadow-lg"
+              transition={{ type: "spring", stiffness: 300, damping: 40 }}
+            >
+              <Image
+                src={icon.url}
+                alt={icon.fileName ?? title}
+                width={64}
+                height={64}
+                className="object-cover w-full h-full"
+                sizes="64px"
+                draggable={false}
+              />
+            </motion.div>
           </div>
+        )}
+
+        <div className="flex items-start justify-between gap-3 px-6 pt-3 shrink-0">
+          <motion.h2
+            className="text-xl font-bold text-primary leading-snug"
+            initial={{ opacity: 0, y: 6 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.22, ease: "easeOut" }}
+          >
+            {title}
+          </motion.h2>
+
+          <div className="flex items-center gap-1.5 shrink-0 mt-0.5">
+            {codebase && (
+              <Link
+                href={codebase}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Source code"
+                className="p-2 rounded-xl bg-secondary hover:bg-muted text-muted-foreground hover:text-primary transition-colors duration-200"
+              >
+                <GithubIcon className="h-4 w-4" />
+              </Link>
+            )}
+            {live && (
+              <Link
+                href={live}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Live project"
+                className="p-2 rounded-xl bg-secondary hover:bg-muted text-muted-foreground hover:text-primary transition-colors duration-200"
+              >
+                <ExternalLink className="h-4 w-4" />
+              </Link>
+            )}
+          </div>
+        </div>
+
+        {/* Scrollable body */}
+        <div className="flex flex-col gap-5 px-6 pt-3 pb-8 overflow-y-auto overflow-x-hidden rounded-b-3xl sm:rounded-b-3xl">
+          <motion.p
+            className="text-sm text-muted-foreground leading-relaxed"
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.14, duration: 0.28, ease: "easeOut" }}
+          >
+            {description}
+          </motion.p>
 
           {stack?.length > 0 && (
-            <ul className="flex gap-2 flex-wrap" aria-label="Technologies">
-              {stack.map((tech) => (
-                <li key={tech}>
-                  <Tag name={tech} size={TagSize.Small} />
-                </li>
-              ))}
-            </ul>
+            <motion.div
+              className="flex flex-col gap-3"
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.22, duration: 0.28, ease: "easeOut" }}
+            >
+              <span className="text-xs font-medium tracking-widest uppercase text-secondary-text">
+                Stack
+              </span>
+              <ul className="flex gap-2 flex-wrap" aria-label="Technologies">
+                {stack.map((tech) => (
+                  <li key={tech}>
+                    <Tag name={tech} size={TagSize.Small} />
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+          )}
+
+          {team?.length > 0 && (
+            <motion.div
+              className="flex flex-col gap-3"
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3, duration: 0.28, ease: "easeOut" }}
+            >
+              <span className="text-xs font-medium tracking-widest uppercase text-secondary-text">
+                With
+              </span>
+
+              <ul className="flex gap-2 flex-wrap">
+                {team.map(({ name, href }) => (
+                  <li key={name}>
+                    <Link
+                      href={href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-secondary hover:bg-muted text-xs font-medium text-muted-foreground hover:text-primary transition-colors duration-200"
+                    >
+                      <UserRound
+                        className="w-3 h-3 shrink-0"
+                        style={{ color: backgroundColor }}
+                      />
+
+                      {name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
           )}
         </div>
-      </div>
-    </article>
+      </Modal>
+    </>
   );
 };
 
