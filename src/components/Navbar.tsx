@@ -16,17 +16,13 @@ type NavLink = {
 const baseNavLinks: Array<NavLink> = [
   { label: "All", route: "/" },
   { label: "Work", route: "/work" },
-  { label: "Projects", route: "/projects" },
+  { label: "Craft", route: "/craft" },
   { label: "Blogs", route: "/blogs" },
 ];
 
 const Navbar = () => {
   const pathname = usePathname();
   const [activeTabHovered, setActiveTabHovered] = useState(false);
-
-  const navLinks = pathname.startsWith("/craft")
-    ? [...baseNavLinks, { label: "Craft", route: "/craft" }]
-    : baseNavLinks;
 
   return (
     <motion.div
@@ -40,7 +36,7 @@ const Navbar = () => {
           className="rounded-full px-1 py-1 nav-glass-body"
         >
           <ul className="flex gap-0.5 list-none">
-            {navLinks.map((link: NavLink) => (
+            {baseNavLinks.map((link: NavLink) => (
               <motion.li
                 key={link.label}
                 className="relative py-[6px] px-5"

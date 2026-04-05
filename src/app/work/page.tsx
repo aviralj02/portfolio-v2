@@ -1,12 +1,12 @@
 import PageWrapper from "@/components/PageWrapper";
+import ProjectCard from "@/components/projects/ProjectCard";
 import ExperienceList from "@/components/work/ExperienceList";
-import Skills from "@/components/work/Skills";
 import getExperiences from "@/lib/utils/get-experience";
-import getSkills from "@/lib/utils/get-skills";
+import getProjects from "@/lib/utils/get-projects";
 
 const Work = async (): Promise<React.JSX.Element> => {
   const timelineData = await getExperiences();
-  const skills = await getSkills();
+  const projects = await getProjects();
 
   return (
     <PageWrapper className="flex flex-col gap-14 sm:my-6 my-12">
@@ -24,18 +24,21 @@ const Work = async (): Promise<React.JSX.Element> => {
         <ExperienceList data={timelineData} />
       </div>
 
-      <div className="flex flex-col gap-8">
+      <div id="projects" className="flex flex-col gap-8">
         <div className="flex flex-col items-start gap-1">
           <h2 className="sm:text-2xl text-xl font-semibold text-primary">
-            Skills
+            Projects
           </h2>
           <p className="sm:text-base text-sm text-muted-foreground">
-            Technologies I&apos;m currently experienced with, yet always eager
-            to learn and adapt to new advancements and tools.
+            Here are some of the projects I&apos;ve worked on
           </p>
         </div>
 
-        <Skills data={skills} />
+        <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-12">
+          {projects?.map((project: Project) => (
+            <ProjectCard key={project.title} project={project} />
+          ))}
+        </div>
       </div>
     </PageWrapper>
   );

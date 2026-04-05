@@ -19,7 +19,7 @@ const RecentProjectTile = ({ recentProject }: Props) => {
         y: -2,
       }}
       transition={{ duration: 0.1, ease: "easeOut" }}
-      href={recentProject?.live || recentProject?.codebase || "/projects"}
+      href={recentProject?.live || recentProject?.codebase || "/work#projects"}
       target="_blank"
       rel="noreferrer"
       className={cn(

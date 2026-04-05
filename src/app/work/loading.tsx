@@ -1,6 +1,6 @@
 import PageWrapper from "@/components/PageWrapper";
+import ProjectSkeleton from "@/components/projects/ProjectSkeleton";
 import ExperienceSkeleton from "@/components/work/ExperienceSkeleton";
-import SkillsSkeleton from "@/components/work/SkillsSkeleton";
 
 export default function Loading() {
   return (
@@ -19,18 +19,21 @@ export default function Loading() {
         <ExperienceSkeleton />
       </div>
 
-      <div className="flex flex-col gap-8">
+      <div id="projects" className="flex flex-col gap-8">
         <div className="flex flex-col items-start gap-1">
           <h2 className="sm:text-2xl text-xl font-semibold text-primary">
-            Skills
+            Projects
           </h2>
           <p className="sm:text-base text-sm text-muted-foreground">
-            Technologies I&apos;m currently experienced with, yet always eager
-            to learn and adapt to new advancements and tools.
+            Here are some of the projects I&apos;ve worked on
           </p>
         </div>
 
-        <SkillsSkeleton />
+        <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-12">
+          {Array.from({ length: 4 }).map((_, index) => (
+            <ProjectSkeleton key={index} />
+          ))}
+        </div>
       </div>
     </PageWrapper>
   );

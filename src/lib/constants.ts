@@ -17,7 +17,7 @@ export const footerLinks: FooterLink[] = [
   },
   {
     label: "Projects",
-    to: "/projects",
+    to: "/work#projects",
   },
   {
     label: "Blogs",
