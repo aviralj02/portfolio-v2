@@ -1,4 +1,5 @@
 import Image from "next/image";
+
 import { formatDateToMonthYear } from "@/lib/utils";
 
 type Props = {

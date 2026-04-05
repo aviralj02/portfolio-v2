@@ -22,6 +22,11 @@ interface Project {
   priority: number;
   stack: string[];
   title: string;
+  intro: string;
+  with: Array<{
+    name: string;
+    href: string;
+  }>;
   icon: Asset;
 }
 

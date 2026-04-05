@@ -2,12 +2,12 @@ import React from "react";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Blogs | Aviral",
+  title: "Crafts | Aviral",
   description:
-    "I write insightful blogs sharing my thoughts on tech trends, development, and the tools I use.",
+    "UI experiments, animations, and interactive demos built as a frontend engineer.",
 };
 
-export default function BlogsLayout({
+export default function CraftsLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;

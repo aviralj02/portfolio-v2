@@ -1,9 +1,11 @@
 "use client";
 
-import { cn } from "@/lib/utils";
-import { motion } from "motion/react";
-import { ArrowRight } from "lucide-react";
 import React from "react";
+
+import { ArrowRight } from "lucide-react";
+import { motion } from "motion/react";
+
+import { cn } from "@/lib/utils";
 
 type Props = {
   recentProject: Project | undefined;
@@ -17,7 +19,7 @@ const RecentProjectTile = ({ recentProject }: Props) => {
         y: -2,
       }}
       transition={{ duration: 0.1, ease: "easeOut" }}
-      href={recentProject?.live || recentProject?.codebase || "/projects"}
+      href={recentProject?.live || recentProject?.codebase || "/work#projects"}
       target="_blank"
       rel="noreferrer"
       className={cn(

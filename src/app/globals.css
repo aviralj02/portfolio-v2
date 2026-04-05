@@ -184,6 +184,28 @@
   }
 }
 
+@utility mist-edges {
+  mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      black 20%,
+      black 80%,
+      transparent 100%
+    ),
+    linear-gradient(to bottom, transparent 0%, black 22%, black 100%);
+  mask-composite: intersect;
+
+  -webkit-mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      black 20%,
+      black 80%,
+      transparent 100%
+    ),
+    linear-gradient(to bottom, transparent 0%, black 22%, black 100%);
+  -webkit-mask-composite: source-in;
+}
+
 @utility card-shadow {
   box-shadow: 0px 4px 18px #0000000a, 0px 2.025px 7.84688px rgba(0, 0, 0, 0.027),
     0px 0.8px 2.925px #00000005, 0px 0.175px 1.04062px rgba(0, 0, 0, 0.013);
@@ -237,11 +259,11 @@
 
 /* VIEW TRANSITIONS */
 ::view-transition-old(root) {
-  animation-delay: 500ms;
+  animation-delay: 800ms;
 }
 
 ::view-transition-new(root) {
-  animation: circle-in 500ms;
+  animation: circle-in 800ms;
 }
 
 @keyframes circle-in {

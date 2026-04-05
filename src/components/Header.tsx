@@ -1,7 +1,9 @@
-import { ArrowUpRight } from "lucide-react";
-import Link from "next/link";
-import Navbar from "./Navbar";
 import Image from "next/image";
+import Link from "next/link";
+
+import { ArrowUpRight } from "lucide-react";
+
+import Navbar from "./Navbar";
 
 const Header = () => {
   return (

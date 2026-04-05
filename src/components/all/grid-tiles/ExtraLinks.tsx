@@ -1,8 +1,9 @@
 "use client";
 
-import { motion } from "motion/react";
-import dynamic from "next/dynamic";
 import { ReactElement } from "react";
+import dynamic from "next/dynamic";
+
+import { motion } from "motion/react";
 
 type Props = {
   socials: Array<Social> | undefined;

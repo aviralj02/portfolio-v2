@@ -1,10 +1,12 @@
 "use client";
 
+import { ArrowRight } from "lucide-react";
+import { motion } from "motion/react";
+
 import { cn, formatDate } from "@/lib/utils";
 import { MonthFormat } from "@/types/enums";
-import { ArrowRight } from "lucide-react";
+
 import ExtraLinks from "./ExtraLinks";
-import { motion } from "motion/react";
 
 type Props = {
   recentBlog: Blog | undefined;
@@ -36,7 +38,10 @@ const RecentBlogTile = ({ recentBlog, socials }: Props) => {
           <span className="text-xs sm:text-sm">RECENT BLOG</span>
           <h2 className="text-sm sm:text-xl font-bold">{recentBlog?.title}</h2>
           <span className="text-xs sm:text-sm">
-            {formatDate(new Date(recentBlog?.publishDate!), MonthFormat.Long)}
+            {formatDate(
+              new Date(recentBlog?.publishDate || ""),
+              MonthFormat.Long
+            )}
           </span>
         </div>
 

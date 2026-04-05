@@ -1,6 +1,7 @@
+import { useTheme } from "next-themes";
+
 import { cn } from "@/lib/utils";
 import { TagSize } from "@/types/enums";
-import { useTheme } from "next-themes";
 
 type Props = {
   name: string;

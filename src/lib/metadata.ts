@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+
 import { PORTFOLIO_DESC, PORTFOLIO_URL } from "./constants";
 
 export const portfolioMetadata: Metadata = {

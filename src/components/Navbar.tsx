@@ -1,20 +1,22 @@
 "use client";
 
-import { cn } from "@/lib/utils";
-import { motion } from "motion/react";
+import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+
+import { motion } from "motion/react";
+
+import { cn } from "@/lib/utils";
 
 type NavLink = {
   label: string;
   route: string;
 };
 
-const navLinks: Array<NavLink> = [
+const baseNavLinks: Array<NavLink> = [
   { label: "All", route: "/" },
   { label: "Work", route: "/work" },
-  { label: "Projects", route: "/projects" },
+  { label: "Craft", route: "/craft" },
   { label: "Blogs", route: "/blogs" },
 ];
 
@@ -34,7 +36,7 @@ const Navbar = () => {
           className="rounded-full px-1 py-1 nav-glass-body"
         >
           <ul className="flex gap-0.5 list-none">
-            {navLinks.map((link: NavLink) => (
+            {baseNavLinks.map((link: NavLink) => (
               <motion.li
                 key={link.label}
                 className="relative py-[6px] px-5"
@@ -55,7 +57,7 @@ const Navbar = () => {
                     "text-sm font-medium transition-colors duration-200 relative z-10 block",
                     pathname !== link.route
                       ? "text-primary/60 hover:text-primary"
-                      : "text-primary",
+                      : "text-primary"
                   )}
                 >
                   {link.label}

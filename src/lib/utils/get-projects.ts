@@ -1,4 +1,5 @@
 import { gql } from "graphql-request";
+
 import client from "../hygraph";
 
 const getProjects = async (): Promise<Project[] | undefined> => {
@@ -12,6 +13,11 @@ const getProjects = async (): Promise<Project[] | undefined> => {
         priority
         stack
         title
+        intro
+        with {
+          name
+          href
+        }
         icon {
           fileName
           url

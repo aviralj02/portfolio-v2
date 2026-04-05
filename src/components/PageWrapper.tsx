@@ -1,8 +1,10 @@
 "use client";
 
-import { cn } from "@/lib/utils";
-import { motion } from "motion/react";
 import React, { FC, ReactElement, ReactNode } from "react";
+
+import { motion } from "motion/react";
+
+import { cn } from "@/lib/utils";
 
 type Props = {
   children: ReactNode;

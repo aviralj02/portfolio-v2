@@ -1,15 +1,14 @@
 "use client";
 
-import { cn } from "@/lib/utils";
-import React from "react";
-import VisitorLocation from "../VisitorLocation";
 import dynamic from "next/dynamic";
+
+import { cn } from "@/lib/utils";
+
+import VisitorLocation from "../VisitorLocation";
 
 const ThemeToggle = dynamic(() => import("../ThemeToggle"), { ssr: false });
 
-type Props = {};
-
-const UtilityTile = (props: Props) => {
+const UtilityTile = () => {
   return (
     <div
       className={cn(

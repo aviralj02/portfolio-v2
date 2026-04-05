@@ -1,15 +1,14 @@
 "use client";
 
-import React from "react";
-import { cn } from "@/lib/utils";
-import Globe from "../Globe";
 import dynamic from "next/dynamic";
+
+import { cn } from "@/lib/utils";
+
+import Globe from "../Globe";
 
 const LiveClock = dynamic(() => import("../LiveClock"), { ssr: false });
 
-type Props = {};
-
-const AboutTile: React.FC<Props> = () => {
+const AboutTile = () => {
   return (
     <div
       className={cn(

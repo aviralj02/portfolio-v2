@@ -1,13 +1,13 @@
 "use client";
 
+import { useEffect, useState } from "react";
+
+import { MapPinned } from "lucide-react";
+
 import getLastVisitor from "@/lib/utils/get-last-visitor";
 import updateLastVisitor from "@/lib/utils/update-last-visitor";
-import { MapPinned } from "lucide-react";
-import React, { useEffect, useState } from "react";
 
-type Props = {};
-
-const VisitorLocation = (props: Props) => {
+const VisitorLocation = () => {
   const [lastLocation, setLastLocation] = useState<LocationData>();
 
   const fetchLastLocation = async () => {
@@ -31,7 +31,7 @@ const VisitorLocation = (props: Props) => {
     }
 
     const isSuccessUpdate = await updateLastVisitor(
-      lastLocation?.id!,
+      lastLocation?.id || "",
       city,
       country
     );
