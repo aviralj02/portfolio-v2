@@ -44,7 +44,7 @@ const CraftsTile = () => {
 
       {/* gradient blobs */}
       <motion.div
-        className="absolute -top-12 -right-12 w-44 h-44 rounded-full bg-linear-to-br from-violet-500/20 to-sky-500/20 blur-3xl pointer-events-none"
+        className="absolute lg:block hidden -top-12 -right-12 w-44 h-44 rounded-full bg-linear-to-br from-violet-500/20 to-sky-500/20 blur-3xl pointer-events-none"
         variants={{
           rest: { opacity: 0.5, scale: 1 },
           hover: { opacity: 1, scale: 1.15 },
@@ -52,7 +52,7 @@ const CraftsTile = () => {
         transition={{ duration: 0.4, ease: "easeOut" }}
       />
       <motion.div
-        className="absolute -bottom-12 -left-12 w-44 h-44 rounded-full bg-linear-to-tr from-rose-500/20 to-emerald-500/20 blur-3xl pointer-events-none"
+        className="absolute lg:block hidden -bottom-12 -left-12 w-44 h-44 rounded-full bg-linear-to-tr from-rose-500/20 to-emerald-500/20 blur-3xl pointer-events-none"
         variants={{
           rest: { opacity: 0.5, scale: 1 },
           hover: { opacity: 1, scale: 1.15 },

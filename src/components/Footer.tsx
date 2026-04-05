@@ -2,11 +2,11 @@
 
 import { ReactElement, useEffect, useState } from "react";
 import dynamic from "next/dynamic";
-import { motion, useReducedMotion } from "motion/react";
 import Link from "next/link";
 import { useTheme } from "next-themes";
 
 import { ArrowUpDown } from "lucide-react";
+import { motion, useReducedMotion } from "motion/react";
 
 import { footerLinks } from "@/lib/constants";
 import { toggleThemeWithTransition } from "@/lib/utils";
