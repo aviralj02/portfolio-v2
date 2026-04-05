@@ -1,20 +1,39 @@
 "use client";
 
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 
 import { ArrowUpRight, Sparkles } from "lucide-react";
-import { motion } from "motion/react";
+import { motion, useAnimation, useInView } from "motion/react";
 
 import { cn } from "@/lib/utils";
 
 const CraftsTile = () => {
+  const controls = useAnimation();
+  const ref = useRef<HTMLDivElement>(null);
+
+  const isInView = useInView(ref, { amount: "all" });
+  const [isTouch, setIsTouch] = useState(false);
+
+  useEffect(() => {
+    setIsTouch(window.matchMedia("(hover: none)").matches);
+  }, []);
+
+  useEffect(() => {
+    if (!isTouch) return;
+
+    controls.start(isInView ? "hover" : "rest");
+  }, [isTouch, isInView, controls]);
+
   return (
     <motion.div
+      ref={ref}
       className={cn(
         "col-span-2 order-5",
         "relative flex flex-col p-5 w-full bg-card rounded-2xl card-shadow overflow-hidden cursor-pointer"
       )}
-      whileHover="hover"
+      whileHover={isTouch ? undefined : "hover"}
+      animate={isTouch ? controls : undefined}
       initial="rest"
     >
       <Link
