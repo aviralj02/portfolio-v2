@@ -4,7 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-import { ChevronRight, ExternalLink, UserRound } from "lucide-react";
+import { ChevronRight, ExternalLink } from "lucide-react";
 import { motion, useReducedMotion } from "motion/react";
 
 import { cn } from "@/lib/utils";
@@ -94,7 +94,7 @@ const ProjectCard = ({ project }: Props) => {
           <div className="px-6 -mt-8 shrink-0">
             <motion.div
               layoutId={iconId}
-              className="w-16 h-16 rounded-full overflow-hidden border-4 border-card shadow-lg"
+              className="size-16 rounded-full overflow-hidden border-4 border-card shadow-lg"
               transition={{ type: "spring", stiffness: 300, damping: 40 }}
             >
               <Image
@@ -105,6 +105,7 @@ const ProjectCard = ({ project }: Props) => {
                 className="object-cover w-full h-full"
                 sizes="64px"
                 draggable={false}
+                loading="eager"
               />
             </motion.div>
           </div>
@@ -195,11 +196,12 @@ const ProjectCard = ({ project }: Props) => {
                       href={href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-secondary hover:bg-muted text-xs font-medium text-muted-foreground hover:text-primary transition-colors duration-200"
+                      className="group flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-secondary hover:bg-muted text-xs font-medium text-muted-foreground hover:text-primary transition-colors duration-200"
                     >
-                      <UserRound
-                        className="w-3 h-3 shrink-0"
-                        style={{ color: backgroundColor }}
+                      <span
+                        className="size-2 rounded-full shrink-0 transition-transform duration-500 ease-[cubic-bezier(0.34,1.8,0.5,1)] group-hover:scale-120"
+                        style={{ backgroundColor }}
+                        aria-hidden
                       />
 
                       {name}

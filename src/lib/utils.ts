@@ -22,13 +22,31 @@ export function formatDate(date: Date, monthFormat: MonthFormat): string {
   });
 }
 
-export const toggleThemeWithTransition = (callback: () => void) => () => {
-  if (!document.startViewTransition) {
-    callback();
-    return;
-  }
+export const toggleThemeWithTransition =
+  (callback: () => void) =>
+  (event?: { clientX: number; clientY: number }) => {
+    const reduced =
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  document.startViewTransition(() => {
-    callback();
-  });
-};
+    if (!document.startViewTransition || reduced) {
+      callback();
+      return;
+    }
+
+    const x = event?.clientX ?? window.innerWidth / 2;
+    const y = event?.clientY ?? window.innerHeight / 2;
+    const endRadius = Math.hypot(
+      Math.max(x, window.innerWidth - x),
+      Math.max(y, window.innerHeight - y)
+    );
+
+    const root = document.documentElement;
+    root.style.setProperty("--vt-x", `${x}px`);
+    root.style.setProperty("--vt-y", `${y}px`);
+    root.style.setProperty("--vt-r", `${endRadius}px`);
+
+    document.startViewTransition(() => {
+      callback();
+    });
+  };

@@ -43,11 +43,11 @@ const Footer = () => {
   }, []);
 
   const iconMap: { [key: string]: ReactElement } = {
-    github: <GithubIcon className="h-5 w-5" />,
-    linkedin: <LinkedInIcon className="h-5 w-5" />,
-    medium: <MediumIcon className="h-5 w-5" />,
-    x: <XIcon className="h-5 w-5" />,
-    pageo: <PageoIcon className="h-5 w-5" />,
+    github: <GithubIcon className="size-4" />,
+    linkedin: <LinkedInIcon className="size-4" />,
+    medium: <MediumIcon className="size-4" />,
+    x: <XIcon className="size-4" />,
+    pageo: <PageoIcon className="size-4" />,
   };
 
   const isLastRow = (index: number) => index >= footerLinks.length - 2;
@@ -69,7 +69,7 @@ const Footer = () => {
         </span>
         {isTheme && (
           <ArrowUpDown
-            strokeWidth={2.3}
+            strokeWidth={1.75}
             className="w-3.5 h-auto ml-0.5 text-dim/80 transition-colors duration-300 group-hover:text-primary"
           />
         )}
@@ -78,43 +78,52 @@ const Footer = () => {
   };
 
   return (
-    <div className="max-w-7xl mx-auto py-8 px-2.5 md:px-20">
-      <hr className="w-full border-0 h-px bg-dim" />
+    <div className="max-w-7xl mx-auto py-6 px-2.5 md:px-20">
+      <hr className="w-full border-0 h-px bg-dim/40" />
 
-      <div className="flex justify-between mt-12 px-6 h-44">
-        <div className="flex flex-col gap-12">
-          <div className="flex flex-col gap-6">
-            <div className="flex flex-col text-left font-semibold text-lg text-secondary-text leading-6">
-              <span>Have an idea?</span>
-              <span>Let&apos;s bring it to life together!</span>
-            </div>
+      <div className="flex justify-between mt-8 px-6 gap-8">
+        <div className="flex flex-col gap-6">
+          <div className="flex gap-8 items-center">
+            {Object.keys(iconMap).map((icon: string) => {
+              const socialData = socials?.find(
+                (social) => social.name === icon
+              );
 
-            <div className="flex gap-8 items-center">
-              {Object.keys(iconMap).map((icon: string) => {
-                const socialData = socials?.find(
-                  (social) => social.name === icon
-                );
-
-                return (
-                  <a
-                    key={icon}
-                    href={socialData?.url}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    {iconMap[icon]}
-                  </a>
-                );
-              })}
-            </div>
+              return (
+                <a
+                  key={icon}
+                  href={socialData?.url}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  {iconMap[icon]}
+                </a>
+              );
+            })}
           </div>
 
-          <div className="font-semibold text-dim">
-            Developed with <span className="text-red-500">❤</span> by Aviral
+          <div className="font-medium text-dim text-sm">
+            Developed with{" "}
+            <motion.span
+              aria-label="love"
+              className="text-red-400/85 inline-block origin-center"
+              animate={
+                prefersReduced ? undefined : { scale: [1, 1.12, 1, 1.07, 1] }
+              }
+              transition={{
+                duration: 1.2,
+                repeat: Infinity,
+                repeatDelay: 2.6,
+                ease: "easeInOut",
+              }}
+            >
+              ❤
+            </motion.span>{" "}
+            by Aviral
           </div>
         </div>
 
-        <div className="hidden sm:grid grid-cols-2 gap-x-8 gap-y-4 text-dim font-semibold self-start">
+        <div className="hidden sm:grid grid-cols-2 gap-x-8 gap-y-3 text-dim font-medium self-start">
           {footerLinks.map((link: FooterLink, index: number) => (
             <motion.div
               key={link.label}
@@ -132,14 +141,14 @@ const Footer = () => {
                   onClick={toggleThemeWithTransition(() =>
                     setTheme(theme === "light" ? "dark" : "light")
                   )}
-                  className="group flex items-center gap-2 py-2.5 text-sm w-full"
+                  className="group flex items-center gap-2 py-2 text-sm w-full"
                 >
                   {linkInner(link.label, index, true)}
                 </button>
               ) : (
                 <Link
                   href={link.to}
-                  className="group flex items-center gap-2 py-2.5 text-sm w-full"
+                  className="group flex items-center gap-2 py-2 text-sm w-full"
                 >
                   {linkInner(link.label, index)}
                 </Link>

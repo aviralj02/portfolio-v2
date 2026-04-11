@@ -1,6 +1,6 @@
-<a href='https://www.aviral.xyz' target="_blank"><img alt='Live Version' src='https://img.shields.io/badge/Live_Version-100000?style=for-the-badge&logo=Live Version&logoColor=020202&labelColor=000000&color=black'/></a>
-
 ### ✨ portfolio
+
+[https://aviral.xyz](aviral.xyz)
 
 - **Framework**: [Next.js](https://nextjs.org/) (TypeScript)
 - **Styling**: [Tailwind CSS](https://tailwindcss.com)
