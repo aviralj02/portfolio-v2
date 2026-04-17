@@ -1,10 +1,12 @@
 "use client";
 
-import React from "react";
+import ReactMarkdown from "react-markdown";
 
 import { ArrowRight } from "lucide-react";
 import { motion } from "motion/react";
+import remarkGfm from "remark-gfm";
 
+import { markdownComponents } from "@/lib/markdown-components";
 import { cn } from "@/lib/utils";
 
 type Props = {
@@ -41,7 +43,14 @@ const RecentProjectTile = ({ recentProject }: Props) => {
         <h2 className="text-base sm:text-2xl font-bold">
           {recentProject?.title}
         </h2>
-        <p className="text-xs sm:text-sm">{recentProject?.description}</p>
+        <div className="text-xs sm:text-sm">
+          <ReactMarkdown
+            remarkPlugins={[remarkGfm]}
+            components={markdownComponents}
+          >
+            {recentProject?.description}
+          </ReactMarkdown>
+        </div>
       </div>
 
       <ArrowRight className="w-5 h-5 sm:w-7 sm:h-7 self-end" />
