@@ -2,10 +2,10 @@
 
 import dynamic from "next/dynamic";
 
+import { CITY, STATE } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 
 import Globe from "../Globe";
-import { CITY, STATE } from "@/lib/constants";
 
 const LiveClock = dynamic(() => import("../LiveClock"), { ssr: false });
 

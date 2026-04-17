@@ -1,12 +1,12 @@
 "use client";
 
 import { useState } from "react";
+import ReactMarkdown from "react-markdown";
 import Image from "next/image";
 import Link from "next/link";
 
 import { ChevronRight, ExternalLink } from "lucide-react";
 import { motion, useReducedMotion } from "motion/react";
-import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
 import { markdownComponents } from "@/lib/markdown-components";

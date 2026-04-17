@@ -1,7 +1,8 @@
 "use client";
 
-import { CITY } from "@/lib/constants";
 import { useEffect, useState } from "react";
+
+import { CITY } from "@/lib/constants";
 
 const TIMEZONE = "Asia/Kolkata";
 
