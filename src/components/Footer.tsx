@@ -78,7 +78,7 @@ const Footer = () => {
   };
 
   return (
-    <div className="max-w-7xl mx-auto py-6 px-2.5 md:px-20">
+    <div className="max-w-7xl mx-auto py-6 px-2.5 md:px-20 w-full">
       <hr className="w-full border-0 h-px bg-dim/40" />
 
       <div className="flex justify-between mt-8 px-6 gap-8">

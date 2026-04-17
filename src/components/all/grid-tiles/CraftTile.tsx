@@ -133,7 +133,7 @@ const CraftsTile = () => {
 
           {/* Card 2 */}
           <motion.div
-            className="absolute bottom-0 left-1/2 -translate-x-1/2 w-32 h-[88px] rounded-xl border border-border bg-card shadow-md p-3 flex flex-col gap-2"
+            className="absolute lg:flex hidden bottom-0 left-1/2 -translate-x-1/2 w-32 h-[88px] rounded-xl border border-border bg-card shadow-md p-3 flex-col gap-2"
             variants={{
               rest: { rotate: 2, y: 16, opacity: 0.7, filter: "grayscale(1)" },
               hover: { rotate: 1, y: 4, opacity: 1, filter: "grayscale(0)" },

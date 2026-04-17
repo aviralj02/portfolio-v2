@@ -23,7 +23,10 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={cn(inter.className, "bg-background text-primary scrollbar")}
+        className={cn(
+          inter.className,
+          "bg-background text-primary scrollbar antialiased h-screen grid grid-rows-[auto_1fr_auto]"
+        )}
       >
         <ThemeProvider
           attribute="class"
