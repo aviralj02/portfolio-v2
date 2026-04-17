@@ -2,6 +2,7 @@
 
 import dynamic from "next/dynamic";
 
+import { CITY, STATE } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 
 import Globe from "../Globe";
@@ -30,8 +31,8 @@ const AboutTile = () => {
 
       <div className="hidden lg:flex flex-col items-start text-sm gap-2">
         <div className="flex items-center font-medium gap-2">
-          Gurugram, <br />
-          Haryana 🇮🇳
+          {CITY}, <br />
+          {STATE} 🇮🇳
         </div>
         <LiveClock />
       </div>

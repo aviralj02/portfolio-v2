@@ -28,3 +28,6 @@ export const footerLinks: FooterLink[] = [
     to: "/#contact",
   },
 ];
+
+export const CITY = "Gurugram";
+export const STATE = "Haryana";

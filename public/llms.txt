@@ -31,16 +31,11 @@ Aviral Jain is a full-stack engineer from India who enjoys building user-friendl
    - Live clock and visitor location
 
 2. **Work** (`/work`)
-   - Work experience and professional history
-   - Skills showcase
-   - Internships and roles
-   - Technical competencies
+   - Work experience and professional history timeline
+   - Portfolio of key projects with descriptions, technologies, and links to live demos and repositories
 
-3. **Projects** (`/projects`)
-   - Portfolio of key projects
-   - Project descriptions and details
-   - Technologies used in each project
-   - Links to live demos and repositories
+3. **Craft** (`/craft`)
+   - Playground for UI experiments, animations, and interactive demos
 
 4. **Blogs** (`/blogs`)
    - Technical blog posts
@@ -71,7 +66,7 @@ Contact information and methods are available on the homepage.
 ## Sitemap
 - https://aviral.xyz (priority: 1.0, weekly updates)
 - https://aviral.xyz/work (priority: 0.8, monthly updates)
-- https://aviral.xyz/projects (priority: 0.8, monthly updates)
+- https://aviral.xyz/craft (priority: 0.8, monthly updates)
 - https://aviral.xyz/blogs (priority: 0.8, monthly updates)
 
 ## Metadata

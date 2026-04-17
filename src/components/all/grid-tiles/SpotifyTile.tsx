@@ -14,7 +14,7 @@ const SpotifyTile = async () => {
         "flex flex-col bg-card rounded-2xl box-border w-full card-shadow"
       )}
     >
-      <div className="relative rounded-t-2xl h-1/3 w-full">
+      <div className="relative rounded-t-2xl h-3/8 w-full">
         <div
           className="absolute inset-0 rounded-t-2xl bg-cover bg-no-repeat"
           style={{
@@ -31,7 +31,7 @@ const SpotifyTile = async () => {
         </div>
       </div>
 
-      <div className="flex flex-col flex-grow justify-between px-3 sm:px-5 py-3 sm:py-4">
+      <div className="flex flex-col grow justify-between px-3 sm:px-5 py-3 sm:py-4">
         {currentlyPlaying.isPlaying ? (
           <a
             className="flex flex-col"

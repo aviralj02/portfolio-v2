@@ -1,12 +1,15 @@
 "use client";
 
 import { useState } from "react";
+import ReactMarkdown from "react-markdown";
 import Image from "next/image";
 import Link from "next/link";
 
 import { ChevronRight, ExternalLink } from "lucide-react";
 import { motion, useReducedMotion } from "motion/react";
+import remarkGfm from "remark-gfm";
 
+import { markdownComponents } from "@/lib/markdown-components";
 import { cn } from "@/lib/utils";
 import { TagSize } from "@/types/enums";
 
@@ -50,7 +53,7 @@ const ProjectCard = ({ project }: Props) => {
         transition={{ duration: 0.15, ease: "easeOut" }}
       >
         <div
-          className="w-1 self-stretch rounded-full shrink-0"
+          className="w-1 self-stretch rounded-full shrink-0 opacity-35 mask-[linear-gradient(to_bottom,transparent,black_30%,black_70%,transparent)]"
           style={{ backgroundColor }}
         />
 
@@ -64,10 +67,10 @@ const ProjectCard = ({ project }: Props) => {
               <Image
                 src={icon.url}
                 alt={icon.fileName ?? title}
-                width={40}
-                height={40}
+                width={64}
+                height={64}
                 className="object-cover w-full h-full"
-                sizes="40px"
+                sizes="64px"
                 draggable={false}
               />
             )}
@@ -147,16 +150,21 @@ const ProjectCard = ({ project }: Props) => {
           </div>
         </div>
 
-        {/* Scrollable body */}
-        <div className="flex flex-col gap-5 px-6 pt-3 pb-8 overflow-y-auto overflow-x-hidden rounded-b-3xl sm:rounded-b-3xl">
-          <motion.p
-            className="text-sm text-muted-foreground leading-relaxed"
+        {/* Body */}
+        <div className="flex flex-col gap-5 px-6 pt-3 pb-8 rounded-b-3xl sm:rounded-b-3xl">
+          <motion.div
+            className="scrollbar overflow-y-auto max-h-[180px] pr-1 text-sm text-muted-foreground leading-relaxed"
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.14, duration: 0.28, ease: "easeOut" }}
           >
-            {description}
-          </motion.p>
+            <ReactMarkdown
+              remarkPlugins={[remarkGfm]}
+              components={markdownComponents}
+            >
+              {description}
+            </ReactMarkdown>
+          </motion.div>
 
           {stack?.length > 0 && (
             <motion.div
