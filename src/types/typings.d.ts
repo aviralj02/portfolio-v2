@@ -64,7 +64,11 @@ type Craft = {
   slug: string;
   title: string;
   description: string;
-  gif: string;
   sourcePath: string;
   writeupPath?: string;
+};
+
+type CraftMedia = {
+  slug: string;
+  video: Asset;
 };

@@ -32,13 +32,13 @@ const Navbar = () => {
   return (
     <motion.div
       layoutScroll
-      className="fixed top-6 left-0 right-0 z-50 flex justify-center pointer-events-none"
+      className="fixed top-7 left-0 right-0 z-50 flex justify-center pointer-events-none"
     >
       <div className="rounded-full p-0.5 nav-glass-ring pointer-events-auto">
         <motion.nav
           layout
           layoutRoot
-          className="rounded-full px-1 py-1 nav-glass-body"
+          className="rounded-full p-px nav-glass-body"
         >
           <ul className="flex gap-0.5 list-none">
             {baseNavLinks.map((link: NavLink) => {
@@ -49,7 +49,7 @@ const Navbar = () => {
               return (
                 <motion.li
                   key={link.label}
-                  className="relative py-[6px] px-5"
+                  className="relative py-1.5 px-5"
                   onHoverStart={
                     active ? () => setActiveTabHovered(true) : undefined
                   }

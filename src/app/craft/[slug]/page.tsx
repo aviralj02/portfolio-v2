@@ -1,12 +1,16 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+
 import { ArrowLeft } from "lucide-react";
 import fs from "node:fs/promises";
 import path from "node:path";
 import { codeToHtml } from "shiki";
+
 import PageWrapper from "@/components/PageWrapper";
+
 import { crafts, getCraft } from "../_registry";
+
 import CraftViewer from "./CraftViewer";
 
 export const dynamicParams = false;
@@ -57,9 +61,10 @@ export default async function CraftDetail({
       <div className="flex flex-col items-start text-primary gap-2">
         <Link
           href="/craft"
-          className="group mb-2 flex items-center gap-2 border-l-2 border-transparent pl-3 text-xs uppercase tracking-widest text-muted-foreground transition-all duration-200 hover:border-secondary-text hover:text-secondary-text"
+          aria-label="Back to Crafts"
+          className="mb-2 inline-flex items-center gap-1.5 text-sm text-muted-foreground transition-colors duration-200 hover:text-foreground"
         >
-          <ArrowLeft className="size-3 transition-transform duration-200 ease-out group-hover:-translate-x-0.5 group-hover:text-secondary-text" />
+          <ArrowLeft className="size-3.5" />
           Crafts
         </Link>
 

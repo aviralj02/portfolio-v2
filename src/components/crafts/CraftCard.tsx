@@ -1,51 +1,69 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 
-import { motion, useReducedMotion } from "motion/react";
+import { ArrowUpRight } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 
 type Props = {
   craft: Craft;
+  videoUrl?: string;
 };
 
-const CraftCard = ({ craft }: Props) => {
-  const prefersReduced = useReducedMotion();
+const CraftCard = ({ craft, videoUrl }: Props) => {
+  const [ready, setReady] = useState(false);
 
   return (
-    <motion.div
-      whileHover={prefersReduced ? {} : { y: -2 }}
-      transition={{ duration: 0.15, ease: "easeOut" }}
-      className="h-full"
+    <Link
+      href={`/craft/${craft.slug}`}
+      className={cn(
+        "group h-full flex flex-col gap-3 rounded-2xl",
+        "bg-card/30 border border-border hover:border-primary/20 overflow-hidden",
+        "duration-200 transition-colors"
+      )}
     >
-      <Link
-        href={`/craft/${craft.slug}`}
-        className={cn(
-          "h-full flex flex-col gap-3 p-3 rounded-2xl",
-          "bg-card border border-border",
-          "transition-colors duration-200 hover:bg-accent"
-        )}
-      >
-        <div className="relative w-full aspect-4/3 rounded-xl overflow-hidden bg-secondary">
-          {}
-          <img
-            src={craft.gif}
-            alt={`${craft.title} preview`}
-            className="w-full h-full object-cover"
-            loading="lazy"
-            draggable={false}
-          />
-        </div>
+      <div className="relative w-full aspect-4/3 rounded-2xl overflow-hidden bg-secondary/70">
+        <div
+          aria-hidden
+          className={cn(
+            "absolute inset-0 bg-linear-to-br from-muted via-secondary to-muted transition-opacity duration-700 ease-out",
+            ready ? "opacity-0" : "opacity-100"
+          )}
+        />
 
-        <div className="flex flex-col gap-1 px-1 pb-1">
-          <h2 className="text-sm font-semibold text-primary">{craft.title}</h2>
-          <p className="text-xs text-muted-foreground line-clamp-2">
-            {craft.description}
-          </p>
-        </div>
-      </Link>
-    </motion.div>
+        {videoUrl && (
+          <video
+            src={videoUrl}
+            className={cn(
+              "relative w-full h-full object-cover transition-opacity duration-700 ease-out",
+              ready ? "opacity-100" : "opacity-0"
+            )}
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="metadata"
+            aria-label={`${craft.title} preview`}
+            onLoadedData={() => setReady(true)}
+          />
+        )}
+      </div>
+
+      <div className="flex flex-col gap-1 p-4">
+        <h2 className="inline-flex items-center gap-1 text-sm font-semibold text-primary">
+          <span>{craft.title}</span>
+          <ArrowUpRight
+            aria-hidden
+            className="size-3.5 text-muted-foreground opacity-0 transition-opacity duration-200 ease-out group-hover:opacity-100"
+          />
+        </h2>
+        <p className="text-xs text-muted-foreground line-clamp-2">
+          {craft.description}
+        </p>
+      </div>
+    </Link>
   );
 };
 

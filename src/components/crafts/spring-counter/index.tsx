@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useState } from "react";
 
 import { Minus, Plus } from "lucide-react";
 import { AnimatePresence, motion, type Variants } from "motion/react";
@@ -13,20 +13,20 @@ const variants: Variants = {
 
 export default function SpringCounter() {
   const [count, setCount] = useState(0);
-  const directionRef = useRef<1 | -1>(1);
+  const [direction, setDirection] = useState<1 | -1>(1);
 
   const bump = (delta: 1 | -1) => {
-    directionRef.current = delta;
+    setDirection(delta);
     setCount((c) => c + delta);
   };
 
   return (
     <div className="flex flex-col items-center justify-center gap-8 min-h-[320px] max-w-40 w-full">
       <div className="relative h-20 w-24 flex items-center justify-center overflow-hidden">
-        <AnimatePresence mode="popLayout" initial={false} custom={directionRef.current}>
+        <AnimatePresence mode="popLayout" initial={false} custom={direction}>
           <motion.span
             key={count}
-            custom={directionRef.current}
+            custom={direction}
             variants={variants}
             initial="enter"
             animate="center"

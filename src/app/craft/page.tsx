@@ -1,9 +1,12 @@
 import CraftCard from "@/components/crafts/CraftCard";
 import PageWrapper from "@/components/PageWrapper";
+import getCraftsMedia from "@/lib/utils/get-crafts-media";
 
 import { crafts } from "./_registry";
 
-const Crafts = (): React.JSX.Element => {
+const Crafts = async (): Promise<React.JSX.Element> => {
+  const media = await getCraftsMedia();
+
   return (
     <PageWrapper className="flex flex-col gap-8 sm:my-6 my-12">
       <div className="flex flex-col items-start text-primary gap-2">
@@ -19,7 +22,11 @@ const Crafts = (): React.JSX.Element => {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {crafts.map((craft) => (
-          <CraftCard key={craft.slug} craft={craft} />
+          <CraftCard
+            key={craft.slug}
+            craft={craft}
+            videoUrl={media[craft.slug]}
+          />
         ))}
       </div>
     </PageWrapper>
