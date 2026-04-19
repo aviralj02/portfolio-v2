@@ -1,8 +1,12 @@
-import { Sparkles } from "lucide-react";
-
+import CraftCard from "@/components/crafts/CraftCard";
 import PageWrapper from "@/components/PageWrapper";
+import getCraftsMedia from "@/lib/utils/get-crafts-media";
 
-const Crafts = (): React.JSX.Element => {
+import { crafts } from "./_registry";
+
+const Crafts = async (): Promise<React.JSX.Element> => {
+  const media = await getCraftsMedia();
+
   return (
     <PageWrapper className="flex flex-col gap-8 sm:my-6 my-12">
       <div className="flex flex-col items-start text-primary gap-2">
@@ -16,16 +20,14 @@ const Crafts = (): React.JSX.Element => {
         </p>
       </div>
 
-      <div className="flex flex-col items-center justify-center py-24 gap-4 text-center">
-        <div className="p-4 rounded-full bg-secondary">
-          <Sparkles className="w-6 h-6 text-secondary-text" />
-        </div>
-        <div className="flex flex-col gap-2">
-          <h2 className="text-lg font-medium">Coming Soon</h2>
-          <p className="text-sm text-muted-foreground max-w-sm">
-            I&apos;m working on some experiments. Check back soon!
-          </p>
-        </div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        {crafts.map((craft) => (
+          <CraftCard
+            key={craft.slug}
+            craft={craft}
+            videoUrl={media[craft.slug]}
+          />
+        ))}
       </div>
     </PageWrapper>
   );

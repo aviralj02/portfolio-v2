@@ -59,3 +59,16 @@ type LocationData = {
   city: string;
   country: string;
 };
+
+type Craft = {
+  slug: string;
+  title: string;
+  description: string;
+  sourcePath: string;
+  writeupPath?: string;
+};
+
+type CraftMedia = {
+  slug: string;
+  video: Asset;
+};

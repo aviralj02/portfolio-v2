@@ -36,6 +36,9 @@ Aviral Jain is a full-stack engineer from India who enjoys building user-friendl
 
 3. **Craft** (`/craft`)
    - Playground for UI experiments, animations, and interactive demos
+   - Grid of craft cards; each card opens a detail page at `/craft/<slug>`
+   - Detail pages have Preview / Code tabs and a Reset button (key-remount)
+   - Source code is syntax-highlighted at build time with Shiki
 
 4. **Blogs** (`/blogs`)
    - Technical blog posts
