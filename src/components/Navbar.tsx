@@ -20,6 +20,11 @@ const baseNavLinks: Array<NavLink> = [
   { label: "Blogs", route: "/blogs" },
 ];
 
+const isRouteActive = (pathname: string, route: string) =>
+  route === "/"
+    ? pathname === "/"
+    : pathname === route || pathname.startsWith(`${route}/`);
+
 const Navbar = () => {
   const pathname = usePathname();
   const [activeTabHovered, setActiveTabHovered] = useState(false);
@@ -36,54 +41,71 @@ const Navbar = () => {
           className="rounded-full px-1 py-1 nav-glass-body"
         >
           <ul className="flex gap-0.5 list-none">
-            {baseNavLinks.map((link: NavLink) => (
-              <motion.li
-                key={link.label}
-                className="relative py-[6px] px-5"
-                onHoverStart={
-                  pathname === link.route
-                    ? () => setActiveTabHovered(true)
-                    : undefined
-                }
-                onHoverEnd={
-                  pathname === link.route
-                    ? () => setActiveTabHovered(false)
-                    : undefined
-                }
-              >
-                <Link
-                  href={link.route}
-                  className={cn(
-                    "text-sm font-medium transition-colors duration-200 relative z-10 block",
-                    pathname !== link.route
-                      ? "text-primary/60 hover:text-primary"
-                      : "text-primary"
-                  )}
-                >
-                  {link.label}
-                </Link>
+            {baseNavLinks.map((link: NavLink) => {
+              const active = isRouteActive(pathname, link.route);
+              const nested =
+                active && link.route !== "/" && pathname !== link.route;
 
-                {pathname === link.route && (
-                  <motion.div
-                    className="absolute inset-0 z-0 rounded-full nav-glass-pill"
-                    layoutId="active-pill"
-                    animate={{
-                      scaleX: activeTabHovered ? 1.06 : 1,
-                      scaleY: activeTabHovered ? 1.08 : 1,
-                    }}
-                    transition={{
-                      layout: {
-                        type: "spring",
-                        stiffness: 400,
-                        damping: 32,
-                      },
-                      duration: 0.3,
-                      ease: "easeInOut",
-                    }}
-                  />
-                )}
-              </motion.li>
-            ))}
+              return (
+                <motion.li
+                  key={link.label}
+                  className="relative py-[6px] px-5"
+                  onHoverStart={
+                    active ? () => setActiveTabHovered(true) : undefined
+                  }
+                  onHoverEnd={
+                    active ? () => setActiveTabHovered(false) : undefined
+                  }
+                >
+                  <Link
+                    href={link.route}
+                    className={cn(
+                      "text-sm font-medium transition-colors duration-200 relative z-10 flex items-center gap-1.5",
+                      !active
+                        ? "text-primary/60 hover:text-primary"
+                        : "text-primary"
+                    )}
+                  >
+                    {link.label}
+
+                    {nested && (
+                      <motion.span
+                        key="nested-dot"
+                        aria-hidden
+                        initial={{ opacity: 0, scale: 0.6 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{
+                          type: "spring",
+                          stiffness: 420,
+                          damping: 22,
+                        }}
+                        className="inline-block size-1 rounded-full bg-emerald-500/70"
+                      />
+                    )}
+                  </Link>
+
+                  {active && (
+                    <motion.div
+                      className="absolute inset-0 z-0 rounded-full nav-glass-pill"
+                      layoutId="active-pill"
+                      animate={{
+                        scaleX: activeTabHovered ? 1.06 : 1,
+                        scaleY: activeTabHovered ? 1.08 : 1,
+                      }}
+                      transition={{
+                        layout: {
+                          type: "spring",
+                          stiffness: 360,
+                          damping: 26,
+                        },
+                        duration: 0.3,
+                        ease: "easeInOut",
+                      }}
+                    />
+                  )}
+                </motion.li>
+              );
+            })}
           </ul>
         </motion.nav>
       </div>
