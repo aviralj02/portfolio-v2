@@ -25,10 +25,9 @@ const craftComponents = {
     () => import("@/components/crafts/spring-counter"),
     { ssr: false }
   ),
-  "blob-menu": dynamic(
-    () => import("@/components/crafts/blob-menu"),
-    { ssr: false }
-  ),
+  "blob-menu": dynamic(() => import("@/components/crafts/blob-menu"), {
+    ssr: false,
+  }),
 } as const;
 
 export default function CraftViewer({

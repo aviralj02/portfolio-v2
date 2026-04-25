@@ -1,3 +1,9 @@
-The effect is two stacked layers. The bottom layer contains only solid-filled shapes — the trigger circle and the card background rectangle — with an SVG filter applied to their container. `feGaussianBlur` melts them both into soft halos; `feColorMatrix` cranks the alpha contrast back up so edges snap to hard boundaries, except where the two blobs overlap and fuse into one. `feComposite` then restores the original sharp pixels inside those shapes.
+## Morph menu
 
-The card starts stacked directly on top of the trigger at `scale: 0`, then springs up to its resting position. That upward journey is the window where trigger and card briefly overlap — the only moment the gooey merge is visible. The top layer, containing the actual text and avatars, sits outside the filter entirely and fades in after the shape settles, so you're never trying to read content mid-morph.
+**Idea:** move a circle and a rectangle like stickers; when they touch, a goo filter makes them **fuse**, then **split** again. No custom art—just motion + overlap.
+
+**Layers:** blob shapes live **under** a filter; messages live **on top**, unfiltered, and fade in **late** so you’re never squinting through the stunt.
+
+**Placement:** card hangs above the trigger with `bottom: triggerHeight + gap` (real button height + fixed gap). It **starts** parked on the button: `y = cardHeight / 1.5 + gap` and `scale: 0`, then eases up to full size; closing runs the same path backward so the merge reads twice.
+
+**Motion:** springs for the blob (snappier close than open); content opacity is **delayed in, fast out**. Slow-motion mode swaps springs for long tweens so you can stare at the overlap without guesswork.

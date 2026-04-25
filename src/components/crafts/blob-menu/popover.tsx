@@ -50,12 +50,6 @@ type MorphMenuProps = {
   className?: string;
 };
 
-const contentVariants: Variants = {
-  hidden: { opacity: 0 },
-  visible: { opacity: 1, transition: { delay: 0.24, duration: 0.14 } },
-  exit: { opacity: 0, transition: { duration: 0.07 } },
-};
-
 export default function MorphMenu({
   children,
   open: controlledOpen,
@@ -174,11 +168,13 @@ export function MorphMenuTrigger({ children }: MorphMenuTriggerProps) {
 type MorphMenuContentProps = {
   children: ReactNode;
   className?: string;
+  slowMotion?: boolean;
 };
 
 export function MorphMenuContent({
   children,
   className = "",
+  slowMotion = false,
 }: MorphMenuContentProps) {
   const { open, filterId, cardWidth, cardHeight, triggerHeight, gap } =
     useMorphMenu();
@@ -190,12 +186,32 @@ export function MorphMenuContent({
     visible: {
       y: 0,
       scale: 1,
-      transition: { type: "spring", stiffness: 300, damping: 28 },
+      transition: slowMotion
+        ? { type: "tween", duration: 1.15, ease: "easeInOut" }
+        : { type: "spring", stiffness: 300, damping: 28 },
     },
     exit: {
       y: cardStartY,
       scale: 0,
-      transition: { type: "spring", stiffness: 420, damping: 30 },
+      transition: slowMotion
+        ? { type: "tween", duration: 0.9, ease: "easeInOut" }
+        : { type: "spring", stiffness: 420, damping: 30 },
+    },
+  };
+
+  const contentVariants: Variants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: slowMotion
+        ? { type: "tween", delay: 1.2, duration: 1.15, ease: "easeInOut" }
+        : { delay: 0.26, duration: 0.14 },
+    },
+    exit: {
+      opacity: 0,
+      transition: slowMotion
+        ? { type: "tween", ease: "easeInOut" }
+        : { duration: 0.07, type: "spring" },
     },
   };
 
