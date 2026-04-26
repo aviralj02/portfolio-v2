@@ -5,15 +5,15 @@ import {
   cloneElement,
   createContext,
   isValidElement,
-  useLayoutEffect,
-  useContext,
-  useId,
-  useMemo,
-  useRef,
-  useState,
   type MouseEventHandler,
   type ReactElement,
   type ReactNode,
+  useContext,
+  useId,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+  useState,
 } from "react";
 
 import { AnimatePresence, motion, type Variants } from "motion/react";
@@ -98,7 +98,7 @@ export default function MorphMenu({
       triggerRef,
       gap,
     }),
-    [open, filterId, cardWidth, cardHeight, triggerHeight, gap]
+    [open, filterId, cardWidth, cardHeight, triggerHeight, gap, setOpen]
   );
 
   return (

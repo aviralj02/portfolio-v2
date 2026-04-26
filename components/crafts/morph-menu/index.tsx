@@ -3,9 +3,11 @@
 import { useState } from "react";
 
 import { MessageSquareDot } from "lucide-react";
-import MorphMenu, { MorphMenuContent, MorphMenuTrigger } from "./popover";
 import { AnimatePresence, motion } from "motion/react";
+
 import { useIsMobile } from "@/hooks";
+
+import MorphMenu, { MorphMenuContent, MorphMenuTrigger } from "./popover";
 
 const MESSAGES = [
   {
