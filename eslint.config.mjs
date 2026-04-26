@@ -9,7 +9,7 @@ const eslintConfig = [
       "**/node_modules/**",
       "**/dist/**",
       "**/build/**",
-      "src/types/**/*",
+      "types/**/*",
     ],
   },
   ...nextCoreWebVitals,
@@ -52,7 +52,7 @@ const eslintConfig = [
     },
   },
   {
-    files: ["src/lib/utils.tsx"],
+    files: ["lib/utils.tsx"],
     rules: {
       "@typescript-eslint/no-explicit-any": "off",
       "@typescript-eslint/no-unused-vars": "off",
