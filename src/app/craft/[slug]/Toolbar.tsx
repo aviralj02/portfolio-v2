@@ -36,7 +36,7 @@ const Toolbar = ({ tab, onTabChange, onReset, showReset }: Props) => {
               role="tab"
               aria-selected={tab === t.key}
               onClick={() => onTabChange(t.key)}
-              whileTap={{ scale: 0.98 }}
+              whileTap={{ scale: 0.9 }}
               className={cn(
                 "relative px-4 py-1.5 cursor-pointer text-xs font-medium rounded-full transition-colors duration-200",
                 tab === t.key
@@ -68,7 +68,7 @@ const Toolbar = ({ tab, onTabChange, onReset, showReset }: Props) => {
           <motion.button
             onClick={onReset}
             aria-label="Reset craft"
-            whileTap={{ scale: 0.97 }}
+            whileTap={{ scale: 0.9 }}
             initial={{ opacity: 0, x: 6, filter: "blur(4px)" }}
             animate={{ opacity: 1, x: 0, filter: "blur(0px)" }}
             exit={{ opacity: 0, x: 6, filter: "blur(4px)" }}

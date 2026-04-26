@@ -14,6 +14,8 @@ import { crafts, getCraft } from "../_registry";
 import CraftViewer from "./CraftViewer";
 
 export const dynamicParams = false;
+const GITHUB_BLOB_BASE_URL =
+  "https://github.com/aviralj02/portfolio-v2/blob/main";
 
 export async function generateStaticParams() {
   return crafts.map((c) => ({ slug: c.slug }));
@@ -47,6 +49,10 @@ export default async function CraftDetail({
     path.join(process.cwd(), craft.sourcePath),
     "utf8"
   );
+  const sourceLinks = (craft.otherSourcePaths ?? []).map((filePath) => ({
+    path: filePath,
+    url: `${GITHUB_BLOB_BASE_URL}/${filePath}`,
+  }));
   const writeupMarkdown = craft.writeupPath
     ? await fs.readFile(path.join(process.cwd(), craft.writeupPath), "utf8")
     : "";
@@ -78,6 +84,8 @@ export default async function CraftDetail({
         slug={craft.slug}
         codeHtml={codeHtml}
         sourceCode={source}
+        sourceName={craft.sourcePath.split("/").at(-1) ?? "index.tsx"}
+        sourceLinks={sourceLinks}
         writeupMarkdown={writeupMarkdown}
       />
     </PageWrapper>

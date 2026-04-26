@@ -4,7 +4,7 @@ import { useCallback, useMemo, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import dynamic from "next/dynamic";
 
-import { Check, Copy } from "lucide-react";
+import { Check, Copy, ExternalLink } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import remarkGfm from "remark-gfm";
 
@@ -17,6 +17,8 @@ type Props = {
   slug: string;
   codeHtml: string;
   sourceCode: string;
+  sourceName: string;
+  sourceLinks?: Array<{ path: string; url: string }>;
   writeupMarkdown?: string;
 };
 
@@ -25,12 +27,17 @@ const craftComponents = {
     () => import("@/components/crafts/spring-counter"),
     { ssr: false }
   ),
+  "morph-menu": dynamic(() => import("@/components/crafts/morph-menu"), {
+    ssr: false,
+  }),
 } as const;
 
 export default function CraftViewer({
   slug,
   codeHtml,
   sourceCode,
+  sourceName,
+  sourceLinks = [],
   writeupMarkdown,
 }: Props) {
   const [tab, setTab] = useState<"preview" | "source">("preview");
@@ -94,13 +101,34 @@ export default function CraftViewer({
             transition={{ duration: 0.1, ease: "linear" }}
             className="relative w-full rounded-2xl border border-border bg-card overflow-hidden text-sm"
           >
+            <div className="no-scrollbar flex items-stretch overflow-x-auto max-w-[85vw] border-b border-border pr-10">
+              <div className="relative inline-flex shrink-0 select-none items-center px-4 py-2.5 font-mono text-[11px] font-medium text-foreground">
+                {sourceName}
+                <span className="absolute inset-x-0 bottom-0 h-[2px] bg-foreground" />
+              </div>
+
+              {/* Other files — GitHub links */}
+              {sourceLinks.map((file) => (
+                <a
+                  key={file.path}
+                  href={file.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group inline-flex shrink-0 items-center gap-1 px-4 py-2.5 font-mono text-[11px] text-muted-foreground transition-colors hover:bg-muted/40 hover:text-foreground"
+                >
+                  {file.path.split("/").at(-1)}
+                  <ExternalLink className="size-2.5 opacity-0 transition-opacity group-hover:opacity-50" />
+                </a>
+              ))}
+            </div>
+
             <motion.button
               type="button"
               onClick={handleCopy}
               aria-label={copied ? "Copied" : "Copy source code"}
               whileTap={{ scale: 0.88 }}
               className={cn(
-                "absolute top-3 right-3 z-10 cursor-pointer flex size-8 items-center justify-center rounded-lg border border-border bg-card/90 text-muted-foreground shadow-sm backdrop-blur-sm transition-colors hover:text-primary",
+                "absolute top-12 right-3 z-10 cursor-pointer flex size-8 items-center justify-center rounded-lg border border-border bg-card/90 text-muted-foreground shadow-sm backdrop-blur-sm transition-colors hover:text-primary",
                 copied && "text-primary"
               )}
             >
@@ -132,10 +160,12 @@ export default function CraftViewer({
               </AnimatePresence>
             </motion.button>
 
-            <div
-              className="[&_pre]:m-0 [&_pre]:p-4 sm:[&_pre]:p-6 [&_pre]:whitespace-pre-wrap [&_pre]:break-all [&_pre]:bg-transparent! [&_pre]:overflow-x-auto [&_pre]:scrollbar"
-              dangerouslySetInnerHTML={{ __html: codeHtml }}
-            />
+            <div className="max-w-[85vw] overflow-x-auto">
+              <div
+                className="[&_pre]:m-0 [&_pre]:p-4 sm:[&_pre]:p-6 [&_pre]:whitespace-pre [&_pre]:break-all [&_pre]:bg-transparent! [&_pre]:overflow-x-auto [&_pre]:scrollbar"
+                dangerouslySetInnerHTML={{ __html: codeHtml }}
+              />
+            </div>
           </motion.div>
         )}
       </AnimatePresence>

@@ -1,6 +1,24 @@
 import type { Components } from "react-markdown";
 
 export const markdownComponents: Components = {
+  h1: (props) => (
+    <h1
+      className="mb-3 mt-1 text-xl font-semibold leading-tight text-primary"
+      {...props}
+    />
+  ),
+  h2: (props) => (
+    <h2
+      className="mb-2 mt-4 text-lg font-semibold leading-tight text-primary"
+      {...props}
+    />
+  ),
+  h3: (props) => (
+    <h3
+      className="mb-2 mt-3 text-base font-semibold leading-snug text-primary"
+      {...props}
+    />
+  ),
   p: (props) => <p className="mb-3 last:mb-0" {...props} />,
   a: (props) => (
     <a

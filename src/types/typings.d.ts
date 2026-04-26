@@ -65,6 +65,7 @@ type Craft = {
   title: string;
   description: string;
   sourcePath: string;
+  otherSourcePaths?: Array<string>;
   writeupPath?: string;
 };
 
