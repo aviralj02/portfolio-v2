@@ -7,11 +7,14 @@ export const crafts: Array<Craft> = [
     writeupPath: "src/components/crafts/spring-counter/writeup.md",
   },
   {
-    slug: "blob-menu",
-    title: "Blob Menu",
+    slug: "morph-menu",
+    title: "Morph Menu",
     description: "A messages card that morphs out of its trigger using an SVG filter.",
-    sourcePath: "src/components/crafts/blob-menu/index.tsx",
-    writeupPath: "src/components/crafts/blob-menu/writeup.md",
+    sourcePath: "src/components/crafts/morph-menu/index.tsx",
+    otherSourcePaths: [
+      "src/components/crafts/morph-menu/popover.tsx",
+    ],
+    writeupPath: "src/components/crafts/morph-menu/writeup.md",
   },
 ];
 
