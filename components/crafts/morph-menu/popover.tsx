@@ -26,6 +26,7 @@ type MorphMenuContextValue = {
   cardHeight: number;
   triggerHeight: number;
   triggerRef: React.RefObject<HTMLDivElement | null>;
+  isAnimatingRef: React.RefObject<boolean>;
   gap: number;
 };
 
@@ -63,6 +64,7 @@ export default function MorphMenu({
   const [uncontrolledOpen, setUncontrolledOpen] = useState(defaultOpen);
   const [triggerHeight, setTriggerHeight] = useState(56);
   const triggerRef = useRef<HTMLDivElement>(null);
+  const isAnimatingRef = useRef(false);
   const open = controlledOpen ?? uncontrolledOpen;
   const filterId = useId().replace(/:/g, "");
 
@@ -96,6 +98,7 @@ export default function MorphMenu({
       cardHeight,
       triggerHeight,
       triggerRef,
+      isAnimatingRef,
       gap,
     }),
     [open, filterId, cardWidth, cardHeight, triggerHeight, gap, setOpen]
@@ -144,7 +147,7 @@ type MorphMenuTriggerProps = {
 };
 
 export function MorphMenuTrigger({ children }: MorphMenuTriggerProps) {
-  const { open, setOpen, triggerRef } = useMorphMenu();
+  const { open, setOpen, triggerRef, isAnimatingRef } = useMorphMenu();
   const child = Children.only(children);
 
   if (!isValidElement<{ onClick?: MouseEventHandler }>(child)) {
@@ -152,7 +155,11 @@ export function MorphMenuTrigger({ children }: MorphMenuTriggerProps) {
   }
 
   const handleClick: MouseEventHandler = (event) => {
+    if (isAnimatingRef.current) return;
+
     child.props.onClick?.(event);
+
+    isAnimatingRef.current = true;
     setOpen(!open);
   };
 
@@ -176,8 +183,15 @@ export function MorphMenuContent({
   className = "",
   slowMotion = false,
 }: MorphMenuContentProps) {
-  const { open, filterId, cardWidth, cardHeight, triggerHeight, gap } =
-    useMorphMenu();
+  const {
+    open,
+    filterId,
+    cardWidth,
+    cardHeight,
+    triggerHeight,
+    gap,
+    isAnimatingRef,
+  } = useMorphMenu();
 
   const cardStartY = cardHeight / 1.5 + gap;
 
@@ -232,13 +246,20 @@ export function MorphMenuContent({
           filter: `url(#${filterId})`,
         }}
       >
-        <AnimatePresence>
+        <AnimatePresence
+          onExitComplete={() => {
+            isAnimatingRef.current = false;
+          }}
+        >
           {open && (
             <motion.div
               variants={contentShapeVariants}
               initial="hidden"
               animate="visible"
               exit="exit"
+              onAnimationComplete={() => {
+                isAnimatingRef.current = false;
+              }}
               style={{
                 width: cardWidth,
                 height: cardHeight,
