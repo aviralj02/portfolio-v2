@@ -24,19 +24,18 @@ export const portfolioMetadata: Metadata = {
     locale: "en_US",
     images: [
       {
-        url: "https://www.aviral.xyz/opengraph-image.jpg",
-      },
-      {
-        url: "https://www.aviral.xyz/twitter-image.jpg",
+        url: `${PORTFOLIO_URL}/opengraph-image.jpg`,
+        width: 1200,
+        height: 630,
+        alt: "Aviral Jain – Portfolio",
       },
     ],
   },
   twitter: {
+    card: "summary_large_image",
     title: "Aviral | Portfolio",
     description: PORTFOLIO_DESC,
-    images: [
-      "https://www.aviral.xyz/twitter-image.jpg",
-    ],
+    images: [`${PORTFOLIO_URL}/twitter-image.jpg`],
   },
   robots: {
     index: true,

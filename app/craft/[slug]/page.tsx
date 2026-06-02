@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+import { PORTFOLIO_URL } from "@/lib/constants";
+
 import { ArrowLeft } from "lucide-react";
 import fs from "node:fs/promises";
 import path from "node:path";
@@ -32,6 +34,7 @@ export async function generateMetadata({
   return {
     title: `${craft.title} | Crafts`,
     description: craft.description,
+    alternates: { canonical: `${PORTFOLIO_URL}/craft/${slug}` },
   };
 }
 
