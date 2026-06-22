@@ -95,8 +95,8 @@ const Navbar = () => {
                       transition={{
                         layout: {
                           type: "spring",
-                          stiffness: 360,
-                          damping: 26,
+                          stiffness: 320,
+                          damping: 40,
                         },
                         duration: 0.3,
                         ease: "easeInOut",
