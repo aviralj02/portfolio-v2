@@ -25,11 +25,15 @@ type Props = {
 const craftComponents = {
   "spring-counter": dynamic(
     () => import("@/components/crafts/spring-counter"),
-    { ssr: false }
+    { ssr: false },
   ),
   "morph-menu": dynamic(() => import("@/components/crafts/morph-menu"), {
     ssr: false,
   }),
+  "draggable-list": dynamic(
+    () => import("@/components/crafts/draggable-list"),
+    { ssr: false },
+  ),
 } as const;
 
 export default function CraftViewer({
@@ -53,7 +57,7 @@ export default function CraftViewer({
 
   const Component = useMemo(
     () => craftComponents[slug as keyof typeof craftComponents] ?? null,
-    [slug]
+    [slug],
   );
 
   return (
@@ -75,7 +79,7 @@ export default function CraftViewer({
             transition={{ duration: 0.1, ease: "linear" }}
             className="flex flex-col gap-8 w-full"
           >
-            <div className="rounded-2xl border border-border bg-card p-4 sm:p-6 min-h-[320px] sm:min-h-[400px] flex flex-col items-center justify-center gap-8 overflow-hidden">
+            <div className="rounded-2xl border border-border bg-card p-4 sm:p-6 min-h-80 sm:min-h-100 flex flex-col items-center justify-center gap-8 overflow-hidden">
               {Component ? <Component key={resetKey} /> : null}
             </div>
 
@@ -104,7 +108,7 @@ export default function CraftViewer({
             <div className="no-scrollbar flex items-stretch overflow-x-auto max-w-[85vw] border-b border-border pr-10">
               <div className="relative inline-flex shrink-0 select-none items-center px-4 py-2.5 font-mono text-[11px] font-medium text-foreground">
                 {sourceName}
-                <span className="absolute inset-x-0 bottom-0 h-[2px] bg-foreground" />
+                <span className="absolute inset-x-0 bottom-0 h-0.5 bg-foreground" />
               </div>
 
               {/* Other files — GitHub links */}
@@ -129,7 +133,7 @@ export default function CraftViewer({
               whileTap={{ scale: 0.88 }}
               className={cn(
                 "absolute top-12 right-3 z-10 cursor-pointer flex size-8 items-center justify-center rounded-lg border border-border bg-card/90 text-muted-foreground shadow-sm backdrop-blur-sm transition-colors hover:text-primary",
-                copied && "text-primary"
+                copied && "text-primary",
               )}
             >
               <AnimatePresence mode="wait" initial={false}>

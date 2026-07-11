@@ -16,6 +16,13 @@ export const crafts: Array<Craft> = [
     sourcePath: "components/crafts/spring-counter/index.tsx",
     writeupPath: "components/crafts/spring-counter/writeup.md",
   },
+  {
+    slug: "draggable-list",
+    title: "Draggable List",
+    description: "A sortable list where the dragged item lifts with rotation and shadow, and neighbors tilt to signal displacement.",
+    sourcePath: "components/crafts/draggable-list/index.tsx",
+    writeupPath: "components/crafts/draggable-list/writeup.md",
+  },
 ];
 
 export const getCraft = (slug: string) => crafts.find((c) => c.slug === slug);
