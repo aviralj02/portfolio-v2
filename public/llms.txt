@@ -1,9 +1,9 @@
 ## Site Information
 - **Name**: Aviral Jain Portfolio
-- **URL**: https://aviral.xyz
+- **URL**: https://heyaviral.com
 - **Description**: A comprehensive portfolio showcasing skills as a full stack developer, including work experience, projects, and technical blogs.
 - **Owner**: Aviral Jain
-- **Location**: Gurugram, Haryana, India
+- **Location**: Bengaluru, Karnataka, India
 
 ## About
 Aviral Jain is a full-stack engineer from India who enjoys building user-friendly applications with solid backend design. The portfolio demonstrates capabilities in web development, showcasing impactful contributions from internships and professional roles.
@@ -67,10 +67,10 @@ The portfolio includes links to various social platforms (GitHub, LinkedIn, X/Tw
 Contact information and methods are available on the homepage.
 
 ## Sitemap
-- https://aviral.xyz (priority: 1.0, weekly updates)
-- https://aviral.xyz/work (priority: 0.8, monthly updates)
-- https://aviral.xyz/craft (priority: 0.8, monthly updates)
-- https://aviral.xyz/blogs (priority: 0.8, monthly updates)
+- https://heyaviral.com (priority: 1.0, weekly updates)
+- https://heyaviral.com/work (priority: 0.8, monthly updates)
+- https://heyaviral.com/craft (priority: 0.8, monthly updates)
+- https://heyaviral.com/blogs (priority: 0.8, monthly updates)
 
 ## Metadata
 - **Keywords**: Aviral Jain, Frontend, Next.js, React.js, Developer, Engineer
