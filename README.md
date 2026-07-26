@@ -1,6 +1,6 @@
 ### ✨ portfolio
 
-[https://aviral.xyz](aviral.xyz)
+[https://heyaviral.com](https://heyaviral.com)
 
 - **Framework**: [Next.js](https://nextjs.org/) (TypeScript)
 - **Styling**: [Tailwind CSS](https://tailwindcss.com)
