@@ -26,6 +26,10 @@ const VisitorLocation = () => {
     const data = await res.json();
     const { city, country } = data;
 
+    if (!city || !country) {
+      return;
+    }
+
     if (city === lastLocation?.city && country === lastLocation?.country) {
       return;
     }
