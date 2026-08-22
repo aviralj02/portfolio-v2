@@ -1,6 +1,6 @@
 "use client";
 
-import { type RefObject, useRef, useState } from "react";
+import { type RefObject, useEffect, useRef, useState } from "react";
 import { useTheme } from "next-themes";
 
 import { GripVertical } from "lucide-react";
@@ -77,6 +77,15 @@ export default function DraggableList() {
 
   const containerHeight =
     items.length * ROW_HEIGHT + (items.length - 1) * ROW_GAP;
+
+  useEffect(() => {
+    if (!draggingId) return;
+
+    const block = (e: TouchEvent) => e.preventDefault();
+    document.addEventListener("touchmove", block, { passive: false });
+
+    return () => document.removeEventListener("touchmove", block);
+  }, [draggingId]);
 
   return (
     <div className="flex flex-col items-center gap-5 w-full">
@@ -202,12 +211,13 @@ function DraggableRow({
           onPointerCancel={onDragEnd}
           className={cn(
             "p-1.5 -m-1.5 rounded-md group hover:bg-muted transition-all",
+            "touch-none cursor-grab active:cursor-grabbing",
             isDragging ? "bg-muted" : "bg-transparent",
           )}
         >
           <GripVertical
             className={cn(
-              "size-4 shrink-0 cursor-grab active:cursor-grabbing touch-none group-hover:text-primary/80 transition-all",
+              "size-4 shrink-0 group-hover:text-primary/80 transition-all",
               isDragging ? "text-primary/80" : "text-muted-foreground/40",
             )}
           />
