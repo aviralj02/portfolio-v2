@@ -3,7 +3,6 @@ import { Inter } from "next/font/google";
 
 import { Analytics } from "@vercel/analytics/react";
 
-import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { PORTFOLIO_DESC, PORTFOLIO_URL } from "@/lib/constants";
@@ -62,7 +61,7 @@ export default function RootLayout({
       <body
         className={cn(
           inter.className,
-          "bg-background text-primary scrollbar antialiased overflow-x-hidden h-screen grid grid-rows-[auto_1fr_auto]",
+          "bg-background text-primary scrollbar antialiased overflow-x-hidden h-screen grid grid-rows-[auto_1fr]",
         )}
       >
         <ThemeProvider
@@ -74,8 +73,6 @@ export default function RootLayout({
           <Header />
 
           {children}
-
-          <Footer />
         </ThemeProvider>
 
         <Analytics />

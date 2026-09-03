@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+/* Themes are driven by the CSS variables below; this only makes the class
+   Tailwind's `dark:` variant looks for match the one next-themes sets. */
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme inline {
   /* Colors - reference :root CSS variables */
   --color-border: hsl(var(--border));

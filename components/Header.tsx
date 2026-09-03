@@ -5,10 +5,11 @@ import { ArrowUpRight } from "lucide-react";
 
 import LocalTime from "./LocalTime";
 import Navbar from "./Navbar";
+import ThemeSwitch from "./ThemeSwitch";
 
 const Header = () => {
   return (
-    <div className="max-w-7xl w-full flex items-center justify-between mx-auto py-7 px-2.5 md:px-20">
+    <div className="max-w-7xl w-full flex items-center justify-between mx-auto py-7 px-5 md:px-20">
       <div className="hidden md:flex items-center gap-4">
         <Link href="/" className="relative shrink-0" aria-label="Home">
           <div className="relative shadow-sm rounded-full">
@@ -36,14 +37,21 @@ const Header = () => {
 
       <Navbar />
 
-      <Link
-        href={"/#contact"}
-        className="md:flex hidden gap-1 items-center font-semibold text-sm tracking-tight text-foreground/90 hover:text-foreground group transition-colors"
-        aria-label="contact-button"
-      >
-        <span>Contact</span>{" "}
-        <ArrowUpRight className="w-4 stroke-[2.5] transform group-hover:rotate-45 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform ease-out duration-200" />
-      </Link>
+      {/* Sits at the right edge on its own on mobile, where the rest of this
+          row is hidden — the footer's toggle was `hidden sm:grid`, so small
+          screens previously had no way to switch theme off the home page. */}
+      <div className="flex items-center gap-5 ml-auto">
+        <ThemeSwitch />
+
+        <Link
+          href={"/#contact"}
+          className="md:flex hidden gap-1 items-center font-semibold text-sm tracking-tight text-foreground/90 hover:text-foreground group transition-colors"
+          aria-label="contact-button"
+        >
+          <span>Contact</span>{" "}
+          <ArrowUpRight className="w-4 stroke-[2.5] transform group-hover:rotate-45 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform ease-out duration-200" />
+        </Link>
+      </div>
     </div>
   );
 };

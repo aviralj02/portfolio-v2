@@ -49,11 +49,6 @@ interface Asset {
   url: string;
 }
 
-type FooterLink = {
-  label: string;
-  to: string;
-};
-
 type LocationData = {
   id: string;
   city: string;
