@@ -1,27 +1,26 @@
-import BlogCard from "@/components/blogs/BlogCard";
+import BlogList from "@/components/blogs/BlogList";
+import BlogMasthead from "@/components/blogs/BlogMasthead";
 import PageWrapper from "@/components/PageWrapper";
+import { archiveSpan } from "@/lib/blogs";
 import getBlogs from "@/lib/utils/get-blogs";
+import getSocials from "@/lib/utils/get-socials";
 
 const Blogs = async (): Promise<React.JSX.Element> => {
-  const blogs = await getBlogs();
+  const [blogsData, socials] = await Promise.all([getBlogs(), getSocials()]);
+
+  const blogs = blogsData ?? [];
+  const medium = socials?.find((social) => social.name.toLowerCase() === "medium");
 
   return (
-    <PageWrapper className="flex flex-col gap-8 sm:my-6 my-12">
-      <div className="flex flex-col items-start text-primary gap-2">
-        <span className="text-xs font-medium tracking-widest uppercase text-secondary-text">
-          Writing
-        </span>
-        <h1 className="sm:text-2xl text-xl font-semibold">Blogs</h1>
-        <p className="sm:text-base text-sm text-muted-foreground">
-          Thoughts I couldn&apos;t stop thinking about, written down so you
-          don&apos;t have to.
-        </p>
-      </div>
+    <PageWrapper className="my-12 sm:my-6">
+      <div className="flex flex-col gap-10 lg:grid lg:grid-cols-[18rem_minmax(0,46rem)] lg:gap-x-16">
+        <BlogMasthead
+          count={blogs.length}
+          span={archiveSpan(blogs)}
+          mediumUrl={medium?.url}
+        />
 
-      <div className="w-full flex flex-col gap-6">
-        {blogs?.map((blog: Blog) => (
-          <BlogCard key={blog.title} blog={blog} />
-        ))}
+        <BlogList blogs={blogs} />
       </div>
     </PageWrapper>
   );

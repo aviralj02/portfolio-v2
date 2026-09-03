@@ -94,7 +94,7 @@
     --secondary-text: 220 50% 30%;
     --muted: 240 4.8% 95.9%;
     --muted-foreground: 240 3.8% 46.1%;
-    --accent: 0 0 93%;
+    --accent: 0 0% 93%;
     --accent-foreground: 240 5.9% 10%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
@@ -308,5 +308,35 @@ html.dark .shiki span {
   ::view-transition-old(root),
   ::view-transition-new(root) {
     animation: none;
+  }
+}
+
+/* The blogs title is written once on load by a pen following its own stroke
+   centres. CSS-only, so it still runs without JS and never hides the title. */
+.blogs-pen {
+  /* The trailing gap matters: with a bare `dasharray: 1` the dash ends exactly
+     at position 0, and a round linecap then paints a half-dot at every
+     stroke's start — visible debris sitting ahead of the pen. The gap lets the
+     dash rest fully off the path instead. */
+  stroke-dasharray: 1 2;
+  /* Duration and delay come from each stroke's share of the pen length. */
+  animation-name: blogs-write;
+  animation-timing-function: linear;
+  animation-fill-mode: both;
+}
+
+@keyframes blogs-write {
+  from {
+    stroke-dashoffset: 1.05;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .blogs-pen {
+    animation: none;
+    stroke-dashoffset: 0;
   }
 }
