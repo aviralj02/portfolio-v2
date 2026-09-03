@@ -9,7 +9,7 @@ const Work = async (): Promise<React.JSX.Element> => {
   const projects = await getProjects();
 
   return (
-    <PageWrapper className="flex flex-col gap-14 sm:my-6 my-12">
+    <PageWrapper className="flex flex-col gap-14">
       <div className="flex flex-col gap-8">
         <div className="flex flex-col items-start gap-2">
           <span className="text-xs font-medium tracking-widest uppercase text-secondary-text">

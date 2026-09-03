@@ -12,7 +12,7 @@ const Blogs = async (): Promise<React.JSX.Element> => {
   const medium = socials?.find((social) => social.name.toLowerCase() === "medium");
 
   return (
-    <PageWrapper className="my-12 sm:my-6">
+    <PageWrapper>
       <div className="flex flex-col gap-10 lg:grid lg:grid-cols-[18rem_minmax(0,46rem)] lg:gap-x-16">
         <BlogMasthead
           count={blogs.length}

@@ -171,7 +171,7 @@ const BlogList = ({ blogs }: Props) => {
                   {entry.startsYear ? entry.year : ""}
                 </span>
 
-                <h2 className="min-w-0 text-[15px] font-medium leading-snug tracking-[-0.012em] text-primary sm:text-[17px]">
+                <h2 className="min-w-0 text-pretty text-[15px] font-medium leading-snug tracking-[-0.012em] text-primary sm:text-[17px]">
                   {entry.title}
                   <ArrowUpRight
                     aria-hidden

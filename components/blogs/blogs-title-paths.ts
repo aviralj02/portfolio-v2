@@ -4,7 +4,7 @@ export const TITLE_VIEW_BOX = "0 0 241.2 118.7";
 export const PEN_WIDTH = 14;
 
 /** How long the whole word takes to write. */
-export const WRITE_MS = 2400;
+export const WRITE_MS = 2000;
 
 /** Beat before the pen starts, so the page has settled. */
 export const WRITE_DELAY_MS = 220;

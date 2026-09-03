@@ -9,7 +9,7 @@ import ThemeSwitch from "./ThemeSwitch";
 
 const Header = () => {
   return (
-    <div className="max-w-7xl w-full flex items-center justify-between mx-auto py-7 px-5 md:px-20">
+    <div className="max-w-6xl w-full flex items-center justify-between mx-auto py-7 px-6 md:px-20">
       <div className="hidden md:flex items-center gap-4">
         <Link href="/" className="relative shrink-0" aria-label="Home">
           <div className="relative shadow-sm rounded-full">

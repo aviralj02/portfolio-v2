@@ -66,7 +66,7 @@ export default async function CraftDetail({
   });
 
   return (
-    <PageWrapper className="flex flex-col gap-6 sm:my-6 my-12">
+    <PageWrapper className="flex flex-col gap-6">
       <div className="flex flex-col items-start text-primary gap-2">
         <Link
           href="/craft"
