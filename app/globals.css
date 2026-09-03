@@ -39,7 +39,6 @@
   --animate-quiet: quiet 1s infinite;
   --animate-decent: decent 1s infinite;
   --animate-loud: loud 1s infinite;
-  --animate-skeleton-shimmer: skeleton-shimmer 1.5s ease-in-out infinite;
 
   @keyframes quiet {
     25% {
@@ -266,16 +265,6 @@ html.dark .shiki span {
 
 .card-template {
   @apply bg-card hover:bg-accent card-shadow;
-}
-
-@keyframes skeleton-shimmer {
-  0%,
-  100% {
-    opacity: 0.6;
-  }
-  50% {
-    opacity: 1;
-  }
 }
 
 /* VIEW TRANSITIONS */
