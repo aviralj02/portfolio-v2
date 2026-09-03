@@ -1,5 +1,7 @@
 import CraftCard from "@/components/crafts/CraftCard";
+import craftsTitle from "@/components/crafts/crafts-title-paths";
 import PageWrapper from "@/components/PageWrapper";
+import PenTitle from "@/components/PenTitle";
 import getCraftsMedia from "@/lib/utils/get-crafts-media";
 
 import { crafts } from "./_registry";
@@ -9,13 +11,15 @@ const Crafts = async (): Promise<React.JSX.Element> => {
 
   return (
     <PageWrapper className="flex flex-col gap-8">
-      <div className="flex flex-col items-start text-primary gap-2">
-        <span className="text-xs font-medium tracking-widest uppercase text-secondary-text">
+      <div className="flex flex-col items-start gap-2 text-primary">
+        <span className="text-xs font-medium uppercase tracking-widest text-secondary-text">
           Playground
         </span>
-        <h1 className="sm:text-2xl text-xl font-semibold">Crafts</h1>
-        <p className="sm:text-base text-sm text-muted-foreground">
-          UI experiments, animations &amp; interactive demos - where ideas get
+
+        <PenTitle title={craftsTitle} />
+
+        <p className="w-full max-w-[58ch] text-pretty text-sm leading-relaxed text-muted-foreground sm:text-[15px]">
+          UI experiments, animations and interactive demos — where ideas get
           weird.
         </p>
       </div>

@@ -327,21 +327,21 @@ html.dark .shiki span {
   }
 }
 
-/* The blogs title is written once on load by a pen following its own stroke
+/* Page titles are written once on load by a pen following their own stroke
    centres. CSS-only, so it still runs without JS and never hides the title. */
-.blogs-pen {
+.pen-write {
   /* The trailing gap matters: with a bare `dasharray: 1` the dash ends exactly
      at position 0, and a round linecap then paints a half-dot at every
      stroke's start — visible debris sitting ahead of the pen. The gap lets the
      dash rest fully off the path instead. */
   stroke-dasharray: 1 2;
   /* Duration and delay come from each stroke's share of the pen length. */
-  animation-name: blogs-write;
+  animation-name: pen-write;
   animation-timing-function: linear;
   animation-fill-mode: both;
 }
 
-@keyframes blogs-write {
+@keyframes pen-write {
   from {
     stroke-dashoffset: 1.05;
   }
@@ -351,7 +351,7 @@ html.dark .shiki span {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .blogs-pen {
+  .pen-write {
     animation: none;
     stroke-dashoffset: 0;
   }

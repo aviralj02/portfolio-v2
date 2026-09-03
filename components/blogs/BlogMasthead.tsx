@@ -1,6 +1,8 @@
 import { ArrowUpRight } from "lucide-react";
 
-import BlogTitle from "./BlogTitle";
+import PenTitle from "@/components/PenTitle";
+
+import blogsTitle from "./blogs-title-paths";
 
 type Props = {
   count: number;
@@ -26,7 +28,7 @@ const BlogMasthead = ({
         Writing
       </span>
 
-      <BlogTitle />
+      <PenTitle title={blogsTitle} />
 
       <p className="w-full max-w-[58ch] text-pretty text-sm leading-relaxed text-muted-foreground sm:text-[15px]">
         Thoughts I couldn&apos;t stop thinking about, written down so you
