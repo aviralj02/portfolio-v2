@@ -58,7 +58,10 @@ export const getNowPlaying = async () => {
     },
   });
 
-  const data = await res.json();
+  /* Nothing playing is a 204 with an empty body, so parsing unconditionally
+     threw and the caller's own 204 branch was never reached. */
+  const body = await res.text();
+  const data = body ? JSON.parse(body) : {};
 
   return { res, data };
 };
