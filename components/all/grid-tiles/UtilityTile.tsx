@@ -18,7 +18,7 @@ const UtilityTile = () => {
     >
       <div
         id="theme"
-        className="flex justify-center items-center bg-card rounded-2xl w-full card-shadow"
+        className="flex justify-center items-center bg-card rounded-2xl w-full card-glass"
       >
         <ThemeToggle />
       </div>

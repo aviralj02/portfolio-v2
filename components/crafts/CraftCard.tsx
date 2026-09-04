@@ -20,8 +20,8 @@ const CraftCard = ({ craft, videoUrl }: Props) => {
       href={`/craft/${craft.slug}`}
       className={cn(
         "group h-full flex flex-col gap-3 rounded-2xl",
-        "bg-card/30 border border-border hover:border-primary/20 overflow-hidden",
-        "duration-200 transition-colors"
+        "card-glass bg-card/30 hover:card-glass-lift overflow-hidden",
+        "duration-200 transition-[box-shadow,background-color]"
       )}
     >
       <div className="relative w-full aspect-4/3 rounded-2xl overflow-hidden bg-secondary/70">

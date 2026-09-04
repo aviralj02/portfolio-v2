@@ -98,7 +98,7 @@ const ExperienceTimeline = ({ timeline }: Props): React.JSX.Element => {
       ref={scroller}
       className={cn(
         "no-scrollbar -mx-6 overflow-x-auto px-6 md:-mx-20 md:px-20",
-        "[mask-image:linear-gradient(to_right,transparent,black_24px,black_calc(100%-24px),transparent)]",
+        "mask-[linear-gradient(to_right,transparent,black_24px,black_calc(100%-24px),transparent)]",
       )}
     >
       <div className="relative" style={{ width }}>
@@ -209,7 +209,7 @@ const ExperienceTimeline = ({ timeline }: Props): React.JSX.Element => {
                     ? { duration: 0.15 }
                     : { type: "spring", stiffness: 520, damping: 22, mass: 0.7 }
                 }
-                className="absolute top-0 rounded-xl border border-border bg-card p-4"
+                className="card-glass absolute top-0 rounded-xl bg-card p-4"
                 style={{
                   width: CARD_WIDTH,
                   /* Anchored under its own bar, pulled back at the tail so the

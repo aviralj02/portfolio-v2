@@ -133,6 +133,21 @@
 
     --nav-pill-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9),
       0 1px 4px rgba(0, 0, 0, 0.1);
+
+    /* Card glass. The navbar's language — a 135deg sheen, a specular ring and
+       an ambient shadow — carried onto resting surfaces. Its backdrop blur is
+       deliberately left behind: the navbar floats over scrolling content,
+       whereas a card sits on a flat ground, and blurring a flat colour returns
+       the same colour at the cost of a compositing layer per tile. */
+    --card-glass-gradient: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.55) 0%,
+      rgba(255, 255, 255, 0.12) 100%
+    );
+    --card-glass-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.85),
+      0 0 0 1px rgba(0, 0, 0, 0.055), 0 8px 26px rgba(0, 0, 0, 0.05);
+    --card-glass-shadow-lift: inset 0 1px 0 rgba(255, 255, 255, 0.95),
+      0 0 0 1px rgba(0, 0, 0, 0.09), 0 14px 38px rgba(0, 0, 0, 0.09);
   }
 
   .dark {
@@ -184,6 +199,16 @@
     );
     --nav-pill-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.28),
       0 1px 3px rgba(0, 0, 0, 0.7);
+
+    --card-glass-gradient: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.055) 0%,
+      rgba(255, 255, 255, 0.015) 100%
+    );
+    --card-glass-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.07),
+      0 0 0 1px rgba(255, 255, 255, 0.08), 0 10px 30px rgba(0, 0, 0, 0.55);
+    --card-glass-shadow-lift: inset 0 1px 0 rgba(255, 255, 255, 0.12),
+      0 0 0 1px rgba(255, 255, 255, 0.14), 0 16px 44px rgba(0, 0, 0, 0.7);
   }
 }
 
@@ -209,9 +234,17 @@
   -webkit-mask-composite: source-in;
 }
 
-@utility card-shadow {
-  box-shadow: 0px 4px 18px #0000000a, 0px 2.025px 7.84688px rgba(0, 0, 0, 0.027),
-    0px 0.8px 2.925px #00000005, 0px 0.175px 1.04062px rgba(0, 0, 0, 0.013);
+/* Sheen, specular ring, inset top highlight, ambient shadow. `background-image`
+   rather than `background`, so it layers over whatever `bg-*` the element
+   already carries instead of replacing it, and the ring rides in the shadow so
+   it sits outside the box and never insets a tile's image. */
+@utility card-glass {
+  background-image: var(--card-glass-gradient);
+  box-shadow: var(--card-glass-shadow);
+}
+
+@utility card-glass-lift {
+  box-shadow: var(--card-glass-shadow-lift);
 }
 
 .nav-glass-ring {
@@ -268,7 +301,7 @@ html.dark .shiki span {
 }
 
 .card-template {
-  @apply bg-card hover:bg-accent card-shadow;
+  @apply bg-card card-glass transition-shadow duration-200 hover:card-glass-lift;
 }
 
 /* Page entrance. Opacity only, and short: the persistent shell already tells

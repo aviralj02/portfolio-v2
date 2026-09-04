@@ -45,8 +45,8 @@ const ProjectCard = ({ project }: Props) => {
         onClick={() => setIsOpen(true)}
         className={cn(
           "group flex h-full w-full cursor-pointer items-start gap-3 rounded-xl p-4 text-left",
-          "border border-border bg-card/50",
-          "transition-colors duration-200 hover:border-primary/20 hover:bg-card",
+          "card-glass bg-card/50 hover:card-glass-lift",
+          "transition-[box-shadow,background-color] duration-200 hover:bg-card",
         )}
         whileTap={prefersReduced ? {} : { scale: 0.99 }}
         transition={{ duration: 0.12, ease: "easeOut" }}

@@ -56,7 +56,7 @@ const VisitorLocation = () => {
   }, [lastLocation]);
 
   return (
-    <div className="bg-card rounded-2xl flex items-center justify-center gap-4 px-5 py-3 card-shadow transition-all hover:scale-[1.02]">
+    <div className="bg-card rounded-2xl flex items-center justify-center gap-4 px-5 py-3 card-glass transition-all hover:scale-[1.02]">
       <MapPinned className="hidden lg:block w-7 h-7 text-muted-foreground" />
 
       <div className="flex flex-col text-xs lg:text-sm font-mono tracking-wide select-none">

@@ -30,7 +30,7 @@ const CraftsTile = () => {
       ref={ref}
       className={cn(
         "col-span-2 order-5",
-        "relative flex flex-col p-5 w-full bg-card rounded-2xl card-shadow overflow-hidden cursor-pointer"
+        "relative flex flex-col p-5 w-full bg-card rounded-2xl card-glass overflow-hidden cursor-pointer"
       )}
       whileHover={isTouch ? undefined : "hover"}
       animate={isTouch ? controls : undefined}
