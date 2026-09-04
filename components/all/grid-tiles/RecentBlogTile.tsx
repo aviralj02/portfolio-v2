@@ -18,7 +18,7 @@ const RecentBlogTile = ({ recentBlog, socials }: Props) => {
     <div
       className={cn(
         "row-span-2 lg:order-1 order-2",
-        "flex flex-col gap-4 lg:gap-7"
+        "flex flex-col gap-3 lg:gap-4"
       )}
     >
       <motion.a
