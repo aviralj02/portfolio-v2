@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { Link } from "next-view-transitions";
 
 import { motion } from "motion/react";
 

@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { notFound } from "next/navigation";
-
-import { PORTFOLIO_URL } from "@/lib/constants";
+import { Link } from "next-view-transitions";
 
 import { ArrowLeft } from "lucide-react";
 import fs from "node:fs/promises";
@@ -10,6 +8,7 @@ import path from "node:path";
 import { codeToHtml } from "shiki";
 
 import PageWrapper from "@/components/PageWrapper";
+import { PORTFOLIO_URL } from "@/lib/constants";
 
 import { crafts, getCraft } from "../_registry";
 

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { ViewTransitions } from "next-view-transitions";
 
 import { Analytics } from "@vercel/analytics/react";
 
@@ -51,32 +52,36 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <head>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
-      </head>
-      <body
-        className={cn(
-          inter.className,
-          "bg-background text-primary scrollbar antialiased overflow-x-hidden h-screen grid grid-rows-[auto_1fr]",
-        )}
-      >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="dark"
-          enableSystem={false}
-          disableTransitionOnChange
+    <ViewTransitions>
+      <html lang="en" suppressHydrationWarning>
+        <head>
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          />
+        </head>
+        <body
+          className={cn(
+            inter.className,
+            "bg-background text-primary scrollbar antialiased overflow-x-hidden h-screen grid grid-rows-[auto_1fr]",
+          )}
         >
-          <Navbar />
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="dark"
+            enableSystem={false}
+            disableTransitionOnChange
+          >
+            <Navbar />
 
-          {children}
-        </ThemeProvider>
+            {/* Persists across navigation, so its entrance runs on the first
+              paint only — route changes are the view transition's job now. */}
+            <div className="page-enter">{children}</div>
+          </ThemeProvider>
 
-        <Analytics />
-      </body>
-    </html>
+          <Analytics />
+        </body>
+      </html>
+    </ViewTransitions>
   );
 }

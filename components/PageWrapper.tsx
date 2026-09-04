@@ -1,7 +1,4 @@
-"use client";
-
 import React, { FC, ReactElement, ReactNode } from "react";
-import { usePathname } from "next/navigation";
 
 import { cn } from "@/lib/utils";
 
@@ -25,13 +22,10 @@ const PageWrapper: FC<Props> = ({
   children,
   className,
 }: Props): ReactElement => {
-  const pathname = usePathname();
-
   return (
     <div
-      key={pathname}
       className={cn(
-        "page-enter mx-auto w-full min-w-0 max-w-6xl px-6 md:px-20",
+        "mx-auto w-full min-w-0 max-w-6xl px-6 md:px-20",
         "pt-26.5 pb-24 sm:pt-30.5 sm:pb-32",
         className,
       )}

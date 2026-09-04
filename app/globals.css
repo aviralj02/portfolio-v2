@@ -378,17 +378,38 @@ html.dark .shiki span {
 }
 
 /* VIEW TRANSITIONS */
+
 ::view-transition-old(root) {
-  animation: none;
+  animation: 180ms cubic-bezier(0.4, 0, 1, 1) both vt-out;
 }
 
 ::view-transition-new(root) {
-  animation: circle-in 720ms cubic-bezier(0.22, 1, 0.36, 1);
-  z-index: 2;
+  animation: 260ms cubic-bezier(0.22, 1, 0.36, 1) both vt-in;
 }
 
-::view-transition-old(root) {
+@keyframes vt-out {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes vt-in {
+  from {
+    opacity: 0;
+  }
+}
+
+/* The theme wipe, scoped to a class the toggle sets for the length of its own
+   transition. Without the scope every navigation would inherit the circle and
+   play it from wherever the theme was last toggled. */
+html.theme-transition::view-transition-old(root) {
+  animation: none;
   z-index: 1;
+}
+
+html.theme-transition::view-transition-new(root) {
+  animation: circle-in 720ms cubic-bezier(0.22, 1, 0.36, 1);
+  z-index: 2;
 }
 
 @keyframes circle-in {
@@ -405,7 +426,9 @@ html.dark .shiki span {
 
 @media (prefers-reduced-motion: reduce) {
   ::view-transition-old(root),
-  ::view-transition-new(root) {
+  ::view-transition-new(root),
+  html.theme-transition::view-transition-old(root),
+  html.theme-transition::view-transition-new(root) {
     animation: none;
   }
 }
