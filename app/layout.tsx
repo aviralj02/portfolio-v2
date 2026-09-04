@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 
 import { Analytics } from "@vercel/analytics/react";
 
-import Header from "@/components/Header";
+import Navbar from "@/components/Navbar";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { PORTFOLIO_DESC, PORTFOLIO_URL } from "@/lib/constants";
 import { portfolioMetadata } from "@/lib/metadata";
@@ -70,7 +70,7 @@ export default function RootLayout({
           enableSystem={false}
           disableTransitionOnChange
         >
-          <Header />
+          <Navbar />
 
           {children}
         </ThemeProvider>

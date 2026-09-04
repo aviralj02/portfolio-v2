@@ -8,6 +8,8 @@ import { motion } from "motion/react";
 
 import { cn } from "@/lib/utils";
 
+import Weather from "./Weather";
+
 type NavLink = {
   label: string;
   route: string;
@@ -38,9 +40,10 @@ const Navbar = () => {
         <motion.nav
           layout
           layoutRoot
-          className="rounded-full p-px nav-glass-body"
+          transition={{ layout: { type: "spring", stiffness: 380, damping: 34 } }}
+          className="relative flex items-center rounded-full p-px nav-glass-body"
         >
-          <ul className="flex gap-0.5 list-none">
+          <ul className="relative z-10 flex gap-0.5 list-none">
             {baseNavLinks.map((link: NavLink) => {
               const active = isRouteActive(pathname, link.route);
               const nested =
@@ -107,6 +110,9 @@ const Navbar = () => {
               );
             })}
           </ul>
+
+          <Weather />
+
         </motion.nav>
       </div>
     </motion.div>
