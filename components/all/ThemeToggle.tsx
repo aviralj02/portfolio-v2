@@ -1,43 +1,77 @@
 "use client";
 
+import { useState } from "react";
 import { useTheme } from "next-themes";
 
 import { Moon, Sun } from "lucide-react";
-import { motion } from "motion/react";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 
-import { cn, toggleThemeWithTransition } from "@/lib/utils";
+import { toggleThemeWithTransition } from "@/lib/utils";
 
-const ThemeToggle = () => {
-  const { setTheme, theme } = useTheme();
+const ThemeToggle = (): React.JSX.Element => {
+  const { setTheme, resolvedTheme } = useTheme();
+  const prefersReduced = useReducedMotion();
+
+  const [initial] = useState<"light" | "dark">(() =>
+    typeof document !== "undefined" &&
+    document.documentElement.classList.contains("dark")
+      ? "dark"
+      : "light",
+  );
+
+  const dark =
+    (resolvedTheme === "light" || resolvedTheme === "dark"
+      ? resolvedTheme
+      : initial) === "dark";
 
   return (
-    <div
+    <button
+      type="button"
+      aria-label="Toggle theme"
+      aria-pressed={dark}
       onClick={toggleThemeWithTransition(() =>
-        setTheme(theme === "light" ? "dark" : "light")
+        setTheme(dark ? "light" : "dark"),
       )}
-      className={cn(
-        "flex items-center sm:h-12 sm:w-24 h-10 w-20 rounded-full bg-secondary p-[5px] shadow-inner hover:cursor-pointer",
-        theme === "dark" && "justify-end"
-      )}
+      className="key-well group cursor-pointer rounded-full p-2"
     >
-      <motion.div
-        className="flex sm:h-10 sm:w-10 h-8 w-8 items-center justify-center rounded-full bg-primary-foreground"
-        layout
-        transition={{
-          type: "spring",
-          stiffness: 500,
-          damping: 30,
-        }}
+      <motion.span
+        className="key-face relative flex h-10 w-[124px] items-center justify-center overflow-hidden rounded-full"
+        whileTap={prefersReduced ? {} : { scale: 0.920 }}
+        transition={{ type: "spring", stiffness: 700, damping: 30 }}
       >
-        <motion.div>
-          {theme === "dark" ? (
-            <Moon className="sm:h-6 sm:w-6 h-4 w-4 text-primary" />
-          ) : (
-            <Sun className="sm:h-6 sm:w-6 h-4 w-4 text-primary" />
-          )}
-        </motion.div>
-      </motion.div>
-    </div>
+        <span aria-hidden className="key-gloss absolute inset-0" />
+
+        <AnimatePresence mode="wait" initial={false}>
+          <motion.span
+            key={dark ? "moon" : "sun"}
+            aria-hidden
+            className="key-icon relative flex transition-[color,filter] duration-300"
+            initial={
+              prefersReduced
+                ? { opacity: 0 }
+                : { opacity: 0, rotate: -70, scale: 0.6 }
+            }
+            animate={{ opacity: 1, rotate: 0, scale: 1 }}
+            exit={
+              prefersReduced
+                ? { opacity: 0 }
+                : { opacity: 0, rotate: 70, scale: 0.6 }
+            }
+            transition={
+              prefersReduced
+                ? { duration: 0.12 }
+                : { type: "spring", stiffness: 520, damping: 26 }
+            }
+          >
+            {dark ? (
+              <Moon fill="currentColor" strokeWidth={0} className="size-6" />
+            ) : (
+              <Sun fill="currentColor" strokeWidth={2.25} className="size-6" />
+            )}
+          </motion.span>
+        </AnimatePresence>
+      </motion.span>
+    </button>
   );
 };
 

@@ -2,78 +2,67 @@
 
 import { useEffect, useState } from "react";
 
-import { MapPinned } from "lucide-react";
+import { MapPin } from "lucide-react";
 
 import getLastVisitor from "@/lib/utils/get-last-visitor";
 import updateLastVisitor from "@/lib/utils/update-last-visitor";
 
 const VisitorLocation = () => {
-  const [lastLocation, setLastLocation] = useState<LocationData>();
-
-  const fetchLastLocation = async () => {
-    const lastVisit = await getLastVisitor();
-    setLastLocation(lastVisit?.[0]);
-  };
-
-  const fetchAndUpdateLocation = async () => {
-    const res = await fetch(
-      process.env.NEXT_PUBLIC_LOCATION_ENDPOINT as string,
-      {
-        method: "GET",
-      }
-    );
-
-    const data = await res.json();
-    const { city, country } = data;
-
-    if (!city || !country) {
-      return;
-    }
-
-    if (city === lastLocation?.city && country === lastLocation?.country) {
-      return;
-    }
-
-    const isSuccessUpdate = await updateLastVisitor(
-      lastLocation?.id || "",
-      city,
-      country
-    );
-
-    if (!isSuccessUpdate) {
-      console.log("Failed to update visitor location");
-    }
-  };
+  const [previous, setPrevious] = useState<LocationData | null>();
 
   useEffect(() => {
-    fetchLastLocation();
+    let cancelled = false;
+
+    const exchange = async () => {
+      const seen = (await getLastVisitor())?.[0] ?? null;
+      if (cancelled) return;
+      setPrevious(seen);
+
+      const endpoint = process.env.NEXT_PUBLIC_LOCATION_ENDPOINT;
+      if (!endpoint) return;
+
+      try {
+        const response = await fetch(endpoint);
+        if (!response.ok) return;
+
+        const { city, country } = await response.json();
+        if (!city || !country) return;
+
+        /* Nothing to write if the last visitor was from here too. */
+        if (city === seen?.city && country === seen?.country) return;
+
+        await updateLastVisitor(seen?.id ?? "", city, country);
+      } catch {
+        /* Blocked or offline: the tile still shows who came before. */
+      }
+    };
+
+    exchange();
+
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
-  useEffect(() => {
-    if (lastLocation) {
-      fetchAndUpdateLocation();
-    }
-  }, [lastLocation]);
-
   return (
-    <div className="bg-card rounded-2xl flex items-center justify-center gap-4 px-5 py-3 card-shadow transition-all hover:scale-[1.02]">
-      <MapPinned className="hidden lg:block w-7 h-7 text-muted-foreground" />
+    <div className="card-glass flex flex-col justify-center gap-1 rounded-2xl bg-card px-5 py-4">
+      <span className="flex items-center gap-1.5 text-xs text-muted-foreground">
+        <MapPin aria-hidden className="size-3.5 shrink-0" />
+        Last visitor
+      </span>
 
-      <div className="flex flex-col text-xs lg:text-sm font-mono tracking-wide select-none">
-        <span className="text-muted-foreground">
-          Last Visited
-          <span className="hidden sm:inline">&nbsp;from</span>
-          <span className="inline sm:hidden">:</span>
+      {previous === undefined ? (
+        <span
+          aria-hidden
+          className="mt-0.5 h-4 w-32 animate-pulse rounded-sm bg-muted"
+        />
+      ) : (
+        <span className="truncate text-[15px] font-medium text-primary">
+          {previous
+            ? `${previous.city}, ${previous.country}`
+            : "You're the first"}
         </span>
-
-        {lastLocation ? (
-          <span className="font-semibold">
-            {lastLocation.city}, {lastLocation.country}
-          </span>
-        ) : (
-          <span className="animate-pulse mt-1 text-primary">Detecting...</span>
-        )}
-      </div>
+      )}
     </div>
   );
 };

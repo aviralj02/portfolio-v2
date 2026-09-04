@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { ViewTransitions } from "next-view-transitions";
 
 import { Analytics } from "@vercel/analytics/react";
 
-import Footer from "@/components/Footer";
-import Header from "@/components/Header";
+import Navbar from "@/components/Navbar";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { PORTFOLIO_DESC, PORTFOLIO_URL } from "@/lib/constants";
 import { portfolioMetadata } from "@/lib/metadata";
@@ -52,34 +52,36 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <head>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
-      </head>
-      <body
-        className={cn(
-          inter.className,
-          "bg-background text-primary scrollbar antialiased overflow-x-hidden h-screen grid grid-rows-[auto_1fr_auto]",
-        )}
-      >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="dark"
-          enableSystem={false}
-          disableTransitionOnChange
+    <ViewTransitions>
+      <html lang="en" suppressHydrationWarning>
+        <head>
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          />
+        </head>
+        <body
+          className={cn(
+            inter.className,
+            "bg-background text-primary scrollbar antialiased overflow-x-hidden h-screen grid grid-rows-[auto_1fr]",
+          )}
         >
-          <Header />
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="dark"
+            enableSystem={false}
+            disableTransitionOnChange
+          >
+            <Navbar />
 
-          {children}
+            {/* Persists across navigation, so its entrance runs on the first
+              paint only — route changes are the view transition's job now. */}
+            <div className="page-enter">{children}</div>
+          </ThemeProvider>
 
-          <Footer />
-        </ThemeProvider>
-
-        <Analytics />
-      </body>
-    </html>
+          <Analytics />
+        </body>
+      </html>
+    </ViewTransitions>
   );
 }

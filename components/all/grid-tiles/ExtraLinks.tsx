@@ -23,7 +23,7 @@ const ExtraLinks = ({ socials }: Props) => {
   };
 
   return (
-    <div className="grid grid-cols-2 gap-4 lg:gap-7">
+    <div className="grid grid-cols-2 gap-3 lg:gap-4">
       {Object.keys(iconMap).map((icon: string) => {
         const socialData = socials?.find((social) => social.name === icon);
 

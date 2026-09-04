@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 
 import { ArrowUpRight, Sparkles } from "lucide-react";
 import { motion, useAnimation, useInView } from "motion/react";
@@ -30,7 +30,7 @@ const CraftsTile = () => {
       ref={ref}
       className={cn(
         "col-span-2 order-5",
-        "relative flex flex-col p-5 w-full bg-card rounded-2xl card-shadow overflow-hidden cursor-pointer"
+        "relative flex flex-col p-5 w-full bg-card rounded-2xl card-glass overflow-hidden cursor-pointer"
       )}
       whileHover={isTouch ? undefined : "hover"}
       animate={isTouch ? controls : undefined}

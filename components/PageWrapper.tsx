@@ -1,8 +1,4 @@
-"use client";
-
 import React, { FC, ReactElement, ReactNode } from "react";
-
-import { motion } from "motion/react";
 
 import { cn } from "@/lib/utils";
 
@@ -11,19 +7,31 @@ type Props = {
   className?: string;
 };
 
+/**
+ * The shell — header, nav, footer — never unmounts, so a route change should
+ * read as the middle of the page settling rather than as arriving somewhere
+ * new. The entrance is therefore a short dissolve with no travel: movement is
+ * what announces "different page", and announcing it is the thing we don't
+ * want.
+ *
+ * Keying on the pathname is what replays it. Both routes render this same
+ * component in the same slot, so React would otherwise reuse the DOM node and
+ * the animation would only ever run once, on the first load.
+ */
 const PageWrapper: FC<Props> = ({
   children,
   className,
 }: Props): ReactElement => {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 10 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: 0.15 }}
-      className={cn("mx-auto w-full max-w-7xl px-6 md:px-20", className)}
+    <div
+      className={cn(
+        "mx-auto w-full min-w-0 max-w-6xl px-6 md:px-20",
+        "pt-26.5 pb-24 sm:pt-30.5 sm:pb-32",
+        className,
+      )}
     >
       {children}
-    </motion.div>
+    </div>
   );
 };
 

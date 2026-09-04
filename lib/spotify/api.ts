@@ -1,9 +1,11 @@
+import { unstable_cache } from "next/cache";
+
 import { getNowPlaying } from "./spotify";
 import { Artist, SpotifyData } from "./spotify-types";
 
 import "server-only";
 
-export const fetchSpotifyData = async (): Promise<SpotifyData> => {
+const readNowPlaying = async (): Promise<SpotifyData> => {
   try {
     const { res: spotifyResponse, data } = await getNowPlaying();
 
@@ -32,3 +34,9 @@ export const fetchSpotifyData = async (): Promise<SpotifyData> => {
     return { isPlaying: false };
   }
 };
+
+export const fetchSpotifyData = unstable_cache(
+  readNowPlaying,
+  ["spotify-now-playing"],
+  { revalidate: 30, tags: ["spotify"] },
+);

@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { notFound } from "next/navigation";
-
-import { PORTFOLIO_URL } from "@/lib/constants";
+import { Link } from "next-view-transitions";
 
 import { ArrowLeft } from "lucide-react";
 import fs from "node:fs/promises";
@@ -10,6 +8,7 @@ import path from "node:path";
 import { codeToHtml } from "shiki";
 
 import PageWrapper from "@/components/PageWrapper";
+import { PORTFOLIO_URL } from "@/lib/constants";
 
 import { crafts, getCraft } from "../_registry";
 
@@ -66,7 +65,7 @@ export default async function CraftDetail({
   });
 
   return (
-    <PageWrapper className="flex flex-col gap-6 sm:my-6 my-12">
+    <PageWrapper className="flex flex-col gap-6">
       <div className="flex flex-col items-start text-primary gap-2">
         <Link
           href="/craft"

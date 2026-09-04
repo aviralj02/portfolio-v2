@@ -11,7 +11,7 @@ const SpotifyTile = async () => {
     <div
       className={cn(
         "aspect-square lg:order-5 order-7",
-        "flex flex-col bg-card rounded-2xl box-border w-full card-shadow"
+        "flex flex-col bg-card rounded-2xl box-border w-full card-glass"
       )}
     >
       <div className="relative rounded-t-2xl h-3/8 w-full">

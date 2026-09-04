@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+/* Themes are driven by the CSS variables below; this only makes the class
+   Tailwind's `dark:` variant looks for match the one next-themes sets. */
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme inline {
   /* Colors - reference :root CSS variables */
   --color-border: hsl(var(--border));
@@ -39,7 +43,6 @@
   --animate-quiet: quiet 1s infinite;
   --animate-decent: decent 1s infinite;
   --animate-loud: loud 1s infinite;
-  --animate-skeleton-shimmer: skeleton-shimmer 1.5s ease-in-out infinite;
 
   @keyframes quiet {
     25% {
@@ -94,7 +97,7 @@
     --secondary-text: 220 50% 30%;
     --muted: 240 4.8% 95.9%;
     --muted-foreground: 240 3.8% 46.1%;
-    --accent: 0 0 93%;
+    --accent: 0 0% 93%;
     --accent-foreground: 240 5.9% 10%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
@@ -130,6 +133,31 @@
 
     --nav-pill-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9),
       0 1px 4px rgba(0, 0, 0, 0.1);
+
+    /* Card glass. The navbar's language — a 135deg sheen, a specular ring and
+       an ambient shadow — carried onto resting surfaces. Its backdrop blur is
+       deliberately left behind: the navbar floats over scrolling content,
+       whereas a card sits on a flat ground, and blurring a flat colour returns
+       the same colour at the cost of a compositing layer per tile. */
+    --card-glass-gradient: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.55) 0%,
+      rgba(255, 255, 255, 0.12) 100%
+    );
+    --card-glass-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.85),
+      0 0 0 1px rgba(0, 0, 0, 0.055), 0 8px 26px rgba(0, 0, 0, 0.05);
+    --card-glass-shadow-lift: inset 0 1px 0 rgba(255, 255, 255, 0.95),
+      0 0 0 1px rgba(0, 0, 0, 0.09), 0 14px 38px rgba(0, 0, 0, 0.09);
+
+    /* Theme key. Unlit: the moon is engraved into a brushed silver face. */
+    --key-well: #e4e4e8;
+    --key-well-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.16),
+      inset 0 -1px 0 rgba(255, 255, 255, 0.95);
+    --key-face: linear-gradient(180deg, #ffffff 0%, #dcdce1 100%);
+    --key-face-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.95),
+      0 6px 14px rgba(0, 0, 0, 0.13), 0 1px 2px rgba(0, 0, 0, 0.1);
+    --key-icon: #9b9ba3;
+    --key-icon-glow: drop-shadow(0 1px 0 rgba(255, 255, 255, 0.95));
   }
 
   .dark {
@@ -181,6 +209,27 @@
     );
     --nav-pill-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.28),
       0 1px 3px rgba(0, 0, 0, 0.7);
+
+    --card-glass-gradient: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.055) 0%,
+      rgba(255, 255, 255, 0.015) 100%
+    );
+    --card-glass-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.07),
+      0 0 0 1px rgba(255, 255, 255, 0.08), 0 10px 30px rgba(0, 0, 0, 0.55);
+    --card-glass-shadow-lift: inset 0 1px 0 rgba(255, 255, 255, 0.12),
+      0 0 0 1px rgba(255, 255, 255, 0.14), 0 16px 44px rgba(0, 0, 0, 0.7);
+
+    /* Theme key. Lit: the same moon, now emitting. */
+    --key-well: #0a0a0c;
+    --key-well-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.95),
+      inset 0 -1px 0 rgba(255, 255, 255, 0.05);
+    --key-face: linear-gradient(180deg, #2b2b31 0%, #141417 100%);
+    --key-face-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08),
+      0 8px 18px rgba(0, 0, 0, 0.7);
+    --key-icon: #e8f5ff;
+    --key-icon-glow: drop-shadow(0 0 5px rgba(186, 230, 253, 0.9))
+      drop-shadow(0 0 14px rgba(125, 211, 252, 0.45));
   }
 }
 
@@ -206,9 +255,17 @@
   -webkit-mask-composite: source-in;
 }
 
-@utility card-shadow {
-  box-shadow: 0px 4px 18px #0000000a, 0px 2.025px 7.84688px rgba(0, 0, 0, 0.027),
-    0px 0.8px 2.925px #00000005, 0px 0.175px 1.04062px rgba(0, 0, 0, 0.013);
+/* Sheen, specular ring, inset top highlight, ambient shadow. `background-image`
+   rather than `background`, so it layers over whatever `bg-*` the element
+   already carries instead of replacing it, and the ring rides in the shadow so
+   it sits outside the box and never insets a tile's image. */
+@utility card-glass {
+  background-image: var(--card-glass-gradient);
+  box-shadow: var(--card-glass-shadow);
+}
+
+@utility card-glass-lift {
+  box-shadow: var(--card-glass-shadow-lift);
 }
 
 .nav-glass-ring {
@@ -225,6 +282,35 @@
 .nav-glass-pill {
   background: var(--nav-pill-gradient);
   box-shadow: var(--nav-pill-shadow);
+}
+
+/* The theme control is a lit key, not a slider: state is carried by whether
+   the moon is emitting, so there is nothing to slide and nothing to read. The
+   surfaces are built from theme variables rather than utilities because each
+   one is a stack of gradients and shadows that has to invert wholesale. */
+.key-well {
+  background: var(--key-well);
+  box-shadow: var(--key-well-shadow);
+}
+
+.key-face {
+  background: var(--key-face);
+  box-shadow: var(--key-face-shadow);
+}
+
+.key-icon {
+  color: var(--key-icon);
+  filter: var(--key-icon-glow);
+}
+
+/* The hard diagonal edge of a gloss falling across the top corner. */
+.key-gloss {
+  background: linear-gradient(
+    118deg,
+    transparent 0 52%,
+    rgba(255, 255, 255, 0.1) 52%,
+    rgba(255, 255, 255, 0.02) 100%
+  );
 }
 
 html.dark .shiki {
@@ -265,31 +351,65 @@ html.dark .shiki span {
 }
 
 .card-template {
-  @apply bg-card hover:bg-accent card-shadow;
+  @apply bg-card card-glass transition-shadow duration-200 hover:card-glass-lift;
 }
 
-@keyframes skeleton-shimmer {
-  0%,
-  100% {
-    opacity: 0.6;
+/* Page entrance. Opacity only, and short: the persistent shell already tells
+   you where you are, so the content should look like it settled rather than
+   like it slid in from somewhere. Replayed per route by the key in
+   PageWrapper. */
+@keyframes page-enter {
+  from {
+    opacity: 0;
   }
-  50% {
+  to {
     opacity: 1;
   }
 }
 
+.page-enter {
+  animation: page-enter 260ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-enter {
+    animation: none;
+  }
+}
+
 /* VIEW TRANSITIONS */
+
 ::view-transition-old(root) {
-  animation: none;
+  animation: 180ms cubic-bezier(0.4, 0, 1, 1) both vt-out;
 }
 
 ::view-transition-new(root) {
-  animation: circle-in 720ms cubic-bezier(0.22, 1, 0.36, 1);
-  z-index: 2;
+  animation: 260ms cubic-bezier(0.22, 1, 0.36, 1) both vt-in;
 }
 
-::view-transition-old(root) {
+@keyframes vt-out {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes vt-in {
+  from {
+    opacity: 0;
+  }
+}
+
+/* The theme wipe, scoped to a class the toggle sets for the length of its own
+   transition. Without the scope every navigation would inherit the circle and
+   play it from wherever the theme was last toggled. */
+html.theme-transition::view-transition-old(root) {
+  animation: none;
   z-index: 1;
+}
+
+html.theme-transition::view-transition-new(root) {
+  animation: circle-in 720ms cubic-bezier(0.22, 1, 0.36, 1);
+  z-index: 2;
 }
 
 @keyframes circle-in {
@@ -306,7 +426,39 @@ html.dark .shiki span {
 
 @media (prefers-reduced-motion: reduce) {
   ::view-transition-old(root),
-  ::view-transition-new(root) {
+  ::view-transition-new(root),
+  html.theme-transition::view-transition-old(root),
+  html.theme-transition::view-transition-new(root) {
     animation: none;
+  }
+}
+
+/* Page titles are written once on load by a pen following their own stroke
+   centres. CSS-only, so it still runs without JS and never hides the title. */
+.pen-write {
+  /* The trailing gap matters: with a bare `dasharray: 1` the dash ends exactly
+     at position 0, and a round linecap then paints a half-dot at every
+     stroke's start — visible debris sitting ahead of the pen. The gap lets the
+     dash rest fully off the path instead. */
+  stroke-dasharray: 1 2;
+  /* Duration and delay come from each stroke's share of the pen length. */
+  animation-name: pen-write;
+  animation-timing-function: linear;
+  animation-fill-mode: both;
+}
+
+@keyframes pen-write {
+  from {
+    stroke-dashoffset: 1.05;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pen-write {
+    animation: none;
+    stroke-dashoffset: 0;
   }
 }

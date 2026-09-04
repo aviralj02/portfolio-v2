@@ -46,7 +46,13 @@ export const toggleThemeWithTransition =
     root.style.setProperty("--vt-y", `${y}px`);
     root.style.setProperty("--vt-r", `${endRadius}px`);
 
-    document.startViewTransition(() => {
+    root.classList.add("theme-transition");
+
+    const transition = document.startViewTransition(() => {
       callback();
+    });
+
+    transition.finished.finally(() => {
+      root.classList.remove("theme-transition");
     });
   };
