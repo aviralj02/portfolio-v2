@@ -39,7 +39,10 @@ const PageWrapper: FC<Props> = ({
          home page had none at all. The generous pb replaces the footer as the
          thing that stops the page ending on its last line. */
       className={cn(
-        "page-enter mx-auto w-full max-w-6xl px-6 md:px-20",
+        /* min-w-0: this is a grid item, so `min-width: auto` resolves to its
+           min-content — a horizontally scrolling child would otherwise
+           push the whole page wider than the screen. */
+        "page-enter mx-auto w-full min-w-0 max-w-6xl px-6 md:px-20",
         "pt-10 pb-24 sm:pt-14 sm:pb-32",
         className,
       )}

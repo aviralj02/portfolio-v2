@@ -5,7 +5,6 @@ import { ArrowUpRight } from "lucide-react";
 
 import LocalTime from "./LocalTime";
 import Navbar from "./Navbar";
-import ThemeSwitch from "./ThemeSwitch";
 
 const Header = () => {
   return (
@@ -37,21 +36,14 @@ const Header = () => {
 
       <Navbar />
 
-      {/* Sits at the right edge on its own on mobile, where the rest of this
-          row is hidden — the footer's toggle was `hidden sm:grid`, so small
-          screens previously had no way to switch theme off the home page. */}
-      <div className="flex items-center gap-5 ml-auto">
-        <ThemeSwitch />
-
-        <Link
-          href={"/#contact"}
-          className="md:flex hidden gap-1 items-center font-semibold text-sm tracking-tight text-foreground/90 hover:text-foreground group transition-colors"
-          aria-label="contact-button"
-        >
-          <span>Contact</span>{" "}
-          <ArrowUpRight className="w-4 stroke-[2.5] transform group-hover:rotate-45 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform ease-out duration-200" />
-        </Link>
-      </div>
+      <Link
+        href={"/#contact"}
+        className="md:flex hidden gap-1 items-center font-semibold text-sm tracking-tight text-foreground/90 hover:text-foreground group transition-colors"
+        aria-label="contact-button"
+      >
+        <span>Contact</span>{" "}
+        <ArrowUpRight className="w-4 stroke-[2.5] transform group-hover:rotate-45 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform ease-out duration-200" />
+      </Link>
     </div>
   );
 };

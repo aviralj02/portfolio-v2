@@ -5,7 +5,7 @@ import ReactMarkdown from "react-markdown";
 import Image from "next/image";
 import Link from "next/link";
 
-import { ChevronRight, ExternalLink } from "lucide-react";
+import { ExternalLink } from "lucide-react";
 import { motion, useReducedMotion } from "motion/react";
 import remarkGfm from "remark-gfm";
 
@@ -44,47 +44,49 @@ const ProjectCard = ({ project }: Props) => {
       <motion.button
         onClick={() => setIsOpen(true)}
         className={cn(
-          "w-full flex items-center gap-3 p-3 rounded-2xl text-left",
-          "bg-card border border-border",
-          "cursor-pointer group"
+          "group flex h-full w-full cursor-pointer items-start gap-3 rounded-xl p-4 text-left",
+          "border border-border bg-card/50",
+          "transition-colors duration-200 hover:border-primary/20 hover:bg-card",
         )}
-        whileHover={prefersReduced ? {} : { x: 4 }}
-        whileTap={prefersReduced ? {} : { scale: 0.985 }}
-        transition={{ duration: 0.15, ease: "easeOut" }}
+        whileTap={prefersReduced ? {} : { scale: 0.99 }}
+        transition={{ duration: 0.12, ease: "easeOut" }}
       >
-        <div
-          className="w-1 self-stretch rounded-full shrink-0 opacity-35 mask-[linear-gradient(to_bottom,transparent,black_30%,black_70%,transparent)]"
-          style={{ backgroundColor }}
-        />
-
         {!isOpen ? (
           <motion.div
             layoutId={iconId}
-            className="w-10 h-10 rounded-full overflow-hidden border-2 border-border shrink-0"
+            className="size-10 shrink-0 overflow-hidden rounded-[11px]"
+            style={{ boxShadow: `0 0 0 1.5px ${backgroundColor}` }}
             transition={{ type: "spring", stiffness: 300, damping: 40 }}
           >
             {icon?.url && (
               <Image
                 src={icon.url}
-                alt={icon.fileName ?? title}
-                width={64}
-                height={64}
-                className="object-cover w-full h-full"
-                sizes="64px"
+                alt=""
+                width={80}
+                height={80}
+                sizes="80px"
                 draggable={false}
+                className={cn(
+                  "size-full object-cover",
+                  "transition-transform duration-300 ease-out group-hover:scale-[1.06]",
+                  "motion-reduce:transition-none motion-reduce:group-hover:scale-100",
+                )}
               />
             )}
           </motion.div>
         ) : (
-          <div className="w-10 h-10 shrink-0" aria-hidden />
+          <div className="size-10 shrink-0" aria-hidden />
         )}
 
-        <div className="flex-1 min-w-0 flex flex-col gap-0.5">
-          <h2 className="text-sm font-semibold text-primary">{title}</h2>
-          <p className="text-xs text-muted-foreground truncate">{intro}</p>
-        </div>
+        <div className="flex min-w-0 flex-col gap-0.5">
+          <h3 className="truncate text-sm font-medium tracking-[-0.01em] text-primary">
+            {title}
+          </h3>
 
-        <ChevronRight className="w-4 h-4 text-muted-foreground shrink-0 transition-transform duration-200 group-hover:translate-x-0.5" />
+          <p className="line-clamp-2 text-pretty text-[12.5px] leading-[1.45] text-muted-foreground">
+            {intro}
+          </p>
+        </div>
       </motion.button>
 
       <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
