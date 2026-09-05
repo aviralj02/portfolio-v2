@@ -1,5 +1,14 @@
 export const crafts: Array<Craft> = [
   {
+    slug: "liquid-input",
+    title: "Liquid Input",
+    description:
+      "An input whose surface melts into whatever sits beside it - the gap between them decides if they read as one shape or two.",
+    sourcePath: "components/crafts/liquid-input/index.tsx",
+    otherSourcePaths: ["components/crafts/liquid-input/liquid.tsx"],
+    writeupPath: "components/crafts/liquid-input/writeup.md"
+  },
+  {
     slug: "draggable-list",
     title: "Draggable List",
     description:
