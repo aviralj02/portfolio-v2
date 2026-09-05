@@ -63,7 +63,7 @@ export default function RootLayout({
         <body
           className={cn(
             inter.className,
-            "bg-background text-primary scrollbar antialiased overflow-x-hidden h-screen grid grid-rows-[auto_1fr]",
+            "bg-background text-primary scrollbar antialiased overflow-x-hidden",
           )}
         >
           <ThemeProvider
