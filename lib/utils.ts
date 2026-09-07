@@ -22,37 +22,24 @@ export function formatDate(date: Date, monthFormat: MonthFormat): string {
   });
 }
 
-export const toggleThemeWithTransition =
-  (callback: () => void) =>
-  (event?: { clientX: number; clientY: number }) => {
-    const reduced =
-      typeof window !== "undefined" &&
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+export const toggleThemeWithTransition = (callback: () => void) => () => {
+  const reduced =
+    typeof window !== "undefined" &&
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    if (!document.startViewTransition || reduced) {
-      callback();
-      return;
-    }
+  if (!document.startViewTransition || reduced) {
+    callback();
+    return;
+  }
 
-    const x = event?.clientX ?? window.innerWidth / 2;
-    const y = event?.clientY ?? window.innerHeight / 2;
-    const endRadius = Math.hypot(
-      Math.max(x, window.innerWidth - x),
-      Math.max(y, window.innerHeight - y)
-    );
+  const root = document.documentElement;
+  root.classList.add("theme-transition");
 
-    const root = document.documentElement;
-    root.style.setProperty("--vt-x", `${x}px`);
-    root.style.setProperty("--vt-y", `${y}px`);
-    root.style.setProperty("--vt-r", `${endRadius}px`);
+  const transition = document.startViewTransition(() => {
+    callback();
+  });
 
-    root.classList.add("theme-transition");
-
-    const transition = document.startViewTransition(() => {
-      callback();
-    });
-
-    transition.finished.finally(() => {
-      root.classList.remove("theme-transition");
-    });
-  };
+  transition.finished.finally(() => {
+    root.classList.remove("theme-transition");
+  });
+};
