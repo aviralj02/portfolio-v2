@@ -82,7 +82,7 @@ export default function CraftViewer({
             transition={{ duration: 0.1, ease: "linear" }}
             className="flex flex-col gap-8 w-full"
           >
-            <div className="rounded-2xl border border-border bg-card p-4 sm:p-6 min-h-80 sm:min-h-100 flex flex-col items-center justify-center gap-8 overflow-hidden">
+            <div className="rounded-2xl border border-border bg-card p-4 sm:p-6 min-h-80 sm:min-h-100 flex flex-col items-center justify-end gap-8 overflow-hidden">
               {Component ? <Component key={resetKey} /> : null}
             </div>
 

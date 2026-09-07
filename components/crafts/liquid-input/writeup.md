@@ -4,4 +4,4 @@ The trick is that nothing here has a background. The input and the connector ban
 
 Both layers are driven by one motion value - the banner's distance from the input - so they can never drift apart. Revealing the banner animates that distance from "fully inside the input" up to the gap on a spring, and the content's blur and opacity are derived from how submerged it still is, which is why text dissolves as the banner sinks instead of just fading.
 
-The 1px ring is part of the filter too: dilate the gooed shape by a pixel, flood it with the border colour, and merge it underneath. Same for the shadow - it's a `drop-shadow()` chained after the goo, so it follows the merged outline rather than the two boxes.
+The 1px ring is part of the filter too: dilate the gooed shape by a pixel, flood it with the border colour, and merge it underneath. Same for the shadow - it's an `feDropShadow` at the end of the same filter, so it follows the merged outline rather than the two boxes.

@@ -1,37 +1,20 @@
 "use client";
 
-import { useState } from "react";
-import { useTheme } from "next-themes";
-
 import { Moon, Sun } from "lucide-react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 
-import { toggleThemeWithTransition } from "@/lib/utils";
+import { useThemeSwitch } from "@/hooks";
 
 const ThemeToggle = (): React.JSX.Element => {
-  const { setTheme, resolvedTheme } = useTheme();
+  const { dark, toggle } = useThemeSwitch();
   const prefersReduced = useReducedMotion();
-
-  const [initial] = useState<"light" | "dark">(() =>
-    typeof document !== "undefined" &&
-    document.documentElement.classList.contains("dark")
-      ? "dark"
-      : "light",
-  );
-
-  const dark =
-    (resolvedTheme === "light" || resolvedTheme === "dark"
-      ? resolvedTheme
-      : initial) === "dark";
 
   return (
     <button
       type="button"
       aria-label="Toggle theme"
       aria-pressed={dark}
-      onClick={toggleThemeWithTransition(() =>
-        setTheme(dark ? "light" : "dark"),
-      )}
+      onClick={toggle}
       className="key-well group cursor-pointer rounded-full p-2"
     >
       <motion.span

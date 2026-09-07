@@ -22,7 +22,7 @@ export default function LiquidInput() {
   const canSend = message.trim().length > 0;
 
   return (
-    <div className="flex w-full max-w-lg flex-col gap-8 rounded-[28px] border border-border/60 bg-background px-5 pt-24 pb-5 sm:px-16 sm:pt-28 sm:pb-6">
+    <div className="flex w-full grow max-w-lg flex-col justify-end gap-8 rounded-[28px] border border-border/60 bg-background px-5 pt-24 pb-5 sm:px-16 sm:pt-28 sm:pb-6">
       <Liquid
         gap={gap}
         radius={22}

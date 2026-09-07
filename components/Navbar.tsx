@@ -8,6 +8,7 @@ import { motion } from "motion/react";
 
 import { cn } from "@/lib/utils";
 
+import NavThemeToggle from "./NavThemeToggle";
 import Weather from "./Weather";
 
 type NavLink = {
@@ -112,9 +113,10 @@ const Navbar = () => {
           </ul>
 
           <Weather />
-
         </motion.nav>
       </div>
+
+      <NavThemeToggle />
     </motion.div>
   );
 };
