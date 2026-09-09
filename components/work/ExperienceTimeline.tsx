@@ -1,10 +1,10 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import Image from "next/image";
 
 import { ArrowUpRight } from "lucide-react";
-import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import { motion, useReducedMotion, type Variants } from "motion/react";
 
 import type { Timeline } from "@/lib/experience";
 import { cn } from "@/lib/utils";
@@ -15,13 +15,15 @@ type Props = {
 
 /** Wide enough that even a three-month role is a comfortable target. */
 const PX_PER_MONTH = 68;
-const CARD_WIDTH = 264;
 
-const RAMP = ["#0e7490", "#0d9488", "#14b8a6", "#10b981", "#34d399"];
+/** A bar earns its duration at this width, and the company name at this one. */
+const SHOW_DURATION = 72;
+const SHOW_NAME = 156;
 
 const ExperienceTimeline = ({ timeline }: Props): React.JSX.Element => {
-  const { entries, ticks, marks, months, from, to } = timeline;
+  const { entries, ticks, months, from, to } = timeline;
   const prefersReduced = useReducedMotion();
+  const idBase = useId();
 
   /* The current role is the one worth landing on, and entries arrive newest
      first. */
@@ -32,11 +34,12 @@ const ExperienceTimeline = ({ timeline }: Props): React.JSX.Element => {
   });
 
   const scroller = useRef<HTMLDivElement>(null);
+  const bars = useRef<Array<HTMLButtonElement | null>>([]);
 
   /* On arrival the strip plays itself from the first role to the current one,
      so the span is shown rather than described — the reader sees how far the
      scale runs before it settles on now.
-     
+
      Duration follows the distance so the strip travels at roughly one speed
      whatever the screen width (~0.6ms per pixel), and any wheel, drag or touch hands control
      straight back: an intro that fights the reader is worse than none. */
@@ -91,167 +94,210 @@ const ExperienceTimeline = ({ timeline }: Props): React.JSX.Element => {
 
   const width = Math.round(months * PX_PER_MONTH);
   const entry = entries[active];
-  const colourOf = (index: number) => RAMP[entries.length - 1 - index] ?? RAMP[0];
+  const line: Variants = {
+    hidden: { opacity: 0, y: prefersReduced ? 0 : 6 },
+    shown: { opacity: 1, y: 0, transition: { duration: 0.24, ease: [0.16, 1, 0.3, 1] } },
+  };
+
+  const select = (index: number) => {
+    const next = Math.min(Math.max(index, 0), entries.length - 1);
+
+    setActive(next);
+    bars.current[next]?.focus({ preventScroll: true });
+    bars.current[next]?.scrollIntoView({ block: "nearest", inline: "nearest" });
+  };
+
+  /* Roles run newest first, so the reading order along the axis is the reverse. */
+  const onKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
+    const moves: Record<string, number> = {
+      ArrowRight: active - 1,
+      ArrowLeft: active + 1,
+      Home: entries.length - 1,
+      End: 0,
+    };
+    if (moves[event.key] === undefined) return;
+
+    event.preventDefault();
+    select(moves[event.key]);
+  };
 
   return (
-    <div
-      ref={scroller}
-      className={cn(
-        "no-scrollbar -mx-6 overflow-x-auto px-6 md:-mx-20 md:px-20",
-        "mask-[linear-gradient(to_right,transparent,black_24px,black_calc(100%-24px),transparent)]",
-      )}
-    >
-      <div className="relative" style={{ width }}>
-        <div className="relative h-5">
-          {/* Bookends sit flush to the ends; quarter marks are centred on
-              their own tick. */}
-          <span className="absolute left-0 text-[11px] tabular-nums text-muted-foreground/70">
-            {from}
-          </span>
+    <div className="flex flex-col">
+      <div
+        ref={scroller}
+        className={cn(
+          "no-scrollbar -mx-6 overflow-x-auto px-6 md:-mx-20 md:px-20",
+          "mask-[linear-gradient(to_right,transparent,black_24px,black_calc(100%-24px),transparent)]",
+        )}
+      >
+        <div className="relative" style={{ width }}>
+          <div className="relative h-4">
+            {/* Bookends sit flush to the ends; quarter marks are centred on
+                their own tick. */}
+            <span className="absolute left-0 text-[11px] tabular-nums text-muted-foreground/70">
+              {from}
+            </span>
 
-          {/* A quarter mark landing under a bookend is dropped rather than
-              overprinted — the tail one collided with "Now". */}
-          {ticks
-            .filter((tick) => tick.at > 0.04 && tick.at < 0.94)
-            .map((tick) => (
-              <span
-                key={tick.label + tick.at}
-                className="absolute -translate-x-1/2 text-[11px] tabular-nums text-muted-foreground/70"
-                style={{ left: `${tick.at * 100}%` }}
-              >
-                {tick.label}
-              </span>
-            ))}
-
-          <span className="absolute right-0 text-[11px] tabular-nums text-muted-foreground/70">
-            {to}
-          </span>
-        </div>
-
-        {/* The ruler. Minor mark every month, taller one every quarter. */}
-        <div aria-hidden className="relative mt-2 h-3 border-t border-border">
-          {marks.map((at, index) => (
-            <span
-              key={at}
-              className={cn(
-                "absolute top-0 w-px",
-                index % 3 === 0 ? "h-3 bg-border" : "h-1.5 bg-border/60",
-              )}
-              style={{ left: `${at * 100}%` }}
-            />
-          ))}
-        </div>
-
-        <div className="relative mt-3 h-10">
-          {entries.map((item, index) => {
-            const colour = colourOf(index);
-            const selected = index === active;
-
-            return (
-              <button
-                key={item.company}
-                type="button"
-                onMouseEnter={() => setActive(index)}
-                onFocus={() => setActive(index)}
-                onClick={() => setActive(index)}
-                aria-label={`${item.company} — ${item.role}, ${item.range}`}
-                aria-pressed={selected}
-                className={cn(
-                  "absolute top-0 flex h-10 items-center gap-2 overflow-hidden rounded-full px-3",
-                  "cursor-pointer transition-[background-color,border-color] duration-200",
-                )}
-                style={{
-                  left: `${item.offset * 100}%`,
-                  width: `calc(${item.width * 100}% - 4px)`,
-                  /* A tint plus a solid edge: the tint alone dies on one theme
-                     or the other, and solid fill would leave no colour that
-                     text of either polarity could sit on. */
-                  backgroundColor: `${colour}${selected ? "40" : "22"}`,
-                  border: `1px solid ${colour}${selected ? "" : "99"}`,
-                }}
-              >
-                <Image
-                  src={item.logo.url}
-                  alt=""
-                  width={22}
-                  height={22}
-                  className="size-[22px] shrink-0 rounded-[5px] object-cover"
-                />
-
-                <span className="truncate text-[12px] font-medium tabular-nums text-primary">
-                  {item.duration}
+            {/* A quarter mark landing under a bookend is dropped rather than
+                overprinted — the tail one collided with "Now". */}
+            {ticks
+              .filter((tick) => tick.at > 0.04 && tick.at < 0.94)
+              .map((tick) => (
+                <span
+                  key={tick.label + tick.at}
+                  className="absolute -translate-x-1/2 text-[11px] tabular-nums text-muted-foreground/70"
+                  style={{ left: `${tick.at * 100}%` }}
+                >
+                  {tick.label}
                 </span>
+              ))}
 
-                {item.current && (
-                  <span className="ml-auto size-2 shrink-0 rounded-full bg-emerald-400" />
-                )}
-              </button>
-            );
-          })}
-        </div>
+            <span className="absolute right-0 text-[11px] tabular-nums text-muted-foreground/70">
+              {to}
+            </span>
+          </div>
 
-        {/* Reserved, so the card never clips against the scroller and nothing
-            shifts when it changes. */}
-        <div className="relative mt-4 h-[104px]">
-          <AnimatePresence mode="popLayout" initial={false}>
-            {entry && (
-              <motion.div
-                key={entry.company}
-                initial={
-                  prefersReduced
-                    ? { opacity: 0 }
-                    : { opacity: 0, y: 14, scale: 0.94 }
-                }
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                exit={prefersReduced ? { opacity: 0 } : { opacity: 0, scale: 0.97 }}
-                transition={
-                  prefersReduced
-                    ? { duration: 0.15 }
-                    : { type: "spring", stiffness: 520, damping: 22, mass: 0.7 }
-                }
-                className="card-glass absolute top-0 rounded-xl bg-card p-4"
-                style={{
-                  width: CARD_WIDTH,
-                  /* Anchored under its own bar, pulled back at the tail so the
-                     last role's card stays inside the scrollable width. */
-                  left: Math.min(entry.offset * width, width - CARD_WIDTH),
-                }}
-              >
-                <div className="flex items-center gap-2.5">
+          {/* One hairline a quarter, under the label it belongs to. */}
+          <div aria-hidden className="relative mt-1.5 h-2 border-t border-border">
+            {ticks.map((tick) => (
+              <span
+                key={tick.at}
+                className="absolute top-0 h-2 w-px bg-border"
+                style={{ left: `${tick.at * 100}%` }}
+              />
+            ))}
+          </div>
+
+          <div
+            role="tablist"
+            aria-label="Roles"
+            aria-orientation="horizontal"
+            onKeyDown={onKeyDown}
+            className="relative mt-3.5 h-9"
+          >
+            {entries.map((item, index) => {
+              const selected = index === active;
+              const barWidth = item.width * width;
+              const showDuration = barWidth >= SHOW_DURATION;
+              const showName = barWidth >= SHOW_NAME;
+
+              return (
+                <button
+                  key={item.company}
+                  ref={(node) => {
+                    bars.current[index] = node;
+                  }}
+                  type="button"
+                  role="tab"
+                  id={`${idBase}-tab-${index}`}
+                  aria-controls={`${idBase}-panel`}
+                  aria-selected={selected}
+                  tabIndex={selected ? 0 : -1}
+                  onMouseEnter={() => setActive(index)}
+                  onFocus={() => setActive(index)}
+                  onClick={() => setActive(index)}
+                  aria-label={`${item.company} — ${item.role}, ${item.range}`}
+                  className={cn(
+                    "absolute top-0 flex h-9 items-center gap-2 overflow-hidden rounded-full",
+                    "cursor-pointer transition-colors duration-200 ease-out",
+                    /* The strip's edges are masked, so a bar scrolled "just
+                       visible" is still under the fade. */
+                    "scroll-mx-10 md:scroll-mx-28",
+                    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+                    showDuration ? "px-3" : "justify-center px-0",
+                    selected
+                      ? "bg-emerald-100 dark:bg-emerald-400/20"
+                      : "bg-card hover:bg-accent",
+                  )}
+                  style={{
+                    left: `${item.offset * 100}%`,
+                    width: `calc(${item.width * 100}% - 4px)`,
+                  }}
+                >
                   <Image
-                    src={entry.logo.url}
+                    src={item.logo.url}
                     alt=""
-                    width={32}
-                    height={32}
-                    className="size-8 shrink-0 rounded-lg object-cover"
+                    width={20}
+                    height={20}
+                    className={cn(
+                      "size-5 shrink-0 rounded-[5px] object-cover",
+                      "transition-opacity duration-200 ease-out",
+                      selected ? "opacity-100" : "opacity-75",
+                    )}
                   />
 
-                  <span className="flex min-w-0 flex-col">
-                    <a
-                      href={entry.url}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="group inline-flex items-center gap-1 truncate text-sm font-medium text-primary"
-                    >
-                      {entry.company}
-                      <ArrowUpRight
-                        aria-hidden
-                        className="size-3.5 shrink-0 text-muted-foreground transition-transform duration-200 ease-out group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-                      />
-                    </a>
-                    <span className="truncate text-[13px] text-muted-foreground">
-                      {entry.role}
+                  {showName && (
+                    <span className="min-w-0 flex-1 truncate text-left text-[12px] font-medium text-primary">
+                      {item.company}
                     </span>
-                  </span>
-                </div>
+                  )}
 
-                <p className="mt-3 text-xs tabular-nums text-muted-foreground/70">
-                  {entry.range}
-                </p>
-              </motion.div>
-            )}
-          </AnimatePresence>
+                  {showDuration && (
+                    <span
+                      className={cn(
+                        "shrink-0 text-[12px] tabular-nums",
+                        showName ? "text-muted-foreground" : "text-primary",
+                      )}
+                    >
+                      {item.duration}
+                    </span>
+                  )}
+
+                  {item.current && (
+                    <span className="ml-1 size-1.5 shrink-0 rounded-full bg-emerald-500 dark:bg-emerald-400" />
+                  )}
+                </button>
+              );
+            })}
+          </div>
         </div>
+      </div>
+
+      {/* Stays put while the strip scrolls, so the detail is always in the same
+          place rather than chasing the bar it belongs to. */}
+      <div
+        id={`${idBase}-panel`}
+        role="tabpanel"
+        aria-labelledby={`${idBase}-tab-${active}`}
+        className="mt-7 min-h-12"
+      >
+        {entry && (
+          <motion.div
+            key={entry.company}
+            initial="hidden"
+            animate="shown"
+            /* The lines arrive a beat apart, so a change down here is caught
+               out of the corner of the eye while the cursor is up on a bar. */
+            variants={{ shown: { transition: { staggerChildren: 0.05 } } }}
+            className="flex flex-col gap-1"
+          >
+            <motion.div variants={line} className="flex items-baseline gap-3">
+              <h3 className="text-[15px] font-medium leading-snug text-primary">
+                {entry.role}
+              </h3>
+
+              <a
+                href={entry.url}
+                target="_blank"
+                rel="noreferrer"
+                className="group ml-auto inline-flex shrink-0 items-center gap-1 text-[13px] text-muted-foreground transition-colors hover:text-primary"
+              >
+                {entry.company}
+                <ArrowUpRight
+                  aria-hidden
+                  className="size-3.5 shrink-0 transition-transform duration-200 ease-out group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                />
+              </a>
+            </motion.div>
+
+            <motion.p
+              variants={line}
+              className="text-xs tabular-nums text-muted-foreground"
+            >
+              {entry.range}
+            </motion.p>
+          </motion.div>
+        )}
       </div>
     </div>
   );

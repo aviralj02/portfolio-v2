@@ -19,7 +19,7 @@ export type ExperienceEntry = {
   url: string;
   logo: Asset;
   current: boolean;
-  /** "Jun 2024 — Sep 2024" */
+  /** "Jun 2024 – Sep 2024" */
   range: string;
   /** "3 mos", "1 yr 2 mos" */
   duration: string;
@@ -35,8 +35,6 @@ export type Timeline = {
   to: string;
   /** Labelled marks every three months, as 0–1 positions along the axis. */
   ticks: { at: number; label: string }[];
-  /** Every month boundary, for the ruler's minor marks. */
-  marks: number[];
   /** Total span in months — the scrollable scale is sized from this. */
   months: number;
 };
@@ -118,30 +116,27 @@ export const buildTimeline = (
     url: item.url,
     logo: item.logo,
     current: item.currentlyWorking,
-    range: `${label(startISO)} - ${item.currentlyWorking ? "Present" : label(endISO)}`,
+    range: `${label(startISO)} – ${item.currentlyWorking ? "Present" : label(endISO)}`,
     duration: spell(monthsBetween(startISO, endISO)),
     offset: (start - first) / span,
     width: (end - start) / span,
   }));
 
-  /* A ruler rather than a bare line: a minor mark every month, a labelled one
-     every quarter. The year is printed only when it changes, so the strip
-     reads "Jun 2024 · Sep · Dec · Mar 2025" instead of repeating itself. */
+  /* One mark a quarter, each carrying its own label. The year is printed only
+     when it changes, so the strip reads "Jun 2024 · Sep · Dec · Mar 2025"
+     instead of repeating itself. */
   /* Anchored on the rounded start month, and begun at the first boundary that
      actually falls inside the span — the axis starts mid-month, so counting
      from `floor` puts the opening tick at a negative position. The span's own
      ends are labelled separately, as bookends. */
   const anchor = Math.round(first);
-  const marks: number[] = [];
   const ticks: { at: number; label: string }[] = [];
   let printedYear = 0;
 
   for (let m = Math.ceil(first); m <= Math.floor(last); m++) {
-    const at = (m - first) / span;
-
-    marks.push(at);
-
     if ((m - anchor) % 3 !== 0) continue;
+
+    const at = (m - first) / span;
 
     const year = Math.floor(m / 12);
     const month = m % 12;
@@ -156,7 +151,6 @@ export const buildTimeline = (
 
   return {
     entries,
-    marks,
     months: span,
     from: label(roles.reduce((a, b) => (a.start < b.start ? a : b)).startISO),
     to: entries.some((entry) => entry.current) ? "Now" : label(
