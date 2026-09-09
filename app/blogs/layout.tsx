@@ -7,7 +7,10 @@ export const metadata: Metadata = {
   title: "Blogs | Aviral",
   description:
     "I write insightful blogs sharing my thoughts on tech trends, development, and the tools I use.",
-  alternates: { canonical: `${PORTFOLIO_URL}/blogs` },
+  alternates: {
+    canonical: `${PORTFOLIO_URL}/blogs`,
+    types: { "text/markdown": `${PORTFOLIO_URL}/blogs.md` },
+  },
 };
 
 export default function BlogsLayout({

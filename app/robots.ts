@@ -7,7 +7,9 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: "*",
       allow: ["/"],
-      disallow: ["/admin/"],
+      /* `/api/markdown` is the internal target of the Markdown rewrite; the
+         representation it serves is already reachable at every real URL. */
+      disallow: ["/admin/", "/api/"],
     },
     sitemap: [`${PORTFOLIO_URL}/sitemap.xml`],
   };

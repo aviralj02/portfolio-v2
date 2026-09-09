@@ -7,7 +7,10 @@ export const metadata: Metadata = {
   title: "Work | Aviral",
   description:
     "Explore my work experience, showcasing impactful contributions and skills I have demonstrated.",
-  alternates: { canonical: `${PORTFOLIO_URL}/work` },
+  alternates: {
+    canonical: `${PORTFOLIO_URL}/work`,
+    types: { "text/markdown": `${PORTFOLIO_URL}/work.md` },
+  },
 };
 
 export default function WorkLayout({

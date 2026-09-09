@@ -48,6 +48,9 @@ export const portfolioMetadata: Metadata = {
   applicationName: "Aviral | Portfolio",
   alternates: {
     canonical: PORTFOLIO_URL,
+    /* The Markdown sibling of the home page, per the llms.txt convention of
+       appending the extension to a URL that has no filename. */
+    types: { "text/markdown": `${PORTFOLIO_URL}/index.md` },
   },
   icons: {
     icon: [

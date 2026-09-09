@@ -33,7 +33,10 @@ export async function generateMetadata({
   return {
     title: `${craft.title} | Crafts`,
     description: craft.description,
-    alternates: { canonical: `${PORTFOLIO_URL}/craft/${slug}` },
+    alternates: {
+      canonical: `${PORTFOLIO_URL}/craft/${slug}`,
+      types: { "text/markdown": `${PORTFOLIO_URL}/craft/${slug}.md` },
+    },
   };
 }
 

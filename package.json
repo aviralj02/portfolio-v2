@@ -6,6 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "test": "node --import ./tests/register.mjs --test",
     "lint": "eslint --fix ."
   },
   "dependencies": {

@@ -7,7 +7,10 @@ export const metadata: Metadata = {
   title: "Crafts | Aviral",
   description:
     "UI experiments, animations, and interactive demos built as a frontend engineer.",
-  alternates: { canonical: `${PORTFOLIO_URL}/craft` },
+  alternates: {
+    canonical: `${PORTFOLIO_URL}/craft`,
+    types: { "text/markdown": `${PORTFOLIO_URL}/craft.md` },
+  },
 };
 
 export default function CraftsLayout({

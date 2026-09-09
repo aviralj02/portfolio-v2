@@ -8,6 +8,7 @@ import SocialsTile from "@/components/all/grid-tiles/SocialsTile";
 import SpotifyTile from "@/components/all/grid-tiles/SpotifyTile";
 import UtilityTile from "@/components/all/grid-tiles/UtilityTile";
 import GridWrapper from "@/components/all/GridWrapper";
+import HomeSummary from "@/components/all/HomeSummary";
 import PageWrapper from "@/components/PageWrapper";
 import getBlogs from "@/lib/utils/get-blogs";
 import getProjects from "@/lib/utils/get-projects";
@@ -20,9 +21,12 @@ export default async function Home() {
 
   return (
     <PageWrapper>
+      {/* Tile order in the grid is set by the `order-*` classes, not by source
+          order, so the introduction — and with it the page's only H1 — leads
+          the document while the layout stays exactly where it was. */}
       <GridWrapper>
-        <RecentBlogTile recentBlog={blogsData?.[0]} socials={socialsData} />
         <AboutTile />
+        <RecentBlogTile recentBlog={blogsData?.[0]} socials={socialsData} />
         <SocialsTile socials={socialsData} />
         <ClientImageTile />
 
@@ -33,6 +37,8 @@ export default async function Home() {
         <ContactTile />
         <UtilityTile />
       </GridWrapper>
+
+      <HomeSummary />
     </PageWrapper>
   );
 }
