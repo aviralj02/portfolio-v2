@@ -23,6 +23,9 @@ type Props = {
 };
 
 const craftComponents = {
+  "wobble-tabs": dynamic(() => import("@/components/crafts/wobble-tabs"), {
+    ssr: false,
+  }),
   "liquid-input": dynamic(() => import("@/components/crafts/liquid-input"), {
     ssr: false,
   }),

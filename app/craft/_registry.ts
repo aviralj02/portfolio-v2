@@ -1,5 +1,14 @@
 export const crafts: Array<Craft> = [
   {
+    slug: "wobble-tabs",
+    title: "Wobble Tabs",
+    description:
+      "Tabs that trade width for attention - the chosen one springs open past its own size to let its label in, the last one folds back to an icon.",
+    sourcePath: "components/crafts/wobble-tabs/index.tsx",
+    otherSourcePaths: ["components/crafts/wobble-tabs/tabs.tsx"],
+    writeupPath: "components/crafts/wobble-tabs/writeup.md"
+  },
+  {
     slug: "liquid-input",
     title: "Liquid Input",
     description:
