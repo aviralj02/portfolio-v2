@@ -1,5 +1,14 @@
 export const crafts: Array<Craft> = [
   {
+    slug: "cloud-status",
+    title: "Cloud Status",
+    description:
+      "A status that drifts up off an avatar - as a thought, puffs rolling into a cloud, or as a message, a bubble whose tail was the puffs all along.",
+    sourcePath: "components/crafts/cloud-status/index.tsx",
+    otherSourcePaths: ["components/crafts/cloud-status/cloud.tsx"],
+    writeupPath: "components/crafts/cloud-status/writeup.md"
+  },
+  {
     slug: "wobble-tabs",
     title: "Wobble Tabs",
     description:

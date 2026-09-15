@@ -23,6 +23,9 @@ type Props = {
 };
 
 const craftComponents = {
+  "cloud-status": dynamic(() => import("@/components/crafts/cloud-status"), {
+    ssr: false,
+  }),
   "wobble-tabs": dynamic(() => import("@/components/crafts/wobble-tabs"), {
     ssr: false,
   }),
