@@ -11,6 +11,7 @@ import GridWrapper from "@/components/all/GridWrapper";
 import HomeSummary from "@/components/all/HomeSummary";
 import PageWrapper from "@/components/PageWrapper";
 import getBlogs from "@/lib/utils/get-blogs";
+import getExperiences from "@/lib/utils/get-experience";
 import getProjects from "@/lib/utils/get-projects";
 import getSocials from "@/lib/utils/get-socials";
 
@@ -18,15 +19,17 @@ export default async function Home() {
   const projects = await getProjects();
   const socialsData = await getSocials();
   const blogsData = await getBlogs();
+  const experiences = await getExperiences();
+
+  const current = experiences?.find(
+    (experience) => experience.currentlyWorking,
+  );
 
   return (
     <PageWrapper>
-      {/* Tile order in the grid is set by the `order-*` classes, not by source
-          order, so the introduction — and with it the page's only H1 — leads
-          the document while the layout stays exactly where it was. */}
       <GridWrapper>
-        <AboutTile />
         <RecentBlogTile recentBlog={blogsData?.[0]} socials={socialsData} />
+        <AboutTile current={current} />
         <SocialsTile socials={socialsData} />
         <ClientImageTile />
 

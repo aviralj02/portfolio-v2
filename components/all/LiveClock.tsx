@@ -2,6 +2,9 @@
 
 import { useEffect, useState } from "react";
 
+// The clock is "my" time, so it's pinned to India rather than the visitor's zone.
+const TIME_ZONE = "Asia/Kolkata";
+
 const LiveClock = () => {
   const [currentTime, setCurrentTime] = useState<Date>(new Date());
 
@@ -13,24 +16,20 @@ const LiveClock = () => {
     return () => clearInterval(timer);
   }, []);
 
-  const formatDate = currentTime.toLocaleDateString("en-US", {
-    month: "short",
-    day: "numeric",
-    year: "numeric",
-  });
-
-  const formatTime = currentTime.toLocaleTimeString("en-US", {
+  const time = currentTime.toLocaleTimeString("en-US", {
     hour: "2-digit",
     minute: "2-digit",
-    second: "2-digit",
     hour12: true,
+    timeZone: TIME_ZONE,
   });
 
   return (
-    <div className="flex flex-col text-muted-foreground">
-      <span>{formatDate}</span>
-      <span>{formatTime}</span>
-    </div>
+    <time
+      dateTime={currentTime.toISOString()}
+      className="tabular-nums text-foreground"
+    >
+      {time}
+    </time>
   );
 };
 
