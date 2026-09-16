@@ -4,12 +4,18 @@ import React, { useEffect, useRef } from "react";
 import { useTheme } from "next-themes";
 
 import { useSpring } from "@react-spring/web";
-import createGlobe, { COBEOptions } from "cobe";
+import createGlobe from "cobe";
+
+const HOME: [number, number] = [12.9716, 77.5946];
+
+// cobe v2 shows longitude (228° - phi) front and centre. Start a little east of
+// home so Bengaluru drifts through the middle of the view as it spins.
+const START_PHI = ((228 - (HOME[1] + 20)) * Math.PI) / 180;
 
 const Globe = () => {
-  const { theme } = useTheme();
+  const { resolvedTheme } = useTheme();
 
-  const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const containerRef = useRef<HTMLDivElement | null>(null);
   const pointerInteracting = useRef<number | null>(null);
   const pointerInteractionMovement = useRef<number>(0);
   const [{ r }, api] = useSpring(() => ({
@@ -23,89 +29,100 @@ const Globe = () => {
   }));
 
   useEffect(() => {
-    let phi = 0;
-    let width = 0;
+    const container = containerRef.current;
+    if (!container) return;
+
+    // cobe v2 wraps its canvas in a div of its own, so the canvas is created
+    // here rather than by React, which would otherwise lose track of it.
+    const canvas = document.createElement("canvas");
+    canvas.style.cssText =
+      "width:100%;height:100%;contain:layout paint size;opacity:0;transition:opacity 1s ease";
+    container.append(canvas);
+
+    const dark = resolvedTheme === "dark";
+    let phi = START_PHI;
+    let width = container.offsetWidth;
+    let frame = 0;
 
     const onResize = () => {
-      if (canvasRef.current) {
-        width = canvasRef.current.offsetWidth;
-      }
+      width = container.offsetWidth;
     };
     window.addEventListener("resize", onResize);
-    onResize();
 
-    const globe = createGlobe(
-      canvasRef.current as HTMLCanvasElement,
-      {
-        devicePixelRatio: 2,
-        width: width * 2,
-        height: width * 2,
-        phi: 0,
-        theta: 0.3,
-        dark: theme === "dark" ? 1 : 0,
-        diffuse: 0,
-        mapSamples: 20000,
-        mapBrightness: 12,
-        baseColor: [1, 1, 1],
-        markerColor:
-          theme === "dark"
-            ? [184 / 255, 234 / 255, 219 / 255]
-            : [38 / 255, 64 / 255, 115 / 255],
-        glowColor: [120 / 255, 120 / 255, 120 / 255],
-        markers: [{ location: [28.459497, 77.026634], size: 0.08 }],
-        onRender: (state) => {
-          if (!pointerInteracting.current) {
-            phi += 0.003;
-          }
-          state.phi = phi + r.get();
-          state.width = width * 2;
-          state.height = width * 2;
-        },
-      } as COBEOptions
-    );
+    // v2 takes CSS pixels and scales by devicePixelRatio itself.
+    const globe = createGlobe(canvas, {
+      devicePixelRatio: 2,
+      width,
+      height: width,
+      phi,
+      theta: -0.45,
+      dark: dark ? 1 : 0,
+      diffuse: 0,
+      mapSamples: 20000,
+      mapBrightness: 12,
+      baseColor: [1, 1, 1],
+      markerColor: dark
+        ? [184 / 255, 234 / 255, 219 / 255]
+        : [38 / 255, 64 / 255, 115 / 255],
+      glowColor: [120 / 255, 120 / 255, 120 / 255],
+      markers: [{ location: HOME, size: 0.05 }],
+      // v2 lifts markers off the surface by default, which reads as floating.
+      markerElevation: 0,
+    });
 
-    setTimeout(() => {
-      if (canvasRef.current) {
-        canvasRef.current.style.opacity = "1";
+    // v2 dropped onRender, so the spin is driven from here.
+    const tick = () => {
+      if (pointerInteracting.current === null) {
+        phi += 0.003;
       }
+      globe.update({ phi: phi + r.get(), width, height: width });
+      frame = requestAnimationFrame(tick);
+    };
+    frame = requestAnimationFrame(tick);
+
+    const fadeIn = setTimeout(() => {
+      canvas.style.opacity = "1";
     });
 
     return () => {
+      cancelAnimationFrame(frame);
+      clearTimeout(fadeIn);
       globe.destroy();
+      container.replaceChildren();
       window.removeEventListener("resize", onResize);
     };
-  }, [r, theme]);
+  }, [r, resolvedTheme]);
+
+  const setCursor = (cursor: string) => {
+    if (containerRef.current) {
+      containerRef.current.style.cursor = cursor;
+    }
+  };
 
   return (
-    <canvas
-      ref={canvasRef}
-      onPointerDown={(e: React.PointerEvent<HTMLCanvasElement>) => {
+    <div
+      ref={containerRef}
+      onPointerDown={(e: React.PointerEvent<HTMLDivElement>) => {
         pointerInteracting.current =
           e.clientX - pointerInteractionMovement.current;
-        if (canvasRef.current) {
-          canvasRef.current.style.cursor = "grabbing";
-        }
+        setCursor("grabbing");
       }}
       onPointerUp={() => {
         pointerInteracting.current = null;
-        if (canvasRef.current) {
-          canvasRef.current.style.cursor = "grab";
-        }
+        setCursor("grab");
       }}
       onPointerOut={() => {
         pointerInteracting.current = null;
-        if (canvasRef.current) {
-          canvasRef.current.style.cursor = "grab";
-        }
+        setCursor("grab");
       }}
-      onMouseMove={(e: React.MouseEvent<HTMLCanvasElement>) => {
+      onMouseMove={(e: React.MouseEvent<HTMLDivElement>) => {
         if (pointerInteracting.current !== null) {
           const delta = e.clientX - pointerInteracting.current;
           pointerInteractionMovement.current = delta;
           api.start({ r: delta / 200 });
         }
       }}
-      onTouchMove={(e: React.TouchEvent<HTMLCanvasElement>) => {
+      onTouchMove={(e: React.TouchEvent<HTMLDivElement>) => {
         if (pointerInteracting.current !== null && e.touches[0]) {
           const delta = e.touches[0].clientX - pointerInteracting.current;
           pointerInteractionMovement.current = delta;
@@ -116,9 +133,6 @@ const Globe = () => {
         width: "100%",
         height: "100%",
         cursor: "grab",
-        contain: "layout paint size",
-        opacity: 0,
-        transition: "opacity 1s ease",
         userSelect: "none",
       }}
     />
