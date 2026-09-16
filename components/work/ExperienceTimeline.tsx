@@ -6,6 +6,7 @@ import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 import { motion, useReducedMotion, type Variants } from "motion/react";
 
+import { useDragScroll } from "@/hooks";
 import type { Timeline } from "@/lib/experience";
 import { cn } from "@/lib/utils";
 
@@ -35,6 +36,31 @@ const ExperienceTimeline = ({ timeline }: Props): React.JSX.Element => {
 
   const scroller = useRef<HTMLDivElement>(null);
   const bars = useRef<Array<HTMLButtonElement | null>>([]);
+
+  useDragScroll(scroller);
+
+  /* The edges only fade on a side that has more to show, so a fade reads as
+     "keep going" rather than decoration. */
+  useEffect(() => {
+    const node = scroller.current;
+    if (!node) return;
+
+    const sync = () => {
+      const max = node.scrollWidth - node.clientWidth;
+
+      node.dataset.fadeStart = String(node.scrollLeft > 1);
+      node.dataset.fadeEnd = String(node.scrollLeft < max - 1);
+    };
+
+    sync();
+    node.addEventListener("scroll", sync, { passive: true });
+    window.addEventListener("resize", sync);
+
+    return () => {
+      node.removeEventListener("scroll", sync);
+      window.removeEventListener("resize", sync);
+    };
+  }, []);
 
   /* On arrival the strip plays itself from the first role to the current one,
      so the span is shown rather than described — the reader sees how far the
@@ -127,7 +153,11 @@ const ExperienceTimeline = ({ timeline }: Props): React.JSX.Element => {
         ref={scroller}
         className={cn(
           "no-scrollbar -mx-6 overflow-x-auto px-6 md:-mx-20 md:px-20",
-          "mask-[linear-gradient(to_right,transparent,black_24px,black_calc(100%-24px),transparent)]",
+          "[--fade-start:0px] [--fade-end:0px] data-[fade-start=true]:[--fade-start:56px] data-[fade-end=true]:[--fade-end:56px]",
+          "mask-[linear-gradient(to_right,transparent,black_var(--fade-start),black_calc(100%-var(--fade-end)),transparent)]",
+          /* Mouse only: touch already pans, and a grab hand there is noise. */
+          "select-none pointer-fine:cursor-grab",
+          "data-dragging:cursor-grabbing data-dragging:**:cursor-grabbing",
         )}
       >
         <div className="relative" style={{ width }}>
@@ -152,7 +182,14 @@ const ExperienceTimeline = ({ timeline }: Props): React.JSX.Element => {
                 </span>
               ))}
 
-            <span className="absolute right-0 text-[11px] tabular-nums text-muted-foreground/70">
+            <span
+              className={cn(
+                "absolute right-0 text-[11px] tabular-nums",
+                to === "Now"
+                  ? "font-medium text-primary"
+                  : "text-muted-foreground/70",
+              )}
+            >
               {to}
             </span>
           </div>
@@ -167,6 +204,15 @@ const ExperienceTimeline = ({ timeline }: Props): React.JSX.Element => {
               />
             ))}
           </div>
+
+          {/* A playhead at "Now": the running role's bar reaches it, which says
+              "ongoing" once, instead of a status dot on the axis and the bar. */}
+          {to === "Now" && (
+            <span
+              aria-hidden
+              className="pointer-events-none absolute top-[22px] -bottom-1 right-0 w-px bg-linear-to-b from-foreground/45 via-foreground/20 to-transparent"
+            />
+          )}
 
           <div
             role="tablist"
@@ -217,6 +263,7 @@ const ExperienceTimeline = ({ timeline }: Props): React.JSX.Element => {
                   <Image
                     src={item.logo.url}
                     alt=""
+                    draggable={false}
                     width={20}
                     height={20}
                     className={cn(
@@ -243,9 +290,6 @@ const ExperienceTimeline = ({ timeline }: Props): React.JSX.Element => {
                     </span>
                   )}
 
-                  {item.current && (
-                    <span className="ml-1 size-1.5 shrink-0 rounded-full bg-emerald-500 dark:bg-emerald-400" />
-                  )}
                 </button>
               );
             })}
