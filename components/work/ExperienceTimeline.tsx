@@ -122,7 +122,11 @@ const ExperienceTimeline = ({ timeline }: Props): React.JSX.Element => {
   const entry = entries[active];
   const line: Variants = {
     hidden: { opacity: 0, y: prefersReduced ? 0 : 6 },
-    shown: { opacity: 1, y: 0, transition: { duration: 0.24, ease: [0.16, 1, 0.3, 1] } },
+    shown: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.24, ease: [0.16, 1, 0.3, 1] },
+    },
   };
 
   const select = (index: number) => {
@@ -152,7 +156,7 @@ const ExperienceTimeline = ({ timeline }: Props): React.JSX.Element => {
       <div
         ref={scroller}
         className={cn(
-          "no-scrollbar -mx-6 overflow-x-auto px-6 md:-mx-20 md:px-20",
+          "no-scrollbar -mx-6 overflow-x-auto overflow-y-hidden px-6 pb-1 md:-mx-20 md:px-20",
           "[--fade-start:0px] [--fade-end:0px] data-[fade-start=true]:[--fade-start:56px] data-[fade-end=true]:[--fade-end:56px]",
           "mask-[linear-gradient(to_right,transparent,black_var(--fade-start),black_calc(100%-var(--fade-end)),transparent)]",
           /* Mouse only: touch already pans, and a grab hand there is noise. */
@@ -195,7 +199,10 @@ const ExperienceTimeline = ({ timeline }: Props): React.JSX.Element => {
           </div>
 
           {/* One hairline a quarter, under the label it belongs to. */}
-          <div aria-hidden className="relative mt-1.5 h-2 border-t border-border">
+          <div
+            aria-hidden
+            className="relative mt-1.5 h-2 border-t border-border"
+          >
             {ticks.map((tick) => (
               <span
                 key={tick.at}
@@ -289,7 +296,6 @@ const ExperienceTimeline = ({ timeline }: Props): React.JSX.Element => {
                       {item.duration}
                     </span>
                   )}
-
                 </button>
               );
             })}
@@ -303,7 +309,7 @@ const ExperienceTimeline = ({ timeline }: Props): React.JSX.Element => {
         id={`${idBase}-panel`}
         role="tabpanel"
         aria-labelledby={`${idBase}-tab-${active}`}
-        className="mt-7 min-h-12"
+        className="mt-6 min-h-12"
       >
         {entry && (
           <motion.div
