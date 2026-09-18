@@ -1,5 +1,13 @@
 export const crafts: Array<Craft> = [
   {
+    slug: "otp-input",
+    title: "OTP Input",
+    description:
+      "A one-time code field where digits spring into place, backspace walks you back and a paste fills it in one go.",
+    sourcePath: "components/crafts/otp-input/index.tsx",
+    writeupPath: "components/crafts/otp-input/writeup.md"
+  },
+  {
     slug: "cloud-status",
     title: "Cloud Status",
     description:

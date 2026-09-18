@@ -23,6 +23,9 @@ type Props = {
 };
 
 const craftComponents = {
+  "otp-input": dynamic(() => import("@/components/crafts/otp-input"), {
+    ssr: false,
+  }),
   "cloud-status": dynamic(() => import("@/components/crafts/cloud-status"), {
     ssr: false,
   }),
