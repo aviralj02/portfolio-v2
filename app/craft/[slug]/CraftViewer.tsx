@@ -23,6 +23,9 @@ type Props = {
 };
 
 const craftComponents = {
+  "zipper-coupon": dynamic(() => import("@/components/crafts/zipper-coupon"), {
+    ssr: false,
+  }),
   "otp-input": dynamic(() => import("@/components/crafts/otp-input"), {
     ssr: false,
   }),

@@ -1,5 +1,17 @@
 export const crafts: Array<Craft> = [
   {
+    slug: "zipper-coupon",
+    title: "Zipper Coupon",
+    description:
+      "A coupon pouch sealed with a zip - drag the pull and the fabric peels open along a curve, then the ticket inside pops out.",
+    sourcePath: "components/crafts/zipper-coupon/index.tsx",
+    otherSourcePaths: [
+      "components/crafts/zipper-coupon/zipper.tsx",
+      "components/crafts/zipper-coupon/ticket.tsx"
+    ],
+    writeupPath: "components/crafts/zipper-coupon/writeup.md"
+  },
+  {
     slug: "otp-input",
     title: "OTP Input",
     description:
