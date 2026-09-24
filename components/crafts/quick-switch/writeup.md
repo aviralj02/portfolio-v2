@@ -1,0 +1,7 @@
+One number drives the whole bar: a count of switches that only ever goes up, with the mode read off it by modulo. Tapping the pill bumps it and hands focus back to the input, so the caret never leaves while you switch. Because the count never repeats, every switch gets a fresh key, even when fast taps loop back to a mode whose old word is still on its way out.
+
+The placeholder isn't the input's own. The browser can't animate that, so it's a span laid over the empty field and hidden the moment you type. Each word is split into letters, and the old and new words sit in the same grid cell so they overlap while one hands off to the other. Swapping the key lets `AnimatePresence` keep the old word around long enough to leave: its letters rise and blur out while the new ones come up from below, both staggered left to right, so the change sweeps across the field as a wave instead of a crossfade.
+
+The icon does the same thing without the stagger. The outgoing glyph shrinks into a blur as the next one grows out of it in the same spot, and the pill gives a small spring under your finger on press.
+
+The rest are small tells. The chevrons tick down once per switch, since they remount on the same counter. The track picks up a hairline ring while the input has focus. The send button stays pale and a touch smaller until there's something to send, then fills in and springs up to size. On send, its arrow shoots off to the right while a fresh one slides in behind it. Everything respects reduced motion through `MotionConfig`.
