@@ -1,5 +1,14 @@
 export const crafts: Array<Craft> = [
   {
+    slug: "quick-switch",
+    title: "Quick Switch",
+    description:
+      "A prompt bar with a mode pill - tap it and the icon blurs into the next one while the placeholder rewrites itself letter by letter.",
+    sourcePath: "components/crafts/quick-switch/index.tsx",
+    otherSourcePaths: ["components/crafts/quick-switch/morph-text.tsx"],
+    writeupPath: "components/crafts/quick-switch/writeup.md"
+  },
+  {
     slug: "zipper-coupon",
     title: "Zipper Coupon",
     description:
