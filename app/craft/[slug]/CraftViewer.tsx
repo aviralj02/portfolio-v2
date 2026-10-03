@@ -23,6 +23,9 @@ type Props = {
 };
 
 const craftComponents = {
+  "segmented-nav": dynamic(() => import("@/components/crafts/segmented-nav"), {
+    ssr: false,
+  }),
   "quick-switch": dynamic(() => import("@/components/crafts/quick-switch"), {
     ssr: false,
   }),

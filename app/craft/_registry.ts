@@ -1,5 +1,13 @@
 export const crafts: Array<Craft> = [
   {
+    slug: "segmented-nav",
+    title: "Segmented Nav",
+    description:
+      "A navigation track of ticks - pick one and it stretches into a labeled pill while its neighbors fade out with distance.",
+    sourcePath: "components/crafts/segmented-nav/index.tsx",
+    writeupPath: "components/crafts/segmented-nav/writeup.md"
+  },
+  {
     slug: "quick-switch",
     title: "Quick Switch",
     description:
