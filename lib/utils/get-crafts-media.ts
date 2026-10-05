@@ -5,7 +5,7 @@ import client from "../hygraph";
 const getCraftsMedia = async (): Promise<Record<string, string>> => {
   const query = gql`
     query getCraftsMedia {
-      crafts {
+      crafts(first: 100) {
         slug
         video {
           url
