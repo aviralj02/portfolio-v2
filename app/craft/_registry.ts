@@ -1,5 +1,13 @@
 export const crafts: Array<Craft> = [
   {
+    slug: "copy-tabs",
+    title: "Copy Tabs",
+    description:
+      "A copy button split into three tabs - what it holds, what a click does, and that it worked - with only one ever open.",
+    sourcePath: "components/crafts/copy-tabs/index.tsx",
+    writeupPath: "components/crafts/copy-tabs/writeup.md"
+  },
+  {
     slug: "segmented-nav",
     title: "Segmented Nav",
     description:

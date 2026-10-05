@@ -23,6 +23,9 @@ type Props = {
 };
 
 const craftComponents = {
+  "copy-tabs": dynamic(() => import("@/components/crafts/copy-tabs"), {
+    ssr: false,
+  }),
   "segmented-nav": dynamic(() => import("@/components/crafts/segmented-nav"), {
     ssr: false,
   }),
