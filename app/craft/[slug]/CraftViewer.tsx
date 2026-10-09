@@ -23,6 +23,9 @@ type Props = {
 };
 
 const craftComponents = {
+  "peel-button": dynamic(() => import("@/components/crafts/peel-button"), {
+    ssr: false,
+  }),
   "copy-tabs": dynamic(() => import("@/components/crafts/copy-tabs"), {
     ssr: false,
   }),

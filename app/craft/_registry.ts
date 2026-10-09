@@ -1,5 +1,13 @@
 export const crafts: Array<Craft> = [
   {
+    slug: "peel-button",
+    title: "Peel Button",
+    description:
+      "A button that's really a sticker - hover and its corner curls back off the layer underneath, press and it pulls a little further.",
+    sourcePath: "components/crafts/peel-button/index.tsx",
+    writeupPath: "components/crafts/peel-button/writeup.md"
+  },
+  {
     slug: "copy-tabs",
     title: "Copy Tabs",
     description:
