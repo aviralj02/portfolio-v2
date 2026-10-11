@@ -5,7 +5,7 @@ import client from "../hygraph";
 const getProjects = async (): Promise<Project[] | undefined> => {
   const query = gql`
     query getProjects {
-      projects(orderBy: priority_ASC) {
+      projects(orderBy: priority_ASC, first: 100) {
         backgroundColor
         codebase
         description
