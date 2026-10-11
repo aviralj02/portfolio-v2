@@ -23,6 +23,10 @@ type Props = {
 };
 
 const craftComponents = {
+  "process-button": dynamic(
+    () => import("@/components/crafts/process-button"),
+    { ssr: false },
+  ),
   "peel-button": dynamic(() => import("@/components/crafts/peel-button"), {
     ssr: false,
   }),

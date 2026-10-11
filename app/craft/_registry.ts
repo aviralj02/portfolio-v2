@@ -1,5 +1,13 @@
 export const crafts: Array<Craft> = [
   {
+    slug: "process-button",
+    title: "Process Button",
+    description:
+      "A button that runs its own progress - start it and a stop button buds off its side like a droplet, then melts back in when the work ends.",
+    sourcePath: "components/crafts/process-button/index.tsx",
+    writeupPath: "components/crafts/process-button/writeup.md"
+  },
+  {
     slug: "peel-button",
     title: "Peel Button",
     description:
