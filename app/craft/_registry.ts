@@ -1,5 +1,13 @@
 export const crafts: Array<Craft> = [
   {
+    slug: "record-waveform",
+    title: "Record Waveform",
+    description:
+      "A record button with its waveform bent into a ring - tap it and eight dashes open around it, stretching and shrinking like a voice.",
+    sourcePath: "components/crafts/record-waveform/index.tsx",
+    writeupPath: "components/crafts/record-waveform/writeup.md"
+  },
+  {
     slug: "process-button",
     title: "Process Button",
     description:

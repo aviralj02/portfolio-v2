@@ -23,6 +23,10 @@ type Props = {
 };
 
 const craftComponents = {
+  "record-waveform": dynamic(
+    () => import("@/components/crafts/record-waveform"),
+    { ssr: false },
+  ),
   "process-button": dynamic(
     () => import("@/components/crafts/process-button"),
     { ssr: false },
