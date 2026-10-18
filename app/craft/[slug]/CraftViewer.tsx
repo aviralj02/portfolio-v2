@@ -23,6 +23,10 @@ type Props = {
 };
 
 const craftComponents = {
+  "generative-grid": dynamic(
+    () => import("@/components/crafts/generative-grid"),
+    { ssr: false },
+  ),
   "record-waveform": dynamic(
     () => import("@/components/crafts/record-waveform"),
     { ssr: false },

@@ -1,5 +1,13 @@
 export const crafts: Array<Craft> = [
   {
+    slug: "generative-grid",
+    title: "Generative Grid",
+    description:
+      "A photo that builds itself out of a grid - dashed cuts split the frame, blurry pieces land tile by tile, then the whole thing comes into focus.",
+    sourcePath: "components/crafts/generative-grid/index.tsx",
+    writeupPath: "components/crafts/generative-grid/writeup.md"
+  },
+  {
     slug: "record-waveform",
     title: "Record Waveform",
     description:
