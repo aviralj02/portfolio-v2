@@ -3,7 +3,7 @@ import { NextRequest } from "next/server";
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 
-import proxy from "@/proxy";
+import proxy, { config } from "@/proxy";
 
 /**
  * The proxy is the whole of this site's content negotiation, so it is checked
@@ -144,5 +144,22 @@ describe("paths that do not exist", () => {
 
   it("still refuses a type it cannot produce, rather than 404ing in markdown", () => {
     assert.equal(run("/nope", "application/pdf").status, 406);
+  });
+});
+
+describe("the matcher", () => {
+  /* Next compiles the matcher with path-to-regexp; anchoring the same pattern
+     is close enough to tell which paths ever reach the proxy. */
+  const reaches = (pathname: string) =>
+    config.matcher.some((pattern) => new RegExp(`^${pattern}$`).test(pathname));
+
+  it("lets generated social images past, since they have no extension", () => {
+    assert.equal(reaches("/craft/morph-menu/opengraph-image"), false);
+    assert.equal(reaches("/craft/morph-menu/twitter-image"), false);
+  });
+
+  it("still runs on pages and their markdown siblings", () => {
+    assert.equal(reaches("/craft/morph-menu"), true);
+    assert.equal(reaches("/craft/morph-menu.md"), true);
   });
 });

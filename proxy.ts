@@ -94,8 +94,11 @@ export default proxy;
 
 export const config = {
   /* Everything except Next's internals, the API routes this file rewrites to,
-     and static assets — `.md` is deliberately not in the exclusion list. */
+     generated social images (served without an extension, so a crawler that
+     accepts anything would otherwise land on the Markdown 404), and static
+     assets —
+     `.md` is deliberately not in the exclusion list. */
   matcher: [
-    "/((?!api/|_next/|_vercel/|.*\\.(?:ico|png|jpe?g|gif|svg|webp|avif|txt|xml|json|webmanifest|mp4|webm|woff2?|ttf|otf|css|js|map)$).*)",
+    "/((?!api/|_next/|_vercel/|.*(?:opengraph|twitter)-image|.*\\.(?:ico|png|jpe?g|gif|svg|webp|avif|txt|xml|json|webmanifest|mp4|webm|woff2?|ttf|otf|css|js|map)$).*)",
   ],
 };
