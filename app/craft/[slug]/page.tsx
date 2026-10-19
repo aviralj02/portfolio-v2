@@ -9,6 +9,7 @@ import { codeToHtml } from "shiki";
 
 import PageWrapper from "@/components/PageWrapper";
 import { PORTFOLIO_URL } from "@/lib/constants";
+import { socialMetadata } from "@/lib/metadata";
 
 import { crafts, getCraft } from "../_registry";
 
@@ -30,9 +31,15 @@ export async function generateMetadata({
   const { slug } = await params;
   const craft = getCraft(slug);
   if (!craft) return {};
+  const title = `${craft.title} | Crafts`;
   return {
-    title: `${craft.title} | Crafts`,
+    title,
     description: craft.description,
+    ...socialMetadata({
+      title,
+      description: craft.description,
+      path: `/craft/${slug}`,
+    }),
     alternates: {
       canonical: `${PORTFOLIO_URL}/craft/${slug}`,
       types: { "text/markdown": `${PORTFOLIO_URL}/craft/${slug}.md` },

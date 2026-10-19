@@ -2,6 +2,12 @@ import type { Metadata } from "next";
 
 import { PORTFOLIO_DESC, PORTFOLIO_URL } from "./constants";
 
+const OPEN_GRAPH_BASE = {
+  siteName: "Aviral Jain",
+  type: "website",
+  locale: "en_US",
+} as const;
+
 export const portfolioMetadata: Metadata = {
   metadataBase: new URL(PORTFOLIO_URL),
   title: "Aviral | Portfolio",
@@ -19,9 +25,7 @@ export const portfolioMetadata: Metadata = {
     title: "Aviral Jain",
     description: PORTFOLIO_DESC,
     url: PORTFOLIO_URL,
-    siteName: "Aviral Jain",
-    type: "website",
-    locale: "en_US",
+    ...OPEN_GRAPH_BASE,
     images: [
       {
         url: `${PORTFOLIO_URL}/opengraph-image.jpg`,
@@ -68,3 +72,31 @@ export const portfolioMetadata: Metadata = {
     ],
   },
 };
+
+/**
+ * Child segments that set `openGraph` or `twitter` replace the root's objects
+ * wholesale, and ones that set neither inherit the home page's title and URL.
+ * Images are left out on purpose: each segment's `opengraph-image` and
+ * `twitter-image` files supply them.
+ */
+export const socialMetadata = ({
+  title,
+  description,
+  path,
+}: {
+  title: string;
+  description: string;
+  path: string;
+}): Pick<Metadata, "openGraph" | "twitter"> => ({
+  openGraph: {
+    ...OPEN_GRAPH_BASE,
+    title,
+    description,
+    url: `${PORTFOLIO_URL}${path}`,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title,
+    description,
+  },
+});
