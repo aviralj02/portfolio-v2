@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "next-view-transitions";
 
 import { ArrowUpRight } from "lucide-react";
@@ -14,6 +14,29 @@ type Props = {
 
 const CraftCard = ({ craft, videoUrl }: Props) => {
   const [ready, setReady] = useState(false);
+  const [near, setNear] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  // Only fetch a preview once it's close to the screen, and only play it
+  // while it's actually there.
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setNear(true);
+          video.play().catch(() => {});
+        } else {
+          video.pause();
+        }
+      },
+      { rootMargin: "200px 0px" }
+    );
+    observer.observe(video);
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <Link
@@ -35,7 +58,8 @@ const CraftCard = ({ craft, videoUrl }: Props) => {
 
         {videoUrl && (
           <video
-            src={videoUrl}
+            ref={videoRef}
+            src={near ? videoUrl : undefined}
             className={cn(
               "relative w-full h-full object-cover transition-opacity duration-700 ease-out",
               ready ? "opacity-100" : "opacity-0"
