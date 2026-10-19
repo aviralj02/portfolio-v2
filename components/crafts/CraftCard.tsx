@@ -10,9 +10,10 @@ import { cn } from "@/lib/utils";
 type Props = {
   craft: Craft;
   videoUrl?: string;
+  placeholder?: string;
 };
 
-const CraftCard = ({ craft, videoUrl }: Props) => {
+const CraftCard = ({ craft, videoUrl, placeholder }: Props) => {
   const [ready, setReady] = useState(false);
   const [near, setNear] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -48,13 +49,27 @@ const CraftCard = ({ craft, videoUrl }: Props) => {
       )}
     >
       <div className="relative w-full aspect-4/3 rounded-2xl overflow-hidden bg-secondary/70">
-        <div
-          aria-hidden
-          className={cn(
-            "absolute inset-0 bg-linear-to-br from-muted via-secondary to-muted transition-opacity duration-700 ease-out",
-            ready ? "opacity-0" : "opacity-100"
-          )}
-        />
+        {/* A blurred first frame holds the spot until the video can play, then
+            fades out over the same frame. Falls back to a gradient. */}
+        {placeholder ? (
+          <img
+            src={placeholder}
+            alt=""
+            aria-hidden
+            className={cn(
+              "absolute inset-0 size-full scale-110 object-cover blur-xl transition-opacity duration-700 ease-out",
+              ready ? "opacity-0" : "opacity-100"
+            )}
+          />
+        ) : (
+          <div
+            aria-hidden
+            className={cn(
+              "absolute inset-0 bg-linear-to-br from-muted via-secondary to-muted transition-opacity duration-700 ease-out",
+              ready ? "opacity-0" : "opacity-100"
+            )}
+          />
+        )}
 
         {videoUrl && (
           <video

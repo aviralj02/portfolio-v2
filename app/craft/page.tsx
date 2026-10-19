@@ -2,6 +2,7 @@ import CraftCard from "@/components/crafts/CraftCard";
 import craftsTitle from "@/components/crafts/crafts-title-paths";
 import PageWrapper from "@/components/PageWrapper";
 import PenTitle from "@/components/PenTitle";
+import craftPlaceholders from "@/lib/craft-placeholders";
 import getCraftsMedia from "@/lib/utils/get-crafts-media";
 
 import { crafts } from "./_registry";
@@ -30,6 +31,7 @@ const Crafts = async (): Promise<React.JSX.Element> => {
             key={craft.slug}
             craft={craft}
             videoUrl={media[craft.slug]}
+            placeholder={craftPlaceholders[craft.slug]}
           />
         ))}
       </div>
