@@ -23,6 +23,9 @@ type Props = {
 };
 
 const craftComponents = {
+  "vanish-input": dynamic(() => import("@/components/crafts/vanish-input"), {
+    ssr: false,
+  }),
   "generative-grid": dynamic(
     () => import("@/components/crafts/generative-grid"),
     { ssr: false },

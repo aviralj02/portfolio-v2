@@ -1,5 +1,13 @@
 export const crafts: Array<Craft> = [
   {
+    slug: "vanish-input",
+    title: "Vanish Input",
+    description:
+      "A search field that eats your query - press Enter and the text breaks into pixels that stream back into the magnifier.",
+    sourcePath: "components/crafts/vanish-input/index.tsx",
+    writeupPath: "components/crafts/vanish-input/writeup.md"
+  },
+  {
     slug: "generative-grid",
     title: "Generative Grid",
     description:
