@@ -1,5 +1,13 @@
 export const crafts: Array<Craft> = [
   {
+    slug: "wave-loader",
+    title: "Wave Loader",
+    description:
+      "A save button whose label is its loader - the letters thin into bars that tip like dominoes while it works, then blur into a saved state.",
+    sourcePath: "components/crafts/wave-loader/index.tsx",
+    writeupPath: "components/crafts/wave-loader/writeup.md"
+  },
+  {
     slug: "vanish-input",
     title: "Vanish Input",
     description:

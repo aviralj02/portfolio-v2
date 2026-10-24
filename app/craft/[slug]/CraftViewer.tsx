@@ -23,6 +23,9 @@ type Props = {
 };
 
 const craftComponents = {
+  "wave-loader": dynamic(() => import("@/components/crafts/wave-loader"), {
+    ssr: false,
+  }),
   "vanish-input": dynamic(() => import("@/components/crafts/vanish-input"), {
     ssr: false,
   }),
