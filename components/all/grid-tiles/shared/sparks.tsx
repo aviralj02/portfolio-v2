@@ -2,12 +2,16 @@ import { motion, useReducedMotion } from "motion/react";
 
 import { cn } from "@/lib/utils";
 
-import { SPARKS } from "./constants";
+type Props = {
+  /** Tailwind position classes, one per mark. */
+  positions: Array<string>;
+};
 
-const Sparks = () => {
+/* Scattered marks that keep a tile alive while it's at rest. */
+const Sparks = ({ positions }: Props) => {
   const prefersReduced = useReducedMotion();
 
-  return SPARKS.map((position, i) => (
+  return positions.map((position, i) => (
     <motion.span
       key={position}
       aria-hidden

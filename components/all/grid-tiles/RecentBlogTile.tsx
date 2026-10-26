@@ -1,11 +1,10 @@
-"use client";
-
-import { ArrowRight } from "lucide-react";
-import { motion } from "motion/react";
-
 import { cn, formatDate } from "@/lib/utils";
 import { MonthFormat } from "@/types/enums";
 
+import Manuscript from "./blog-tile/manuscript";
+import Ruled from "./blog-tile/ruled";
+import StatusBadge from "./shared/status-badge";
+import TileLabel from "./shared/tile-label";
 import ExtraLinks from "./ExtraLinks";
 
 type Props = {
@@ -14,39 +13,40 @@ type Props = {
 };
 
 const RecentBlogTile = ({ recentBlog, socials }: Props) => {
+  const title = recentBlog?.title ?? "Blogs";
+  const tags = recentBlog
+    ? [
+        formatDate(new Date(recentBlog.publishDate), MonthFormat.Short),
+        `${recentBlog.readTime} min read`,
+      ]
+    : [];
+
   return (
     <div
       className={cn(
         "row-span-2 lg:order-1 order-2",
-        "flex flex-col gap-3 lg:gap-4"
+        "flex flex-col gap-3 lg:gap-4",
       )}
     >
-      <motion.a
-        whileHover={{
-          scale: 1.02,
-          y: -2,
-        }}
-        transition={{ duration: 0.1, ease: "easeOut" }}
-        href={recentBlog?.link || "/blogs"}
-        target="_blank"
-        rel="noreferrer"
-        className={
-          "flex flex-col flex-1 w-full items-start justify-end gap-12 sm:gap-20 box-border p-3 sm:p-5 rounded-2xl transition ease-in-out duration-200 card-template"
-        }
-      >
-        <div className="flex flex-col gap-4">
-          <span className="text-xs sm:text-sm">RECENT BLOG</span>
-          <h2 className="text-sm sm:text-xl font-bold">{recentBlog?.title}</h2>
-          <span className="text-xs sm:text-sm">
-            {formatDate(
-              new Date(recentBlog?.publishDate || ""),
-              MonthFormat.Long
-            )}
-          </span>
-        </div>
+      <div className="group relative flex-1 w-full min-h-64 rounded-2xl overflow-hidden card-template">
+        <a
+          href={recentBlog?.link || "/blogs"}
+          target="_blank"
+          rel="noreferrer"
+          aria-label={recentBlog ? `${title}, my latest post` : "All posts"}
+          className="absolute inset-0 z-10 rounded-2xl outline-none focus-visible:ring-2 focus-visible:ring-secondary-text/60 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+        />
 
-        <ArrowRight className="w-5 h-5 sm:w-7 sm:h-7 self-end" />
-      </motion.a>
+        <Ruled />
+        {recentBlog && (
+          <>
+            <StatusBadge label="Latest blog" />
+            <Manuscript tags={tags} />
+          </>
+        )}
+
+        <TileLabel title={title} />
+      </div>
 
       <ExtraLinks socials={socials} />
     </div>

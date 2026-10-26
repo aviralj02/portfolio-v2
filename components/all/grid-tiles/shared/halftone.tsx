@@ -1,7 +1,13 @@
 import { motion, useReducedMotion } from "motion/react";
 
-/* Halftone field, densest behind the deck and dissolving outwards. */
-const Halftone = () => {
+type Props = {
+  /** Where the field is densest before it dissolves, as a CSS radial-gradient shape. */
+  focus?: string;
+};
+
+/* Halftone field, densest behind the tile's illustration and dissolving
+   outwards. */
+const Halftone = ({ focus = "ellipse 45% 55% at 50% 45%" }: Props) => {
   const prefersReduced = useReducedMotion();
 
   return (
@@ -11,8 +17,7 @@ const Halftone = () => {
       style={{
         backgroundImage: "radial-gradient(currentColor 0.8px, transparent 1.2px)",
         backgroundSize: "7px 7px",
-        maskImage:
-          "radial-gradient(ellipse 45% 55% at 50% 45%, black, transparent)",
+        maskImage: `radial-gradient(${focus}, black, transparent)`,
       }}
       variants={{
         rest: { opacity: 0.12, scale: 0.9 },
