@@ -1,60 +1,50 @@
-"use client";
-
-import ReactMarkdown from "react-markdown";
-
-import { ArrowRight } from "lucide-react";
-import { motion } from "motion/react";
-import remarkGfm from "remark-gfm";
-
-import { markdownComponents } from "@/lib/markdown-components";
 import { cn } from "@/lib/utils";
+
+import Blueprint from "./project-tile/blueprint";
+import Emblem from "./project-tile/emblem";
+import StatusBadge from "./shared/status-badge";
+import TileLabel from "./shared/tile-label";
 
 type Props = {
   recentProject: Project | undefined;
 };
 
 const RecentProjectTile = ({ recentProject }: Props) => {
+  const title = recentProject?.title ?? "Projects";
+  const href =
+    recentProject?.live || recentProject?.codebase || "/work#projects";
+
   return (
-    <motion.a
-      whileHover={{
-        scale: 1.02,
-        y: -2,
-      }}
-      transition={{ duration: 0.1, ease: "easeOut" }}
-      href={recentProject?.live || recentProject?.codebase || "/work#projects"}
-      target="_blank"
-      rel="noreferrer"
+    <div
       className={cn(
         "row-span-2 lg:order-7 order-6",
-        "flex flex-col w-full justify-between rounded-2xl box-border p-3 sm:p-5 transition ease-in-out duration-200 card-template"
+        "group relative w-full min-h-80 rounded-2xl overflow-hidden card-template",
       )}
     >
-      <div className="w-[10vw] h-[10vw] max-w-16 max-h-16 rounded-full grayscale-50 select-none">
-        <img
-          src={recentProject?.icon.url}
-          alt={recentProject?.icon.fileName}
-          className="rounded-full object-cover w-full h-full"
-          draggable={false}
-        />
-      </div>
+      <a
+        href={href}
+        target="_blank"
+        rel="noreferrer"
+        aria-label={
+          recentProject ? `${title}, my latest project` : "All projects"
+        }
+        className="absolute inset-0 z-10 rounded-2xl outline-none focus-visible:ring-2 focus-visible:ring-secondary-text/60 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+      />
 
-      <div className="flex flex-col gap-2 sm:gap-4 select-none">
-        <span className="text-xs sm:text-sm">RECENT PROJECT</span>
-        <h2 className="text-base sm:text-2xl font-bold">
-          {recentProject?.title}
-        </h2>
-        <div className="text-xs sm:text-sm">
-          <ReactMarkdown
-            remarkPlugins={[remarkGfm]}
-            components={markdownComponents}
-          >
-            {recentProject?.description}
-          </ReactMarkdown>
-        </div>
-      </div>
+      <Blueprint />
+      {recentProject && (
+        <>
+          <StatusBadge label="Latest project" />
+          <Emblem
+            icon={recentProject.icon}
+            color={recentProject.backgroundColor}
+            stack={recentProject.stack ?? []}
+          />
+        </>
+      )}
 
-      <ArrowRight className="w-5 h-5 sm:w-7 sm:h-7 self-end" />
-    </motion.a>
+      <TileLabel title={title} description={recentProject?.intro} />
+    </div>
   );
 };
 
