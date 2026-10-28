@@ -23,6 +23,10 @@ type Props = {
 };
 
 const craftComponents = {
+  "duration-picker": dynamic(
+    () => import("@/components/crafts/duration-picker"),
+    { ssr: false },
+  ),
   "wave-loader": dynamic(() => import("@/components/crafts/wave-loader"), {
     ssr: false,
   }),

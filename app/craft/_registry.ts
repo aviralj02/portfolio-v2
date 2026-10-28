@@ -1,5 +1,13 @@
 export const crafts: Array<Craft> = [
   {
+    slug: "duration-picker",
+    title: "Duration Picker",
+    description:
+      "A duration pill that pulls apart to be edited - hours and minutes stretch away from each other like goo, then melt back into one when you confirm.",
+    sourcePath: "components/crafts/duration-picker/index.tsx",
+    writeupPath: "components/crafts/duration-picker/writeup.md"
+  },
+  {
     slug: "wave-loader",
     title: "Wave Loader",
     description:
