@@ -246,6 +246,14 @@ export function MorphMenuContent({
           filter: `url(#${filterId})`,
         }}
       >
+        <div
+          className="absolute left-1/2 -translate-x-1/2 rounded-full bg-foreground"
+          style={{
+            top: cardHeight + gap,
+            width: triggerHeight,
+            height: triggerHeight,
+          }}
+        />
         <AnimatePresence
           onExitComplete={() => {
             isAnimatingRef.current = false;
