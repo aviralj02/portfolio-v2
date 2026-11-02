@@ -23,6 +23,10 @@ type Props = {
 };
 
 const craftComponents = {
+  "password-rules": dynamic(
+    () => import("@/components/crafts/password-rules"),
+    { ssr: false },
+  ),
   "duration-picker": dynamic(
     () => import("@/components/crafts/duration-picker"),
     { ssr: false },

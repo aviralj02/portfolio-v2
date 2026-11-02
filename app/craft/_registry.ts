@@ -1,5 +1,13 @@
 export const crafts: Array<Craft> = [
   {
+    slug: "password-rules",
+    title: "Password Rules",
+    description:
+      "A password field that crosses off its own rules - each one is struck through the moment it's met, then folds away until only the all-clear is left.",
+    sourcePath: "components/crafts/password-rules/index.tsx",
+    writeupPath: "components/crafts/password-rules/writeup.md"
+  },
+  {
     slug: "duration-picker",
     title: "Duration Picker",
     description:
