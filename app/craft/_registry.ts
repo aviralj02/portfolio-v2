@@ -150,13 +150,6 @@ export const crafts: Array<Craft> = [
     sourcePath: "components/crafts/morph-menu/index.tsx",
     otherSourcePaths: ["components/crafts/morph-menu/popover.tsx"],
     writeupPath: "components/crafts/morph-menu/writeup.md"
-  },
-  {
-    slug: "spring-counter",
-    title: "Spring Counter",
-    description: "A counter where digits spring in and out on change.",
-    sourcePath: "components/crafts/spring-counter/index.tsx",
-    writeupPath: "components/crafts/spring-counter/writeup.md"
   }
 ];
 

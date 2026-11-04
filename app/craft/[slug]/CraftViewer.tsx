@@ -76,10 +76,6 @@ const craftComponents = {
   "liquid-input": dynamic(() => import("@/components/crafts/liquid-input"), {
     ssr: false,
   }),
-  "spring-counter": dynamic(
-    () => import("@/components/crafts/spring-counter"),
-    { ssr: false },
-  ),
   "morph-menu": dynamic(() => import("@/components/crafts/morph-menu"), {
     ssr: false,
   }),
