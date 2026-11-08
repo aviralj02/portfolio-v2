@@ -1,5 +1,13 @@
 export const crafts: Array<Craft> = [
   {
+    slug: "switch-tabs",
+    title: "Switch Tabs",
+    description:
+      "An icon tab bar where the pill stretches to the tab you pick before letting go of the old one - its icon fills in and the label fades in beside it.",
+    sourcePath: "components/crafts/switch-tabs/index.tsx",
+    writeupPath: "components/crafts/switch-tabs/writeup.md"
+  },
+  {
     slug: "password-rules",
     title: "Password Rules",
     description:
