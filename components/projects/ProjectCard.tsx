@@ -1,229 +1,274 @@
 "use client";
 
-import { useState } from "react";
+import { useId, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import Image from "next/image";
-import Link from "next/link";
 
-import { ExternalLink } from "lucide-react";
-import { motion, useReducedMotion } from "motion/react";
+import { ArrowUpRight } from "lucide-react";
+import { motion, MotionConfig } from "motion/react";
 import remarkGfm from "remark-gfm";
 
 import { markdownComponents } from "@/lib/markdown-components";
 import { cn } from "@/lib/utils";
-import { TagSize } from "@/types/enums";
 
 import GithubIcon from "../icons/GithubIcon";
 import Modal from "../Modal";
-import Tag from "../Tag";
+
+import Signal from "./signal";
 
 type Props = {
   project: Project;
 };
 
+const morph = { type: "spring", stiffness: 300, damping: 40 } as const;
+
+/* Each block of the open project enters in turn: opacity, a little blur and
+   a short rise. Under reduced motion MotionConfig drops the rise. */
+const enter = (i: number) => ({
+  initial: { opacity: 0, y: 12, filter: "blur(4px)" },
+  animate: { opacity: 1, y: 0, filter: "blur(0px)" },
+  transition: { delay: 0.1 * i, duration: 0.3, ease: "easeOut" },
+}) as const;
+
+const CHIP =
+  "whitespace-nowrap rounded-full bg-card card-glass px-2.5 py-1 text-xs font-medium text-muted-foreground";
+
+const ACTION =
+  "inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-medium transition-[background-color,color,scale] duration-150 ease-out motion-safe:active:scale-[0.96] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary-text/60";
+
+/* The project's icon, in its brand ring on the card. Shares a layoutId
+   between the card and the dialog so it travels from one to the other.
+   Positioned so it always paints above the dialog header's backdrop: while
+   it flies its transform lifts it, and without `relative` it would drop
+   behind the backdrop the moment it lands. */
+const Icon = ({
+  project,
+  layoutId,
+  className,
+  ring = true,
+  hoverZoom = false,
+}: {
+  project: Project;
+  layoutId: string;
+  className: string;
+  ring?: boolean;
+  /** Nudges the artwork up when the card around it is hovered. */
+  hoverZoom?: boolean;
+}) => (
+  <motion.div
+    layoutId={layoutId}
+    transition={morph}
+    className={cn(
+      "relative col-start-1 row-start-1 overflow-hidden rounded-[22%] bg-card",
+      className,
+    )}
+    style={{
+      boxShadow: `0 0 0 1.5px ${ring ? (project.backgroundColor ?? "transparent") : "transparent"}, 0 6px 14px -6px rgb(0 0 0 / 0.35)`,
+    }}
+  >
+    {project.icon?.url && (
+      <Image
+        src={project.icon.url}
+        alt=""
+        width={128}
+        height={128}
+        sizes="64px"
+        draggable={false}
+        className={cn(
+          "size-full object-cover",
+          hoverZoom &&
+            "transition-transform duration-300 ease-out group-hover:scale-[1.06] motion-reduce:transition-none motion-reduce:group-hover:scale-100",
+        )}
+      />
+    )}
+  </motion.div>
+);
+
 const ProjectCard = ({ project }: Props) => {
-  const {
-    icon,
-    backgroundColor,
-    codebase,
-    live,
-    title,
-    description,
-    stack,
-    with: team,
-    intro,
-  } = project;
+  const { codebase, live, title, description, stack, with: team, intro } =
+    project;
 
   const [isOpen, setIsOpen] = useState(false);
-  const prefersReduced = useReducedMotion();
 
-  const iconId = `project-icon-${title}`;
+  const id = useId();
+  const iconId = `project-icon-${id}`;
+  const titleId = `project-title-${id}`;
+  const introId = `project-intro-${id}`;
+  const dialogTitleId = `project-dialog-title-${id}`;
 
   return (
-    <>
+    <MotionConfig reducedMotion="user">
       <motion.button
+        type="button"
         onClick={() => setIsOpen(true)}
+        aria-haspopup="dialog"
+        aria-labelledby={titleId}
+        aria-describedby={introId}
         className={cn(
           "group flex h-full w-full cursor-pointer items-start gap-3 rounded-xl p-4 text-left",
           "card-glass bg-card/50 hover:card-glass-lift",
           "transition-[box-shadow,background-color] duration-200 hover:bg-card",
+          "outline-none focus-visible:ring-2 focus-visible:ring-secondary-text/60 focus-visible:ring-offset-2 focus-visible:ring-offset-background",
         )}
-        whileTap={prefersReduced ? {} : { scale: 0.99 }}
+        whileTap={{ scale: 0.99 }}
         transition={{ duration: 0.12, ease: "easeOut" }}
       >
-        {!isOpen ? (
-          <motion.div
-            layoutId={iconId}
-            className="size-10 shrink-0 overflow-hidden rounded-[11px]"
-            style={{ boxShadow: `0 0 0 1.5px ${backgroundColor}` }}
-            transition={{ type: "spring", stiffness: 300, damping: 40 }}
+        <span aria-hidden className="grid size-10 shrink-0">
+          {isOpen ? (
+            <span className="col-start-1 row-start-1 size-10" />
+          ) : (
+            <Icon
+              project={project}
+              layoutId={iconId}
+              className="size-10 rounded-[11px]"
+              hoverZoom
+            />
+          )}
+        </span>
+
+        <span className="flex min-w-0 flex-col gap-0.5">
+          <span
+            id={titleId}
+            className="truncate text-sm font-medium tracking-[-0.01em] text-primary"
           >
-            {icon?.url && (
-              <Image
-                src={icon.url}
-                alt=""
-                width={80}
-                height={80}
-                sizes="80px"
-                draggable={false}
-                className={cn(
-                  "size-full object-cover",
-                  "transition-transform duration-300 ease-out group-hover:scale-[1.06]",
-                  "motion-reduce:transition-none motion-reduce:group-hover:scale-100",
-                )}
-              />
-            )}
-          </motion.div>
-        ) : (
-          <div className="size-10 shrink-0" aria-hidden />
-        )}
-
-        <div className="flex min-w-0 flex-col gap-0.5">
-          <h3 className="truncate text-sm font-medium tracking-[-0.01em] text-primary">
             {title}
-          </h3>
-
-          <p className="line-clamp-2 text-pretty text-[12.5px] leading-[1.45] text-muted-foreground">
+          </span>
+          <span
+            id={introId}
+            className="line-clamp-2 text-[12.5px] leading-[1.45] text-muted-foreground text-pretty"
+          >
             {intro}
-          </p>
-        </div>
+          </span>
+        </span>
       </motion.button>
 
-      <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
-        <div
-          className="h-20 shrink-0 rounded-t-3xl sm:rounded-t-3xl overflow-hidden"
-          style={{ backgroundColor }}
-        />
-
-        {icon?.url && (
-          <div className="px-6 -mt-8 shrink-0">
-            <motion.div
-              layoutId={iconId}
-              className="size-16 rounded-full overflow-hidden border-4 border-card shadow-lg"
-              transition={{ type: "spring", stiffness: 300, damping: 40 }}
-            >
-              <Image
-                src={icon.url}
-                alt={icon.fileName ?? title}
-                width={64}
-                height={64}
-                className="object-cover w-full h-full"
-                sizes="64px"
-                draggable={false}
-                loading="eager"
-              />
-            </motion.div>
-          </div>
-        )}
-
-        <div className="flex items-start justify-between gap-3 px-6 pt-3 shrink-0">
-          <motion.h2
-            className="text-xl font-bold text-primary leading-snug"
-            initial={{ opacity: 0, y: 6 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.22, ease: "easeOut" }}
+      <Modal
+        isOpen={isOpen}
+        onClose={() => setIsOpen(false)}
+        labelledBy={dialogTitleId}
+      >
+        <div aria-hidden className="relative grid h-32 shrink-0 place-items-center">
+          <motion.div
+            className="absolute inset-0"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.3, ease: "easeOut" }}
           >
-            {title}
-          </motion.h2>
-
-          <div className="flex items-center gap-1.5 shrink-0 mt-0.5">
-            {codebase && (
-              <Link
-                href={codebase}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Source code"
-                className="p-2 rounded-xl bg-secondary hover:bg-muted text-muted-foreground hover:text-primary transition-colors duration-200"
-              >
-                <GithubIcon className="h-4 w-4" />
-              </Link>
-            )}
-            {live && (
-              <Link
-                href={live}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Live project"
-                className="p-2 rounded-xl bg-secondary hover:bg-muted text-muted-foreground hover:text-primary transition-colors duration-200"
-              >
-                <ExternalLink className="h-4 w-4" />
-              </Link>
-            )}
-          </div>
+            <Signal color={project.backgroundColor} />
+          </motion.div>
+          <Icon
+            project={project}
+            layoutId={iconId}
+            className="size-14"
+            ring={false}
+          />
         </div>
 
-        {/* Body */}
-        <div className="flex flex-col gap-5 px-6 pt-3 pb-8 rounded-b-3xl sm:rounded-b-3xl">
-          <motion.div
-            className="scrollbar overflow-y-auto max-h-[180px] pr-1 text-sm text-muted-foreground leading-relaxed"
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.14, duration: 0.28, ease: "easeOut" }}
-          >
-            <ReactMarkdown
-              remarkPlugins={[remarkGfm]}
-              components={markdownComponents}
+        <div className="scrollbar flex flex-col gap-6 overflow-y-auto overscroll-contain px-6 pb-8">
+          <motion.div className="flex flex-col gap-3" {...enter(0)}>
+            <h2
+              id={dialogTitleId}
+              className="text-xl font-semibold leading-tight tracking-tight text-primary text-balance"
             >
-              {description}
-            </ReactMarkdown>
+              {title}
+            </h2>
+
+            {(live || codebase) && (
+              <div className="flex flex-wrap gap-2">
+                {live && (
+                  <a
+                    href={live}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={cn(
+                      ACTION,
+                      "bg-primary text-primary-foreground hover:bg-primary/85",
+                    )}
+                  >
+                    Visit site
+                    <ArrowUpRight aria-hidden className="size-3.5" />
+                  </a>
+                )}
+                {codebase && (
+                  <a
+                    href={codebase}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={cn(
+                      ACTION,
+                      "bg-secondary text-muted-foreground hover:bg-muted hover:text-primary",
+                    )}
+                  >
+                    <span aria-hidden className="contents">
+                      <GithubIcon className="size-3.5" />
+                    </span>
+                    View source
+                  </a>
+                )}
+              </div>
+            )}
           </motion.div>
 
-          {stack?.length > 0 && (
+          {description && (
             <motion.div
-              className="flex flex-col gap-3"
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.22, duration: 0.28, ease: "easeOut" }}
+              className="text-sm leading-relaxed text-muted-foreground"
+              {...enter(1)}
             >
-              <span className="text-xs font-medium tracking-widest uppercase text-secondary-text">
-                Stack
-              </span>
-              <ul className="flex gap-2 flex-wrap" aria-label="Technologies">
+              <ReactMarkdown
+                remarkPlugins={[remarkGfm]}
+                components={markdownComponents}
+              >
+                {description}
+              </ReactMarkdown>
+            </motion.div>
+          )}
+
+          {stack?.length > 0 && (
+            <motion.section className="flex flex-col gap-2.5" {...enter(2)}>
+              <h3 className="text-xs font-medium text-secondary-text">Stack</h3>
+              <ul className="flex flex-wrap gap-1.5">
                 {stack.map((tech) => (
-                  <li key={tech}>
-                    <Tag name={tech} size={TagSize.Small} />
+                  <li key={tech} className={CHIP}>
+                    {tech}
                   </li>
                 ))}
               </ul>
-            </motion.div>
+            </motion.section>
           )}
 
           {team?.length > 0 && (
-            <motion.div
-              className="flex flex-col gap-3"
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3, duration: 0.28, ease: "easeOut" }}
-            >
-              <span className="text-xs font-medium tracking-widest uppercase text-secondary-text">
-                With
-              </span>
-
-              <ul className="flex gap-2 flex-wrap">
+            <motion.section className="flex flex-col gap-2.5" {...enter(3)}>
+              <h3 className="text-xs font-medium text-secondary-text">
+                Built with
+              </h3>
+              <ul className="flex flex-wrap gap-1.5">
                 {team.map(({ name, href }) => (
                   <li key={name}>
-                    <Link
+                    <a
                       href={href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="group flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-secondary hover:bg-muted text-xs font-medium text-muted-foreground hover:text-primary transition-colors duration-200"
+                      className={cn(
+                        CHIP,
+                        "inline-flex items-center gap-1.5 transition-colors duration-150 hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary-text/60",
+                      )}
                     >
                       <span
-                        className="size-2 rounded-full shrink-0 transition-transform duration-500 ease-[cubic-bezier(0.34,1.8,0.5,1)] group-hover:scale-120"
-                        style={{ backgroundColor }}
                         aria-hidden
+                        className="size-1.5 shrink-0 rounded-full"
+                        style={{ backgroundColor: project.backgroundColor }}
                       />
-
                       {name}
-                    </Link>
+                      <ArrowUpRight aria-hidden className="size-3" />
+                    </a>
                   </li>
                 ))}
               </ul>
-            </motion.div>
+            </motion.section>
           )}
         </div>
       </Modal>
-    </>
+    </MotionConfig>
   );
 };
 
