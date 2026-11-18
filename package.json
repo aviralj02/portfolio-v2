@@ -28,6 +28,7 @@
     "remark-gfm": "^4.0.1",
     "shiki": "^4.0.2",
     "tailwind-merge": "^2.4.0",
+    "three": "^0.187.0",
     "zod": "^3.23.8"
   },
   "devDependencies": {
@@ -36,6 +37,7 @@
     "@types/node": "^20",
     "@types/react": "19.2.7",
     "@types/react-dom": "19.2.3",
+    "@types/three": "^0.187.0",
     "eslint": "^9.2.0",
     "eslint-config-next": "^16.1.1",
     "eslint-plugin-simple-import-sort": "^12.1.1",
