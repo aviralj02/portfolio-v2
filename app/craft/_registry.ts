@@ -1,5 +1,19 @@
 export const crafts: Array<Craft> = [
   {
+    slug: "cover-drop",
+    title: "Cover Drop",
+    description:
+      "A cover picker where a dropped photo spreads in like liquid over a rippling 3D surface - remove it and it drains away while a droplet springs home.",
+    sourcePath: "components/crafts/cover-drop/index.tsx",
+    otherSourcePaths: [
+      "components/crafts/cover-drop/thumbnail.tsx",
+      "components/crafts/cover-drop/cover.tsx",
+      "components/crafts/cover-drop/liquid-photo.tsx",
+      "components/crafts/cover-drop/shared.ts"
+    ],
+    writeupPath: "components/crafts/cover-drop/writeup.md"
+  },
+  {
     slug: "switch-tabs",
     title: "Switch Tabs",
     description:
