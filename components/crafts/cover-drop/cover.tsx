@@ -71,21 +71,26 @@ export function Cover({ ref, photo, over, onRemove }: Props) {
 function CoverPhoto({ photo }: { photo: Photo }) {
   const [settled, setSettled] = useState(false);
   const reduceMotion = useReducedMotion();
-
-  if (!settled && !reduceMotion) {
-    return (
-      <LiquidPhoto src={src(photo.id)} onSettled={() => setSettled(true)} />
-    );
-  }
+  const still = settled || reduceMotion;
 
   return (
-    <motion.img
-      src={src(photo.id)}
-      alt={photo.alt}
-      draggable={false}
-      initial={reduceMotion ? { opacity: 0 } : false}
-      animate={{ opacity: 1 }}
-      className="absolute inset-0 size-full object-cover"
-    />
+    <>
+      {/* Loaded under the canvas from the start, so the handoff has no gap. */}
+      <motion.img
+        src={src(photo.id)}
+        alt={photo.alt}
+        crossOrigin="anonymous"
+        draggable={false}
+        initial={reduceMotion ? { opacity: 0 } : false}
+        animate={reduceMotion ? { opacity: 1 } : undefined}
+        className={cn(
+          "absolute inset-0 size-full object-cover",
+          !still && "opacity-0",
+        )}
+      />
+      {!still && (
+        <LiquidPhoto src={src(photo.id)} onSettled={() => setSettled(true)} />
+      )}
+    </>
   );
 }
