@@ -17,7 +17,7 @@ const getSocials = async (): Promise<Social[] | undefined> => {
 
     return socials || [];
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 };
 

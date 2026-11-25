@@ -20,7 +20,7 @@ const getLastVisitor = async (): Promise<LocationData[] | undefined> => {
 
     return lastVisits || [];
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 };
 

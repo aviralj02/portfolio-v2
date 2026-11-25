@@ -16,10 +16,12 @@ import getProjects from "@/lib/utils/get-projects";
 import getSocials from "@/lib/utils/get-socials";
 
 export default async function Home() {
-  const projects = await getProjects();
-  const socialsData = await getSocials();
-  const blogsData = await getBlogs();
-  const experiences = await getExperiences();
+  const [projects, socialsData, blogsData, experiences] = await Promise.all([
+    getProjects(),
+    getSocials(),
+    getBlogs(),
+    getExperiences(),
+  ]);
 
   const current = experiences?.find(
     (experience) => experience.currentlyWorking,

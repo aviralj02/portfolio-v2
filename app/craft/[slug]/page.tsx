@@ -57,17 +57,16 @@ export default async function CraftDetail({
 
   if (!craft) notFound();
 
-  const source = await fs.readFile(
-    path.join(process.cwd(), craft.sourcePath),
-    "utf8"
-  );
+  const [source, writeupMarkdown] = await Promise.all([
+    fs.readFile(path.join(process.cwd(), craft.sourcePath), "utf8"),
+    craft.writeupPath
+      ? fs.readFile(path.join(process.cwd(), craft.writeupPath), "utf8")
+      : "",
+  ]);
   const sourceLinks = (craft.otherSourcePaths ?? []).map((filePath) => ({
     path: filePath,
     url: `${GITHUB_BLOB_BASE_URL}/${filePath}`,
   }));
-  const writeupMarkdown = craft.writeupPath
-    ? await fs.readFile(path.join(process.cwd(), craft.writeupPath), "utf8")
-    : "";
 
   const codeHtml = await codeToHtml(source, {
     lang: "tsx",

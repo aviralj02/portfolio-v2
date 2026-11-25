@@ -100,7 +100,7 @@ const ContactTile = () => {
       setStatus("sent");
       form.reset();
     } catch (error) {
-      console.log(error);
+      console.error(error);
       setStatus("failed");
     }
   };

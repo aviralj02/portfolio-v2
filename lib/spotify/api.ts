@@ -30,7 +30,7 @@ const readNowPlaying = async (): Promise<SpotifyData> => {
 
     return spotifyData;
   } catch (error) {
-    console.log(error);
+    console.error(error);
     return { isPlaying: false };
   }
 };

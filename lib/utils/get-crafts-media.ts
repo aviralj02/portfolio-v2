@@ -19,7 +19,7 @@ const getCraftsMedia = async (): Promise<Record<string, string>> => {
 
     return Object.fromEntries(crafts.map((c) => [c.slug, c.video.url]));
   } catch (error) {
-    console.log(error);
+    console.error(error);
     return {};
   }
 };

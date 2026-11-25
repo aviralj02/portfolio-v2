@@ -27,7 +27,7 @@ const getExperiences = async (): Promise<Experience[] | undefined> => {
 
     return experiences || [];
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 };
 

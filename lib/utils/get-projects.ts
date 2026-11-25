@@ -31,7 +31,7 @@ const getProjects = async (): Promise<Project[] | undefined> => {
 
     return projects || [];
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 };
 
