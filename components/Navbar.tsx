@@ -41,6 +41,7 @@ const Navbar = () => {
         <motion.nav
           layout
           layoutRoot
+          aria-label="Primary"
           transition={{ layout: { type: "spring", stiffness: 380, damping: 34 } }}
           className="relative flex items-center rounded-full p-px nav-glass-body"
         >
@@ -63,6 +64,9 @@ const Navbar = () => {
                 >
                   <Link
                     href={link.route}
+                    aria-current={
+                      active ? (nested ? "true" : "page") : undefined
+                    }
                     className={cn(
                       "text-sm font-medium transition-colors duration-200 relative z-10 flex items-center gap-1.5",
                       !active

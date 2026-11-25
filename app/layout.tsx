@@ -72,11 +72,20 @@ export default function RootLayout({
             enableSystem={false}
             disableTransitionOnChange
           >
+            <a
+              href="#main"
+              className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-60 focus:rounded-full focus:bg-card focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-primary focus:shadow-lg focus:outline-2 focus:outline-offset-2 focus:outline-secondary-text/60"
+            >
+              Skip to content
+            </a>
+
             <Navbar />
 
             {/* Persists across navigation, so its entrance runs on the first
               paint only — route changes are the view transition's job now. */}
-            <div className="page-enter">{children}</div>
+            <main id="main" tabIndex={-1} className="page-enter outline-none">
+              {children}
+            </main>
           </ThemeProvider>
 
           <Analytics />

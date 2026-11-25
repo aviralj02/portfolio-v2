@@ -20,7 +20,8 @@ const ImageTile = () => {
             ? "/assets/bg-tile-image-dark.jpg"
             : "/assets/bg-tile-image-light.jpg"
         }
-        alt="image-tile"
+        alt=""
+        aria-hidden
         className="rounded-2xl object-cover w-full h-full"
         draggable={false}
       />
