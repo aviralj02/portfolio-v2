@@ -2,12 +2,12 @@
 
 import {
   Children,
-  cloneElement,
   createContext,
   isValidElement,
   type MouseEventHandler,
   type ReactElement,
   type ReactNode,
+  useCallback,
   useContext,
   useId,
   useLayoutEffect,
@@ -68,12 +68,15 @@ export default function MorphMenu({
   const open = controlledOpen ?? uncontrolledOpen;
   const filterId = useId().replace(/:/g, "");
 
-  const setOpen = (next: boolean) => {
-    onOpenChangeAction?.(next);
-    if (controlledOpen === undefined) {
-      setUncontrolledOpen(next);
-    }
-  };
+  const setOpen = useCallback(
+    (next: boolean) => {
+      onOpenChangeAction?.(next);
+      if (controlledOpen === undefined) {
+        setUncontrolledOpen(next);
+      }
+    },
+    [onOpenChangeAction, controlledOpen]
+  );
 
   useLayoutEffect(() => {
     const node = triggerRef.current;
@@ -154,20 +157,19 @@ export function MorphMenuTrigger({ children }: MorphMenuTriggerProps) {
     return null;
   }
 
+  /* Listens on the wrapper rather than cloning the child: the child's own
+     onClick still runs, and its click bubbles up to here. */
   const handleClick: MouseEventHandler = (event) => {
+    if (event.target === event.currentTarget) return;
     if (isAnimatingRef.current) return;
-
-    child.props.onClick?.(event);
 
     isAnimatingRef.current = true;
     setOpen(!open);
   };
 
   return (
-    <div ref={triggerRef}>
-      {cloneElement(child, {
-        onClick: handleClick,
-      })}
+    <div ref={triggerRef} onClick={handleClick}>
+      {child}
     </div>
   );
 }
